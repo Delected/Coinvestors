@@ -1,0 +1,17 @@
+name: Coinvestors
+version: ${project.version}
+main: me.delected.coinvestors.Coinvestors
+api-version: 1.16
+authors: [ Delected_ ]
+description: A plugin that grabs real crypto data. Invest, mine, and sell with over 25 different cryptos.
+website: https://delected.me/
+
+commands:
+  profile:
+    usage: "/<command>"
+    aliases: ["prf", "pfile"]
+  fortnite:
+    usage: "/<command>"
+    aliases: ["fn", "fnpro"]
+
+depend: [Vault]
