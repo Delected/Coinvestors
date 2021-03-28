@@ -12,8 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class BaseCommand implements TabExecutor {
-    private final String PLUGIN_NAME = "Coinvestors"; // change this to whatever your plugin name is
-
+    private static final String PLUGIN_NAME = "Coinvestors"; // change this to whatever your plugin name is
 
     public abstract SubCommand[] getSubCommands();
     public abstract String getCommandName();
