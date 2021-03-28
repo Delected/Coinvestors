@@ -17,16 +17,16 @@ public class StorageUtils {
     private static final Yaml profile = Coinvestors.profilesYaml;
     public static void createProfile(Player p) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        profile.get().set("profiles." + p.getUniqueId() + ".date-created", dtf.format(LocalDateTime.now()));
+        profile.getConfig().set("profiles." + p.getUniqueId() + ".date-created", dtf.format(LocalDateTime.now()));
         profile.save();
     }
 
     public static boolean hasProfile(Player p) {
-        return profile.get().get("profiles." + p.getUniqueId()) != null;
+        return profile.getConfig().get("profiles." + p.getUniqueId()) != null;
     }
 
     public static void deleteProfile(Player p) {
-        profile.get().set("profiles." + p.getUniqueId(), null);
+        profile.getConfig().set("profiles." + p.getUniqueId(), null);
         profile.save();
     }
 }
