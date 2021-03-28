@@ -7,11 +7,12 @@ description: A plugin that grabs real crypto data. Invest, mine, and sell with o
 website: https://delected.me/
 
 commands:
-  profile:
-    usage: "/<command>"
-    aliases: ["prf", "pfile"]
-  fortnite:
-    usage: "/<command>"
-    aliases: ["fn", "fnpro"]
+  coinvestors:
+    usage: /<command>
+    description: Coinvestors
+  coinvestors profile:
+    usage: /<command>
+    description: test
+    aliases: [ cv profile, cv p , coinvestors p ]
 
-depend: [Vault]
+depend: [ Vault ]

@@ -1,13 +1,19 @@
 package me.delected.coinvestors;
 
+import me.delected.coinvestors.commands.CommandDistributor;
 import me.delected.coinvestors.commands.profilecommands.ProfileCommand;
+import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.storage.Yaml;
 
+import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
+import java.util.Optional;
 
 public final class Coinvestors extends JavaPlugin {
 	public static JavaPlugin INSTANCE;
@@ -19,7 +25,6 @@ public final class Coinvestors extends JavaPlugin {
 	@Override
 	public void onLoad() {
 		INSTANCE = this;
-		setupVault();
 	}
 
 	@Override
@@ -32,22 +37,8 @@ public final class Coinvestors extends JavaPlugin {
 		rigsYaml.setup();
 		// have a log of all transactions
 		saveDefaultConfig();
-		registerCommand("profile", new ProfileCommand());
+		Optional<PluginCommand> cvCommand = Optional.ofNullable(getCommand("coinvestors"));
+		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor(new CommandDistributor());
 	}
 
-	/** Better solution comingSoon™ */
-	@Deprecated
-	private void registerCommand(String name, Object c) {
-		Objects.requireNonNull(getCommand(name)).setExecutor((CommandExecutor) c);
-		Objects.requireNonNull(getCommand(name)).setTabCompleter((TabCompleter) c);
-	}
-
-	/** Bukkit shouldn't enable it anyway if you have Vault as dependency set */
-	@Deprecated
-	private void setupVault() {
-		if (getServer().getPluginManager().getPlugin("Vault") == null) {
-			getLogger().severe("Vault is a requirement for Coinvestors to work. Please download it, and restart your server. Disabling...");
-			setEnabled(false);
-		}
-	}
 }
