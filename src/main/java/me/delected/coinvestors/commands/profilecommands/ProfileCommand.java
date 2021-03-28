@@ -1,6 +1,6 @@
 package me.delected.coinvestors.commands.profilecommands;
 
-import me.delected.coinvestors.Chat;
+import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
@@ -14,11 +14,11 @@ public final class ProfileCommand implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage(Chat.color("&8&m----------&8[ &2Coinvestors &f- &aProfile &8]&m----------"));
+            sender.sendMessage(ChatUtils.color("&8&m----------&8[ &2Coinvestors &f- &aProfile &8]&m----------"));
             Arrays.stream(subCmds)
                     .map(SubCommand::getDescription)
                     .forEach(sender::sendMessage);
-            sender.sendMessage(Chat.color("&8&m-------------------------------------------"));
+            sender.sendMessage(ChatUtils.color("&8&m-------------------------------------------"));
             return true;
 
         }

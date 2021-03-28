@@ -1,4 +1,4 @@
-package me.delected.coinvestors.storage;
+package me.delected.coinvestors.io;
 
 import java.io.File;
 import java.io.IOException;

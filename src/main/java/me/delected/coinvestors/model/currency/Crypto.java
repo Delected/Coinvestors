@@ -1,4 +1,4 @@
-package me.delected.coinvestors.currency;
+package me.delected.coinvestors.model.currency;
 
 public enum Crypto {
     BTC("Bitcoin"),

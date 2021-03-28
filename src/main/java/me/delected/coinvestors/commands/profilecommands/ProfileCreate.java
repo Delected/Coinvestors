@@ -1,8 +1,8 @@
 package me.delected.coinvestors.commands.profilecommands;
 
-import me.delected.coinvestors.Chat;
+import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
-import me.delected.coinvestors.storage.StorageUtils;
+import me.delected.coinvestors.io.StorageUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,7 +16,7 @@ public class ProfileCreate implements SubCommand {
     public String getPrimaryName() { return "create"; }
 
     @Override
-    public String getDescription() { return Chat.color("&fcreate - &7Create your own profile! &c(player only)"); }
+    public String getDescription() { return ChatUtils.color("&fcreate - &7Create your own profile! &c(player only)"); }
 
     @Override
     public List<String> getAliases() { return Arrays.asList("make", "create", "new", "start"); }

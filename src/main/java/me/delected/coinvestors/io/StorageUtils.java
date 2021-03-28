@@ -1,4 +1,4 @@
-package me.delected.coinvestors.storage;
+package me.delected.coinvestors.io;
 
 import me.delected.coinvestors.Coinvestors;
 import org.bukkit.entity.Player;

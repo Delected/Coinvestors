@@ -1,8 +1,8 @@
 package me.delected.coinvestors.commands.profilecommands;
 
-import me.delected.coinvestors.Chat;
+import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
-import me.delected.coinvestors.storage.StorageUtils;
+import me.delected.coinvestors.io.StorageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -18,7 +18,7 @@ public class ProfileDelete implements SubCommand {
     public String getPrimaryName() { return "delete"; }
 
     @Override
-    public String getDescription() { return Chat.color("&fdelete - &7Deletes a user's profile, or your own!"); }
+    public String getDescription() { return ChatUtils.color("&fdelete - &7Deletes a user's profile, or your own!"); }
 
     @Override
     public List<String> getAliases() { return Arrays.asList("delete", "remove", "clear", "reset"); }
@@ -42,8 +42,8 @@ public class ProfileDelete implements SubCommand {
             if (!StorageUtils.hasProfile(p)) {
                 p.sendMessage(ChatColor.RED + "You do not have a profile! Create one with /profile create");
             }
-            p.sendMessage(Chat.color("&4&lAre you sure you would like to delete your profile? &c&lThis will delete ALL of your wallets, " +
-                    "you will lose all of your money that is stored in this profile! &8Type the command again to confirm."));
+            p.sendMessage(ChatUtils.color("&4&lAre you sure you would like to delete your profile? &c&lThis will delete ALL of your wallets, " +
+										  "you will lose all of your money that is stored in this profile! &8Type the command again to confirm."));
             StorageUtils.deleteProfile(p);
             // delete all wallets
             return true;

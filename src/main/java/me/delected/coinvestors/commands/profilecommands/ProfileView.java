@@ -1,26 +1,23 @@
 package me.delected.coinvestors.commands.profilecommands;
 
-import me.delected.coinvestors.Chat;
+import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
-import me.delected.coinvestors.storage.StorageUtils;
+import me.delected.coinvestors.io.StorageUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProfileView implements SubCommand {
     @Override
     public String getPrimaryName() { return "view"; }
 
     @Override
-    public String getDescription() { return Chat.color("&fview - &7View a player's profile, or view your own!"); }
+    public String getDescription() { return ChatUtils.color("&fview - &7View a player's profile, or view your own!"); }
 
     @Override
     public List<String> getAliases() {
@@ -75,9 +72,9 @@ public class ProfileView implements SubCommand {
             sender.sendMessage(ChatColor.RED + "This player does not exist, or is not online!");
             return true;
         }
-        sender.sendMessage(Chat.color("&8&m----------&8[ &f" + target + "'s &9Profile &8]&m----------"));
+        sender.sendMessage(ChatUtils.color("&8&m----------&8[ &f" + target + "'s &9Profile &8]&m----------"));
         sender.sendMessage(ChatColor.GREEN + "Your crypto wallet addresses:");
-        sender.sendMessage(Chat.color("&8&m-------------------------------------------"));
+        sender.sendMessage(ChatUtils.color("&8&m-------------------------------------------"));
 
         return true;
     }
