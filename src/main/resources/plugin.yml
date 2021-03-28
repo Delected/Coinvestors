@@ -10,6 +10,7 @@ commands:
   coinvestors:
     usage: /<command>
     description: Coinvestors
+    aliases: [ cv ]
   coinvestors profile:
     usage: /<command>
     description: test

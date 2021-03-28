@@ -1,19 +1,13 @@
 package me.delected.coinvestors;
 
-import me.delected.coinvestors.commands.CommandDistributor;
-import me.delected.coinvestors.commands.profilecommands.ProfileCommand;
-import me.delected.coinvestors.exceptions.ContactTheDevsException;
-import me.delected.coinvestors.storage.Yaml;
+import java.util.Optional;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.command.TabCompleter;
-import org.bukkit.command.TabExecutor;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.Objects;
-import java.util.Optional;
+import me.delected.coinvestors.commands.CommandDistributor;
+import me.delected.coinvestors.exceptions.ContactTheDevsException;
+import me.delected.coinvestors.storage.Yaml;
 
 public final class Coinvestors extends JavaPlugin {
 	public static JavaPlugin INSTANCE;
@@ -38,7 +32,9 @@ public final class Coinvestors extends JavaPlugin {
 		// have a log of all transactions
 		saveDefaultConfig();
 		Optional<PluginCommand> cvCommand = Optional.ofNullable(getCommand("coinvestors"));
-		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor(new CommandDistributor());
+		CommandDistributor distributor;
+		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor((distributor = new CommandDistributor()));
+		cvCommand.get().setTabCompleter(distributor);
 	}
 
 }

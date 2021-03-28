@@ -10,7 +10,7 @@ import org.bukkit.command.TabExecutor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Deprecated
 public abstract class BaseCommand implements TabExecutor {
     private static final String PLUGIN_NAME = "Coinvestors"; // change this to whatever your plugin name is
 
