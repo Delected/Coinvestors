@@ -2,9 +2,9 @@ name: Coinvestors
 version: ${project.version}
 main: me.delected.coinvestors.Coinvestors
 api-version: 1.16
-authors: [ Delected_ ]
+authors: [ Rigobert0, Delected_ ]
 description: A plugin that grabs real crypto data. Invest, mine, and sell with over 25 different cryptos.
-website: https://delected.me/
+website: https://delected.me/ & https://github.com/Rigobert0, source code at https://github.com/Delected/Coinvestors
 
 commands:
   coinvestors:

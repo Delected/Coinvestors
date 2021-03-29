@@ -1,22 +1,22 @@
 package me.delected.coinvestors.model.currency;
 
-import static me.delected.coinvestors.util.Sets.newSet;
+import me.delected.coinvestors.util.Sets;
 
 import java.util.Set;
 
 // not all of these are 100% correct, feel free to change if you see errors in prefixes, lengths, etc
 public enum Crypto {
-	BTC("Bitcoin", newSet("1", "3", "bc1"), 26, 35),
-	ETH("Ethereum", newSet("0x"), 42),
-	BNB("Binance Coin", newSet("bnb1"), 42),
-	ADA("Cardano", newSet("addr1", "DDzFFz", "Ae2td"), 104),
-	DOT("Polkadot", newSet("1"), 47, 48),
-	XRP("Ripple", newSet("r"), 25, 35),
-	LTC("Litecoin", newSet("L", "3", "M"), 26, 33),
-	BCH("Bitcoin Cash", newSet("1", "3", "q", "Q", "p", "P", "bitcoincash:", "BITCOINCASH:"), 34, 41);
-//    XLM("Stellar"),
-//    WBTC("Wrapped Bitcoin"),
-//    DOGE("Dogecoin"),
+    BTC("Bitcoin", Sets.newSet("1", "3", "bc1"), 26, 35),
+    ETH("Ethereum", Sets.newSet("0x"), 42),
+    BNB("Binance Coin", Sets.newSet("bnb1"), 42),
+    ADA("Cardano", Sets.newSet("addr1", "DDzFFz", "Ae2td"), 104),
+    DOT("Polkadot", Sets.newSet("1"), 47, 48),
+    XRP("Ripple", Sets.newSet("r"), 25, 35),
+    LTC("Litecoin", Sets.newSet("L", "3", "M"), 26, 33),
+    BCH("Bitcoin Cash", Sets.newSet("1", "3", "q", "Q", "p", "P", "bitcoincash:", "BITCOINCASH:"), 34, 41),
+    XLM("Stellar", Sets.newSet("G"), 56), // address is in all caps
+    WBTC("Wrapped Bitcoin", Sets.newSet("x"), 42), // same as ETH, WBTC is basically BTC used with ETH tokens
+    DOGE("Dogecoin", Sets.newSet("D"), 33, 35), // D, followed by any capital letter or number. the rest is random
 //    HEX("HEX"),
 //    XMR("Monero"),
 //    EOS("EOS"),
@@ -33,7 +33,9 @@ public enum Crypto {
 //    VET("VeChain"),
 //    ETC("Ethereum Classic"),
 //    DASH("Dash"),
-//    ZEC("Zcash");
+//    ZEC("Zcash")
+    ;
+
 
 
 	private String fullName;
