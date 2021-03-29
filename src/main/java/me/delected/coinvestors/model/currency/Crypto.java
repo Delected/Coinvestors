@@ -40,6 +40,7 @@ public enum Crypto {
     private Set<String> prefixes;
     private int minLength;
     private int maxLength;
+    private int length;
 
     Crypto(String fullName, Set<String> prefixes, int minLength, int maxLength) {
         this.fullName = fullName;
