@@ -49,14 +49,15 @@ public enum Crypto {
     }
 
     // for keys with the same min and max length
-    Crypto(String fullName, Set<String> prefixes, int minLength) {
+    Crypto(String fullName, Set<String> prefixes, int length) {
         this.fullName = fullName;
         this.prefixes = prefixes;
-        this.minLength = minLength;
+        this.length = length;
     }
 
     public String getFullName() { return fullName; }
     public Set<String> getPrefixes() { return prefixes; }
     public int getMinLength() { return minLength; }
     public int getMaxLength() { return maxLength; }
+    public int getLength() { return length; }
 }
