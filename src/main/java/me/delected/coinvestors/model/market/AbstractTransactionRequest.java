@@ -1,6 +1,6 @@
 package me.delected.coinvestors.model.market;
 
-import me.delected.coinvestors.model.Wallet;
+import me.delected.coinvestors.model.wallet.Wallet;
 
 public abstract class AbstractTransactionRequest {
 	private final double amount;

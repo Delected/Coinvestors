@@ -8,6 +8,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import me.delected.coinvestors.model.currency.Crypto;
+import me.delected.coinvestors.model.wallet.Wallet;
 
 public class Account {
 	private final List<Wallet.WalletUUID> wallets;

@@ -1,4 +1,4 @@
-package me.delected.coinvestors.model;
+package me.delected.coinvestors.model.wallet;
 
 import java.util.ArrayList;
 import java.util.Arrays;
