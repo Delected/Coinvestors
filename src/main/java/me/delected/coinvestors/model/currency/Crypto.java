@@ -4,8 +4,11 @@ package me.delected.coinvestors.model.currency;
 	not all of these are 100% correct, feel free to change if you see errors in prefixes, lengths, etc.
 */
 
+
+import com.mifmif.common.regex.Generex;
+
 public enum Crypto {
-	A("A", "B", "C");
+	BTC("Bitcoin", "(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}", "[5KL][1-9A-HJ-NP-Za-km-z]{50,51}");
 	// commented so that this will compile
 //	BTC("Bitcoin", Sets.newSet("1", "3", "bc1"), 26, 35),
 //	ETH("Ethereum", Sets.newSet("0x"), 42),
@@ -38,25 +41,25 @@ public enum Crypto {
 
 
 	private String fullName;
-	private String publicKey;
-	private String privateKey;
+	private Generex publicKey;
+	private Generex privateKey;
 
 
 	Crypto(String fullName, String publicKey, String privateKey) {
 		this.fullName = fullName;
-		this.publicKey = publicKey;
-		this.privateKey = privateKey;
+		this.publicKey = new Generex(publicKey);
+		this.privateKey = new Generex(privateKey);
 	}
 
 	public String getFullName() {
 		return fullName;
 	}
 
-	public String getPublicKey() {
-		return publicKey;
+	public String generatePublicKey() {
+		return publicKey.random();
 	}
 
-	public String getPrivateKey() {
-		return privateKey;
+	public String generatePrivateKey() {
+		return privateKey.random();
 	}
 }
