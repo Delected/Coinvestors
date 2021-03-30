@@ -1,6 +1,7 @@
 package me.delected.coinvestors.io;
 
 import me.delected.coinvestors.Coinvestors;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 import java.time.LocalDateTime;
@@ -28,5 +29,12 @@ public class StorageUtils {
     public static void deleteProfile(Player p) {
         profile.getConfig().set("profiles." + p.getUniqueId(), null);
         profile.save();
+    }
+
+    //----------( wallets.yml )----------\\
+    private static final FileConfiguration wallet = Coinvestors.walletsYaml.getConfig();
+
+    public static boolean walletExists(String key) {
+        return wallet.get(key) != null;
     }
 }

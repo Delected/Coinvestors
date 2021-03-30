@@ -98,6 +98,10 @@ public class Wallet {
 	}
 
 	public static class WalletUUID {
+		public WalletUUID(byte[] bytes) {
+			this.bytes = bytes;
+		}
+
 		private static final Set<WalletUUID> IN_USE = new HashSet<>();
 		private static final char[] ALPHABET = createAlphabet();
 		private final byte[] bytes;

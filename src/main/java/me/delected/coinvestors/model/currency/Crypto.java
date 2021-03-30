@@ -1,5 +1,6 @@
 package me.delected.coinvestors.model.currency;
 
+import me.delected.coinvestors.model.wallet.address.AddressGenerator;
 import me.delected.coinvestors.util.Sets;
 
 import java.util.Set;
@@ -49,7 +50,15 @@ public enum Crypto {
 	private Set<String> prefixes;
 	private int minLength;
 	private int maxLength;
+	private AddressGenerator generator;
 
+	// UPDATED:
+	Crypto(String fullName, AddressGenerator generator) {
+		this.fullName = fullName;
+		this.generator = generator;
+	}
+
+	@Deprecated
 	Crypto(String fullName, Set<String> prefixes, int minLength, int maxLength) {
 		this.fullName = fullName;
 		this.prefixes = prefixes;
@@ -58,6 +67,7 @@ public enum Crypto {
 	}
 
 	// for keys with the same min and max length
+	@Deprecated
 	Crypto(String fullName, Set<String> prefixes, int length) {
 		this.fullName = fullName;
 		this.prefixes = prefixes;
@@ -65,6 +75,7 @@ public enum Crypto {
 	}
 	
 	// for keys that need a different generation method
+	@Deprecated
 	Crypto(String fullName, int length) {
 		this.fullName = fullName;
 		this.length = length;
@@ -86,4 +97,7 @@ public enum Crypto {
 		return maxLength;
 	}
 
+	public AddressGenerator getGenerator() {
+		return generator;
+	}
 }
