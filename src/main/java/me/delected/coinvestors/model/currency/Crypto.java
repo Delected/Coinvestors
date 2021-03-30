@@ -2,17 +2,21 @@ package me.delected.coinvestors.model.currency;
 
 /*
 	not all of these are 100% correct, feel free to change if you see errors in prefixes, lengths, etc.
+	? = I can't find any info
 */
 
 
 import com.mifmif.common.regex.Generex;
 
 public enum Crypto {
-	BTC("Bitcoin", "(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}", "[5KL][1-9A-HJ-NP-Za-km-z]{50,51}");
-	// commented so that this will compile
-//	BTC("Bitcoin", Sets.newSet("1", "3", "bc1"), 26, 35),
-//	ETH("Ethereum", Sets.newSet("0x"), 42),
-//	BNB("Binance Coin", Sets.newSet("bnb1"), 42),
+	BTC("Bitcoin", "(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,39}", "[5KL][1-9A-HJ-NP-Za-km-z]{50,51}"),
+	ETH("Ethereum", "0x[a-fA-F0-9]{40}", "?"),
+	BNB("Binance Coin", "?", "?"), //	public: pref"bnb1", len42
+	ADA("Cardano", "brb", "brb");
+
+
+
+
 //	ADA("Cardano", Sets.newSet("addr1", "DDzFFz", "Ae2td"), 104),
 //	DOT("Polkadot", Sets.newSet("1"), 47, 48),
 //	XRP("Ripple", Sets.newSet("r"), 25, 35),
@@ -62,4 +66,9 @@ public enum Crypto {
 	public String generatePrivateKey() {
 		return privateKey.random();
 	}
+
+
+	public boolean isValidPublicKey(String s) { return s.matches(publicKey.toString()); }
+
+	public boolean isValidPrivateKey(String s) { return s.matches(privateKey.toString()); }
 }
