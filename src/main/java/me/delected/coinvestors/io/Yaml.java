@@ -18,7 +18,11 @@ public class Yaml {
 		this.name = name;
 	}
 
-	public void create() throws IOException {
+	/*
+	Creates the yaml file from the name given in the constructor.
+	This can be private, as it is only used internally in this class.
+	 */
+	private void create() throws IOException {
 		file = new File(Coinvestors.INSTANCE.getDataFolder(), name + ".yml");
 
 		if (file.createNewFile())
@@ -27,10 +31,18 @@ public class Yaml {
 		customFile = YamlConfiguration.loadConfiguration(file);
 	}
 
+	/**
+	 * Used to get the FileConfiguration of a given Yaml
+	 * @return FileConfiguration of the given Yaml
+	 */
 	public FileConfiguration getConfig() {
 		return customFile;
 	}
 
+	/*
+	Saves the Yaml file. This should be called every time
+	the file is written to/modified.
+	 */
 	public void save() {
 		try {
 			customFile.save(file);
@@ -39,10 +51,19 @@ public class Yaml {
 		}
 	}
 
+	/*
+	Loads new changes made to the file. This is probably
+	only used in the reload command.
+	 */
 	public void reload() {
 		customFile = YamlConfiguration.loadConfiguration(file);
 	}
 
+	/*
+	Sets up the yaml:
+	  - calls create
+      - adds a header
+	*/
 	public void setup() {
 		try {
 			create();
