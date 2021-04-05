@@ -2,7 +2,7 @@ package me.delected.coinvestors.commands.profilecommands;
 
 import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
-import me.delected.coinvestors.io.StorageUtils;
+import me.delected.coinvestors.io.yaml.YamlUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -41,7 +41,7 @@ public class ProfileView implements SubCommand {
                 return true;
             }
             Player p = (Player) sender;
-            if (!StorageUtils.hasProfile(p)) {
+            if (!YamlUtils.hasProfile(p)) {
                 p.sendMessage(ChatColor.RED + "You do not have a profile! Create one with /profile create");
                 return true;
             }

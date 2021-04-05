@@ -1,7 +1,5 @@
 package me.delected.coinvestors.model.market;
 
-import me.delected.coinvestors.model.wallet.Wallet;
-
 public class Ask extends AbstractTransactionRequest implements Comparable<Ask> {
 
 	public Ask(final double amount, final double prize, final Wallet.WalletUUID target) {

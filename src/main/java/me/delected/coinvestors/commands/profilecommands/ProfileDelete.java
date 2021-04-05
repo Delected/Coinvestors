@@ -2,7 +2,7 @@ package me.delected.coinvestors.commands.profilecommands;
 
 import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
-import me.delected.coinvestors.io.StorageUtils;
+import me.delected.coinvestors.io.yaml.YamlUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
@@ -39,23 +39,23 @@ public class ProfileDelete implements SubCommand {
                 return true;
             }
             Player p = (Player) sender;
-            if (!StorageUtils.hasProfile(p)) {
+            if (!YamlUtils.hasProfile(p)) {
                 p.sendMessage(ChatColor.RED + "You do not have a profile! Create one with /profile create");
             }
             p.sendMessage(ChatUtils.color("&4&lAre you sure you would like to delete your profile? &c&lThis will delete ALL of your wallets, " +
 										  "you will lose all of your money that is stored in this profile! &8Type the command again to confirm."));
-            StorageUtils.deleteProfile(p);
+            YamlUtils.deleteProfile(p);
             // delete all wallets
             return true;
         } else if (args.length == 2) {
             if (!sender.hasPermission("coinvestors.profile.delete.others")) { sender.sendMessage(ChatColor.RED + "You do not have permission to delete another user's profile!"); return true; }
             Player p = Bukkit.getPlayer(args[1]);
             if (p == null) { sender.sendMessage(ChatColor.RED + "This player does not exist!");  return true; }
-            if (!StorageUtils.hasProfile(p)) {
+            if (!YamlUtils.hasProfile(p)) {
                 sender.sendMessage(ChatColor.RED + "This player does not have a profile, or they do not exist!"); return true;
             }
 
-            StorageUtils.deleteProfile(p);
+            YamlUtils.deleteProfile(p);
             return true;
         } else {
             sendIncorrectArgMsg(sender, "Profile", "Create");

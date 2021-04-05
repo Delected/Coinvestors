@@ -7,7 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.delected.coinvestors.commands.CommandDistributor;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
-import me.delected.coinvestors.io.Yaml;
+import me.delected.coinvestors.io.yaml.Yaml;
 
 public final class Coinvestors extends JavaPlugin {
 	public static JavaPlugin INSTANCE;

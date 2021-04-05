@@ -1,6 +1,7 @@
-package me.delected.coinvestors.io;
+package me.delected.coinvestors.io.yaml;
 
 import me.delected.coinvestors.Coinvestors;
+import me.delected.coinvestors.io.yaml.Yaml;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
@@ -11,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * This class provides helper utilities for reading/writing with the Yaml files provided
  * in the plugin's data folder
  */
-public class StorageUtils {
+public class YamlUtils {
 
 
     //----------( profiles.yml )----------\\

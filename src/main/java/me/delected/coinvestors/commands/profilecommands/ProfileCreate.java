@@ -2,7 +2,7 @@ package me.delected.coinvestors.commands.profilecommands;
 
 import me.delected.coinvestors.util.ChatUtils;
 import me.delected.coinvestors.commands.SubCommand;
-import me.delected.coinvestors.io.StorageUtils;
+import me.delected.coinvestors.io.yaml.YamlUtils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -36,8 +36,8 @@ public class ProfileCreate implements SubCommand {
             return true;
         }
         Player p = (Player) sender;
-        if (StorageUtils.hasProfile(p)) { p.sendMessage(ChatColor.RED + "You already have a profile! Use /profile view to see it!"); return true; }
-        StorageUtils.createProfile(p);
+        if (YamlUtils.hasProfile(p)) { p.sendMessage(ChatColor.RED + "You already have a profile! Use /profile view to see it!"); return true; }
+        YamlUtils.createProfile(p);
 
         sender.sendMessage(ChatColor.GREEN + "You have created a new profile! Use /profile view to see it!");
         return true;

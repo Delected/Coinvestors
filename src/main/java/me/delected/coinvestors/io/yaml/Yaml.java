@@ -1,4 +1,4 @@
-package me.delected.coinvestors.io;
+package me.delected.coinvestors.io.yaml;
 
 import java.io.File;
 import java.io.IOException;
