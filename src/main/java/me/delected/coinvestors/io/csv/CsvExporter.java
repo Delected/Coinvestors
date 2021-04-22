@@ -2,13 +2,11 @@ package me.delected.coinvestors.io.csv;
 
 import me.delected.coinvestors.io.FileAccessor;
 
-import java.io.File;
+import java.io.IOException;
 
-public class CsvExporter extends FileAccessor {
-    String delim;
+public class CsvExporter extends CsvAccessor {
 
-    public CsvExporter(File file, String delim) {
-        super(file);
-        this.delim = delim;
-    }
+	public CsvExporter(String filePath, String delimiter) throws IOException, IllegalArgumentException {
+		super(filePath, delimiter);
+	}
 }
