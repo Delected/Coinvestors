@@ -45,7 +45,9 @@ public class ObjectMapper {
 		input = input.trim();
 		if (input.charAt(0) == '{')
 			return new JsonObject(parseObject(input), null);
-		else return new JsonObject(null, parseArray(input));
+		else if (input.charAt(0) == '[')
+			return new JsonObject(null, parseArray(input));
+		throw new IllegalArgumentException("The passed String " + input + " is no valid JSON-String");
 	}
 
 	private static AbstractObject parseObject(String input) {
