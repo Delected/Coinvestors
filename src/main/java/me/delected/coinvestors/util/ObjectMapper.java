@@ -69,6 +69,14 @@ public class ObjectMapper {
 		public Map<String, Object> getPrimitives() {
 			return Collections.unmodifiableMap(primitiveFields);
 		}
+
+		@Override
+		public String toString() {
+			return "AbstractObject{" +
+				   "objectFields=" + objectFields +
+				   ", primitiveFields=" + primitiveFields +
+				   '}';
+		}
 	}
 
 	public static JsonObject decode(String input) {
