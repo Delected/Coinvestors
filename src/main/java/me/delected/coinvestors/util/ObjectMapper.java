@@ -1,5 +1,6 @@
 package me.delected.coinvestors.util;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -42,6 +43,13 @@ public class ObjectMapper {
 			this.array = array;
 		}
 
+		@Override
+		public String toString() {
+			return "JsonObject{" +
+				   "object=" + object +
+				   ", array=" + Arrays.toString(array) +
+				   '}';
+		}
 	}
 
 
