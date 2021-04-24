@@ -9,18 +9,34 @@ import java.util.Optional;
 
 public class ObjectMapper {
 
+
+	/**
+	 * The result of any decode request. Contains either a AbstractObject
+	 * or a Object[] representing the decoded JSON.
+	 * The corresponding getter returns a Optional containing the result, the other one returns an empty Optional
+	 */
 	public static class JsonObject {
 		private final AbstractObject object;
 		private final Object[] array;
 
+		/**
+		 * @return an Optional containing the AbstractObject of the decoded JSON if it was one
+		 */
 		public Optional<AbstractObject> getObject() {
 			return Optional.ofNullable(object);
 		}
 
+		/**
+		 * @return an Optional containing an Array of the decoded JSON if it was one
+		 */
 		public Optional<Object[]> getArray() {
 			return Optional.ofNullable(array);
 		}
 
+		/***
+		 * @param object The Object representation or null if is an array
+		 * @param array The Array representation or null if it is an Object
+		 */
 		public JsonObject(final AbstractObject object, final Object[] array) {
 			this.object = object;
 			this.array = array;
@@ -28,6 +44,12 @@ public class ObjectMapper {
 
 	}
 
+
+	/**
+	 * Represents an Object of any class.
+	 * Its fields are separated into objectFields and primitiveFields
+	 * Both getters for them returns a map for making the fields accessible by their names
+	 */
 	public static class AbstractObject {
 		private final Map<String, AbstractObject> objectFields = new HashMap<>();
 		private final Map<String, Object> primitiveFields = new HashMap<>();
