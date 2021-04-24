@@ -1,8 +1,5 @@
 package me.delected.coinvestors.model.currency;
 
-import me.delected.coinvestors.model.wallet.Ethereum;
-import me.delected.coinvestors.model.wallet.Wallet;
-
 public enum Crypto {
 	BTC("Bitcoin"),
 	ETH("Ethereum", new Ethereum()),

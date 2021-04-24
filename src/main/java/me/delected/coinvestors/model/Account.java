@@ -1,40 +1,23 @@
 package me.delected.coinvestors.model;
 
-import java.util.ArrayList;
+import me.delected.coinvestors.model.currency.Crypto;
+import me.delected.coinvestors.model.wallet.Wallet;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import me.delected.coinvestors.model.currency.Crypto;
+import java.util.UUID;
 
 public class Account {
-	private final List<Wallet.WalletUUID> wallets;
+	UUID id;
 
-	public Map<Wallet.WalletUUID, Wallet> getWallets() {
-		return wallets.stream()
-				.map(Wallet::getWalletByPrivateUUID)
-				.map(wallet -> wallet.orElse(null))
-				.filter(Objects::nonNull)
-				.collect(Collectors.toMap(Wallet::getPrivateKey, w -> w));
+	public Account(UUID id) {
+		this.id = id;
 	}
 
-	public Account() {
-		this(new ArrayList<>());
-	}
+	public Map<Crypto, List<Wallet>> wallets = new HashMap<>();
 
-	public Account(List<Wallet.WalletUUID> wallets) {
-		this.wallets = wallets;
-	}
+	public void addWallet() {
 
-	public void addWallet(Crypto crypto) {
-		Wallet newWallet = new Wallet(crypto);
-		wallets.add(newWallet.getPrivateKey());
 	}
-
-	public Optional<Wallet> getWallet(Wallet.WalletUUID uuid) {
-		return Wallet.getWalletByPrivateUUID(uuid);
-	}
-
 }
