@@ -50,20 +50,22 @@ public class ExchangePair {
 	}
 
 	public synchronized boolean buy(Bid bid, Wallet source, Wallet target) {
-		if (source.withdraw(bid.getTotalCost())) {
-			bid.fulfill();
-			target.deposit(bid.getAmount());
-			return true;
-		}
+		if (bids.contains(bid))
+			if (source.withdraw(bid.getTotalCost())) {
+				bid.fulfill();
+				target.deposit(bid.getAmount());
+				return true;
+			}
 		return false;
 	}
 
 	public synchronized boolean sell(Ask ask, Wallet source, Wallet target) {
-		if (source.withdraw(ask.getAmount())) {
-			ask.fulfill();
-			target.deposit(ask.getTotalCost());
-			return true;
-		}
+		if (asks.contains(ask))
+			if (source.withdraw(ask.getAmount())) {
+				ask.fulfill();
+				target.deposit(ask.getTotalCost());
+				return true;
+			}
 		return false;
 	}
 
