@@ -1,8 +1,10 @@
 package me.delected.coinvestors.model.currency;
 
+import me.delected.coinvestors.model.wallet.Wallet;
+
 public enum Crypto {
 	BTC("Bitcoin"),
-	ETH("Ethereum", new Ethereum()),
+	ETH("Ethereum"),
 	BNB("Binance Coin"),
 	ADA("Cardano"),
 	DOT("Polkadot"),
@@ -33,9 +35,11 @@ public enum Crypto {
 	String fullName;
 	Wallet walletClass;
 
-	Crypto(String fullName, Wallet walletClass) {
+
+	//TODO
+	Crypto(String fullName /*, Wallet walletClass*/) {
 		this.fullName = fullName;
-		this.walletClass = walletClass;
+		//this.walletClass = walletClass;
 	}
 
 	public String getFullName() {

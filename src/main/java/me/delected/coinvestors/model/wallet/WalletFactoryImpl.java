@@ -5,10 +5,10 @@ import me.delected.coinvestors.model.currency.Crypto;
 public class WalletFactoryImpl implements WalletFactory {
 
     public String[] createKeyPairFromCrypto(Crypto crypto) {
-        return crypto.getWalletClass().generateKeyPair();
+        return null; //TODO
     }
 
     public WalletAddress createAddressFromCrypto(Crypto crypto) {
-        return crypto.getWalletClass().generateAddress();
+        return null; //TODO
     }
 }
