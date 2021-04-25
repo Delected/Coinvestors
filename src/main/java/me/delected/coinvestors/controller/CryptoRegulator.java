@@ -34,7 +34,7 @@ public class CryptoRegulator {
 
     }
 
-    public static String createRequestArgument() {
+    private static String createRequestArgument() {
         return Arrays.stream(Crypto.values())
                 .map(Crypto::name)
                 .collect(Collectors.joining(","));
