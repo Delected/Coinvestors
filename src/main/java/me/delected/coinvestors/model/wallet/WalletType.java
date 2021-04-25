@@ -1,8 +1,18 @@
 package me.delected.coinvestors.model.wallet;
 
+import me.delected.coinvestors.model.wallet.credentialgenerator.EthereumGenerator;
+import me.delected.coinvestors.model.wallet.credentialgenerator.WalletCredentialGenerator;
+
 public enum WalletType {
-    SHORT_ADDRESS_WALLET,
-    MEDIUM_ADDRESS_WALLET,
-    LONG_ADDRESS_WALLET,
-    ETHEREUM
+    ETHEREUM(EthereumGenerator.class);
+
+    Class<? extends WalletCredentialGenerator> generator;
+
+    WalletType(Class<? extends WalletCredentialGenerator> generator) {
+        this.generator = generator;
+    }
+
+    public Class<? extends WalletCredentialGenerator> getGenerator() {
+        return generator;
+    }
 }

@@ -1,16 +1,9 @@
 package me.delected.coinvestors.model.wallet;
 
-import me.delected.coinvestors.model.wallet.credentialgenerator.WalletCredentialGenerator;
-
 import java.math.BigDecimal;
 
 //TODO
 public class WalletImpl implements Wallet {
-
-	@Override
-	public WalletCredentialGenerator getCredentialGenerator() {
-		return null;
-	}
 
 	@Override
 	public boolean withdraw(BigDecimal amount) {
