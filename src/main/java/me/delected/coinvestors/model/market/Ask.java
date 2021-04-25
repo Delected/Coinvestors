@@ -1,11 +1,13 @@
 package me.delected.coinvestors.model.market;
 
+import java.math.BigDecimal;
+
 import me.delected.coinvestors.model.currency.ExchangePair;
 import me.delected.coinvestors.model.wallet.Wallet;
 
 public class Ask extends MarketTransactionRequest implements Comparable<Ask> {
 
-	public Ask(final ExchangePair pair, final double amount, final double prize, final Wallet source, final Wallet target) {
+	public Ask(final ExchangePair pair, final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
 		super(pair, amount, prize, source, target);
 	}
 

@@ -1,16 +1,18 @@
 package me.delected.coinvestors.model.market;
 
+import java.math.BigDecimal;
+
 import me.delected.coinvestors.model.currency.ExchangePair;
 import me.delected.coinvestors.model.wallet.Wallet;
 
 public abstract class MarketTransactionRequest {
 	private final ExchangePair pair;
-	private final double amount;
+	private final BigDecimal amount;
 	private final double prize;
 	private final Wallet source;
 	private final Wallet target;
 
-	protected MarketTransactionRequest(final ExchangePair pair, final double amount, final double prize, final Wallet source, final Wallet target) {
+	protected MarketTransactionRequest(final ExchangePair pair, final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
 		this.pair = pair;
 		this.amount = amount;
 		this.prize = prize;
@@ -18,11 +20,11 @@ public abstract class MarketTransactionRequest {
 		this.target = target;
 	}
 
-	public double getTotalCost() {
-		return amount * prize;
+	public BigDecimal getTotalCost() {
+		return amount.multiply(BigDecimal.valueOf(prize));
 	}
 
-	public double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 

@@ -1,5 +1,6 @@
 package me.delected.coinvestors.model.currency;
 
+import java.math.BigDecimal;
 import java.util.TreeSet;
 
 import me.delected.coinvestors.model.market.Ask;
@@ -33,7 +34,7 @@ public class ExchangePair {
 		return asks;
 	}
 
-	public boolean makeAsk(final double amount, final double prize, final Wallet source, final Wallet target) {
+	public boolean makeAsk(final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
 		Ask ask = new Ask(this, amount, prize, source, target);
 		if (!target.withdraw(ask.getTotalCost()))
 			return false;
@@ -41,7 +42,7 @@ public class ExchangePair {
 		return true;
 	}
 
-	public boolean makeBid(final double amount, final double prize, final Wallet source, final Wallet target) {
+	public boolean makeBid(final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
 		if (!target.withdraw(amount))
 			return false;
 		Bid bid = new Bid(this, amount, prize, source, target);
