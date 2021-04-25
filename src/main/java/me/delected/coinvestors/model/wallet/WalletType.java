@@ -1,9 +1,9 @@
 package me.delected.coinvestors.model.wallet;
 
 public enum WalletType {
-    ShortAddressWallet(0),
-    MediumAddressWallet(1),
-    LongAddressWallet(2);
+    SHORT_ADDRESS_WALLET(0),
+    MEDIUM_ADDRESS_WALLET(1),
+    LONG_ADDRESS_WALLET(2);
 
     int length;
 
