@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CryptoRegulator {
     public static void main(String[] args) {
@@ -17,7 +19,7 @@ public class CryptoRegulator {
     public static Optional<Object[]> recalculatePrices() {
         ObjectMapper.JsonObject jsonObject;
         try {
-            URL url = new URL("https://api.nomics.com/v1/currencies/ticker?key=4777d99b1e3d2b5dc28f496a8791a214&ids=" + Crypto.getAsCsv() + "&interval=none&convert=USD&per-page=100&page=1");
+            URL url = new URL("https://api.nomics.com/v1/currencies/ticker?key=4777d99b1e3d2b5dc28f496a8791a214&ids=" + createRequestArgument() + "&interval=none&convert=USD&per-page=100&page=1");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             String response = connection.getInputStream().toString();
             jsonObject = ObjectMapper.decode(response);
@@ -30,5 +32,11 @@ public class CryptoRegulator {
 
 
 
+    }
+
+    public static String createRequestArgument() {
+        return Arrays.stream(Crypto.values())
+                .map(Crypto::name)
+                .collect(Collectors.joining(","));
     }
 }

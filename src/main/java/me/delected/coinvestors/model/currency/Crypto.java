@@ -58,10 +58,4 @@ public enum Crypto {
 	public Wallet getWalletClass() {
 		return walletClass;
 	}
-
-	public static String getAsCsv() {
-		return Arrays.stream(Crypto.values())
-				.map(Crypto::name)
-				.collect(Collectors.joining(","));
-	}
 }
