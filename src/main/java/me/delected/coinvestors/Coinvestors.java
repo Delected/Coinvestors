@@ -2,6 +2,8 @@ package me.delected.coinvestors;
 
 import java.util.Optional;
 
+import me.delected.coinvestors.controller.CryptoRegulator;
+import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -35,6 +37,8 @@ public final class Coinvestors extends JavaPlugin {
 		CommandDistributor distributor;
 		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor((distributor = new CommandDistributor()));
 		cvCommand.get().setTabCompleter(distributor);
-	}
 
+		Bukkit.getScheduler().runTaskTimer(this, CryptoRegulator::recalculatePrices,
+				0L, getConfig().getInt("reload_seconds") * 1000L);
+	}
 }

@@ -11,4 +11,9 @@ public class WalletFactoryImpl implements WalletFactory {
     public WalletAddress createAddressFromCrypto(Crypto crypto) {
         return null; //TODO
     }
+
+    @Override
+    public Wallet creatFor(Crypto crypto) {
+        return null;
+    }
 }

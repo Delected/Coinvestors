@@ -2,6 +2,9 @@ package me.delected.coinvestors.model.currency;
 
 import me.delected.coinvestors.model.wallet.Wallet;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public enum Crypto {
 	BTC("Bitcoin"),
 	ETH("Ethereum"),
@@ -35,11 +38,17 @@ public enum Crypto {
 	String fullName;
 	Wallet walletClass;
 
+	/**
+	@Deprecated only used to omit errors.
+	 */
+	@Deprecated
+	Crypto(String fullName) {
 
-	//TODO
-	Crypto(String fullName /*, Wallet walletClass*/) {
+	}
+
+	Crypto(String fullName, Wallet walletClass) {
 		this.fullName = fullName;
-		//this.walletClass = walletClass;
+		this.walletClass = walletClass;
 	}
 
 	public String getFullName() {
@@ -48,5 +57,11 @@ public enum Crypto {
 
 	public Wallet getWalletClass() {
 		return walletClass;
+	}
+
+	public static String getAsCsv() {
+		return Arrays.stream(Crypto.values())
+				.map(Crypto::name)
+				.collect(Collectors.joining(","));
 	}
 }
