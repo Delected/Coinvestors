@@ -3,9 +3,7 @@ package me.delected.coinvestors.controller;
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.util.ObjectMapper;
 
-import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Optional;

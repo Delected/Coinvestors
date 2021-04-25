@@ -2,9 +2,6 @@ package me.delected.coinvestors.model.currency;
 
 import me.delected.coinvestors.model.wallet.Wallet;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 public enum Crypto {
 	BTC("Bitcoin"),
 	ETH("Ethereum"),

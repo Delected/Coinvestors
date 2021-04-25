@@ -1,10 +1,19 @@
 package me.delected.coinvestors.model.wallet;
 
+import me.delected.coinvestors.model.wallet.credentialgenerator.WalletCredentialGenerator;
+
+import java.math.BigDecimal;
+
 public interface Wallet {
+	WalletCredentialGenerator getCredentialGenerator();
 
-	WalletAddress getAddress();
+	boolean withdraw(BigDecimal amount);
 
-	boolean withdraw(double amount);
+	void deposit(BigDecimal amount);
 
-	void deposit(double amount);
+	BigDecimal getBalance();
+
+	void setBalance(BigDecimal newAmount);
+
+	WalletType getWalletType();
 }
