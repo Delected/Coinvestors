@@ -1,20 +1,15 @@
 package me.delected.coinvestors.commands;
 
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.reflections.Reflections;
 
-import me.delected.coinvestors.util.SingletonCreator;
+import me.delected.coinvestors.util.SubtypeInstanceBuilder;
 
 public class CommandDistributor implements TabExecutor {
 
@@ -23,7 +18,7 @@ public class CommandDistributor implements TabExecutor {
 	private final Set<AbstractCommand> executors = setupExecutors();
 
 	private static Set<AbstractCommand> setupExecutors() {
-		return SingletonCreator.createSingletons(AbstractCommand.class, "me.delected.coinvestors.commands");
+		return SubtypeInstanceBuilder.createInstances(AbstractCommand.class, "me.delected.coinvestors.commands");
 	}
 
 	@Override
