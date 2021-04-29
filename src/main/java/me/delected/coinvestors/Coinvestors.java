@@ -1,7 +1,9 @@
 package me.delected.coinvestors;
 
+import java.util.Objects;
 import java.util.Optional;
 
+import me.delected.coinvestors.commands.menu.OpenCommand;
 import me.delected.coinvestors.controller.CryptoRegulator;
 
 import org.bukkit.Bukkit;
@@ -30,10 +32,10 @@ public final class Coinvestors extends JavaPlugin {
 		CommandDistributor distributor;
 		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor((distributor = new CommandDistributor()));
 		cvCommand.get().setTabCompleter(distributor);
-
-
+		Objects.requireNonNull(getCommand("open")).setExecutor(new OpenCommand());
+		/*
 		Bukkit.getScheduler().runTaskTimer(this, CryptoRegulator::recalculatePrices,
-				0L, getConfig().getInt("reload_seconds") * 1000L);
+				0L, getConfig().getInt("reload_seconds") * 1000L);*/
 	}
 
 

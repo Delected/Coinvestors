@@ -7,6 +7,9 @@ description: A plugin that grabs real crypto data. Invest, mine, and sell with o
 website: https://delected.me/ & https://github.com/Rigobert0, source code at https://github.com/Delected/Coinvestors
 
 commands:
+  open:
+    usage: sadasd
+    description: asdasfasdga
   coinvestors:
     usage: /<command>
     description: Coinvestors
