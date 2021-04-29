@@ -15,11 +15,6 @@ import me.delected.coinvestors.io.yaml.Yaml;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
-
-	public static Yaml profilesYaml = new Yaml("profiles");
-	public static Yaml walletsYaml = new Yaml("wallets");
-	public static Yaml rigsYaml = new Yaml("rigs");
-
 	private final GuiPlayerStateManager manager = new GuiPlayerStateManager();
 
 	@Override
@@ -29,13 +24,7 @@ public final class Coinvestors extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		// profiles.yml
-		profilesYaml.setup();
-		// wallets.yml
-		walletsYaml.setup();
-		// rigs.yml
-		rigsYaml.setup();
-		// have a log of all transactions
+		// have a log of all transactions maybe
 		saveDefaultConfig();
 		Optional<PluginCommand> cvCommand = Optional.ofNullable(getCommand("coinvestors"));
 		CommandDistributor distributor;
