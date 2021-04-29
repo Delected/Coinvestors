@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 public class InteractionListener extends AbstractListener<PlayerInteractEvent> {
 
 	@Override
-	@EventHandler
+	@EventHandler()
 	public void handle(final PlayerInteractEvent event) {
 
 	}

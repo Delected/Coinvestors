@@ -8,8 +8,11 @@ import java.util.UUID;
 public class AccountManager {
 	private final Map<UUID, Account> accountMap = new HashMap<>();
 
-	public void createAccount(UUID id) {
+	public boolean createAccount(UUID id) {
+		if (accountMap.containsKey(id))
+			return false;
 		accountMap.put(id, new Account(id));
+		return true;
 	}
 
 	public Optional<Account> getAccountOf(UUID userUUID) {
