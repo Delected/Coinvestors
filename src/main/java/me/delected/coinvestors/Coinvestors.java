@@ -8,12 +8,14 @@ import me.delected.coinvestors.controller.CryptoRegulator;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.delected.coinvestors.commands.CommandDistributor;
 import me.delected.coinvestors.controller.GuiPlayerStateManager;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.io.yaml.Yaml;
+import me.delected.coinvestors.listeners.AbstractListener;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
@@ -28,16 +30,20 @@ public final class Coinvestors extends JavaPlugin {
 	public void onEnable() {
 		// have a log of all transactions maybe
 		saveDefaultConfig();
+		//register commands
 		Optional<PluginCommand> cvCommand = Optional.ofNullable(getCommand("coinvestors"));
 		CommandDistributor distributor;
 		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor((distributor = new CommandDistributor()));
 		cvCommand.get().setTabCompleter(distributor);
+		//register all Listeners
+		PluginManager pluginManager = getServer().getPluginManager();
+		AbstractListener.createListeners().forEach(l -> pluginManager.registerEvents(l, this));
+		//DEBUG
 		Objects.requireNonNull(getCommand("open")).setExecutor(new OpenCommand());
 		/*
 		Bukkit.getScheduler().runTaskTimer(this, CryptoRegulator::recalculatePrices,
 				0L, getConfig().getInt("reload_seconds") * 1000L);*/
 	}
-
 
 	public static JavaPlugin INSTANCE() {
 		return INSTANCE;
