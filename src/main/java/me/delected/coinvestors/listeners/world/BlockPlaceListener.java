@@ -5,7 +5,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 
 import me.delected.coinvestors.listeners.AbstractListener;
 
-public class BlockPlace extends AbstractListener<BlockPlaceEvent> {
+public class BlockPlaceListener extends AbstractListener<BlockPlaceEvent> {
 
 	@Override
 	@EventHandler
