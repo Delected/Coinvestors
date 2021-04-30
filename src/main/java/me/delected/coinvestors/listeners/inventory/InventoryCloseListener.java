@@ -1,4 +1,4 @@
-package me.delected.coinvestors.listeners;
+package me.delected.coinvestors.listeners.inventory;
 
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -8,6 +8,7 @@ import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
+import me.delected.coinvestors.listeners.AbstractListener;
 import me.delected.coinvestors.util.PersistentDataManager;
 
 public class InventoryCloseListener extends AbstractListener<InventoryCloseEvent> {

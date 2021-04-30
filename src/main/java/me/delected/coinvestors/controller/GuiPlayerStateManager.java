@@ -18,4 +18,8 @@ public class GuiPlayerStateManager {
 		return guiStateMap.computeIfAbsent(uuid, GuiPlayerState::new);
 	}
 
+	public void removePlayer(Player player) {
+		guiStateMap.remove(player.getUniqueId());
+	}
+
 }

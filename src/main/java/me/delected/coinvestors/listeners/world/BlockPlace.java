@@ -1,7 +1,9 @@
-package me.delected.coinvestors.listeners;
+package me.delected.coinvestors.listeners.world;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.BlockPlaceEvent;
+
+import me.delected.coinvestors.listeners.AbstractListener;
 
 public class BlockPlace extends AbstractListener<BlockPlaceEvent> {
 
