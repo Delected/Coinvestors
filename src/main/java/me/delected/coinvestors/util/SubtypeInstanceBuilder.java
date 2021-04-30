@@ -3,16 +3,18 @@ package me.delected.coinvestors.util;
 import java.lang.reflect.Modifier;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.bukkit.Bukkit;
 import org.reflections.Reflections;
 
 /**
  * A utility class for making it easy to create singletons of subtypes in the same package.
  */
 public class SubtypeInstanceBuilder {
+
+	private static Logger logger = Logger.getGlobal();
 
 	/**
 	 * Builds a singleton of all subtypes in a package using the declared standard Constructor.
@@ -35,8 +37,8 @@ public class SubtypeInstanceBuilder {
 					try {
 						return subclass.getDeclaredConstructor().newInstance();
 					} catch (ReflectiveOperationException e) {
-						Bukkit.getLogger().severe("Could not initialize the " + subclass.getSimpleName());
-						Bukkit.getLogger().severe(e.getMessage() + e.getCause());
+						logger.severe("Could not initialize the " + subclass.getSimpleName());
+						logger.severe(e.getMessage() + e.getCause());
 						return null;
 					}
 				})
@@ -47,4 +49,8 @@ public class SubtypeInstanceBuilder {
 				.collect(Collectors.toSet());
 	}
 
+	public static void setLogger(final Logger logger) {
+		assert logger != null;
+		SubtypeInstanceBuilder.logger = logger;
+	}
 }

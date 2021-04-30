@@ -16,6 +16,7 @@ import me.delected.coinvestors.controller.GuiPlayerStateManager;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.io.yaml.Yaml;
 import me.delected.coinvestors.listeners.AbstractListener;
+import me.delected.coinvestors.util.SubtypeInstanceBuilder;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
@@ -24,6 +25,7 @@ public final class Coinvestors extends JavaPlugin {
 	@Override
 	public void onLoad() {
 		INSTANCE = this;
+		SubtypeInstanceBuilder.setLogger(Bukkit.getLogger());
 	}
 
 	@Override
