@@ -19,7 +19,7 @@ public class InventoryClickListener extends AbstractListener<InventoryClickEvent
 			e.setCancelled(true);
 		}
 		if (PersistentDataManager.isLink(item)) {
-			MenuLinker.getLink(PersistentDataManager.getLink(item)).accept((Player) e.getWhoClicked());
+			MenuLinker.getAction(PersistentDataManager.getLinkID(item)).accept((Player) e.getWhoClicked());
 		}
 	}
 }

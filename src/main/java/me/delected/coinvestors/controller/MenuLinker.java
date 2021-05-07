@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class MenuLinker {
 	private static final Map<String, Consumer<Player>> LINK_ACTIONS = new HashMap<>();
 
-	public static Consumer<Player> getLink(String link) {
+	public static Consumer<Player> getAction(String link) {
 		return LINK_ACTIONS.get(link);
 	}
 

@@ -9,18 +9,18 @@ import org.bukkit.inventory.Inventory;
 
 public class GuiPlayerState {
 	private final UUID playerId;
-	private final Map<MenuState, GuiState> stateMap = new HashMap<>();
+	private final Map<MenuState, GuiStage> stateMap = new HashMap<>();
 	private Inventory menuInventory;
-	private GuiState actualState;
+	private GuiStage actualState;
 
 	public GuiPlayerState(final UUID playerId) {
 		this.playerId = playerId;
 	}
 
-	public void setState(GuiState guiState) {
-		actualState = guiState;
-		stateMap.put(guiState.getState(), guiState);
-		menuInventory = guiState.build(Bukkit.getPlayer(playerId));
+	public void setStage(GuiStage guiStage) {
+		actualState = guiStage;
+		stateMap.put(guiStage.getState(), guiStage);
+		menuInventory = guiStage.build(Bukkit.getPlayer(playerId));
 	}
 
 	public void changeToLastState(MenuState state) {
@@ -32,7 +32,7 @@ public class GuiPlayerState {
 		return menuInventory;
 	}
 
-	public GuiState getActualState() {
+	public GuiStage getActualStage() {
 		return actualState;
 	}
 }

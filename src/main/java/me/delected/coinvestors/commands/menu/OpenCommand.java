@@ -1,9 +1,11 @@
 package me.delected.coinvestors.commands.menu;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryType;
 import org.jetbrains.annotations.NotNull;
 
 import me.delected.coinvestors.Coinvestors;
@@ -19,8 +21,9 @@ public class OpenCommand implements CommandExecutor {
 			return true;
 		Player player = (Player) commandSender;
 		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
-		state.setState(new MenuGuiState());
-		player.openInventory(state.getMenuInventory());
+		state.setStage(new MenuGuiState());
+		//player.openInventory(state.getMenuInventory());
+		player.openInventory(Bukkit.createInventory(null, InventoryType.ANVIL));
 		return true;
 	}
 

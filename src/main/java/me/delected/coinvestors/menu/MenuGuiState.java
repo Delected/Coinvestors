@@ -14,13 +14,13 @@ import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.util.ItemStackCreator;
 import me.delected.coinvestors.util.PersistentDataManager;
 
-public class MenuGuiState extends GuiState {
+public class MenuGuiState extends GuiStage {
 
 	private static final Inventory INVENTORY = createInventory();
 	private static final String MENU_TRANSACTION_LINK = "MENU_TO_TRANSACTION";
 
 	static {
-		registerMenuTransactionLink();
+		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::menuToTransactionChange);
 	}
 
 	public MenuGuiState() {
@@ -35,13 +35,9 @@ public class MenuGuiState extends GuiState {
 		return result;
 	}
 
-	private static void registerMenuTransactionLink() {
-		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::menuToTransactionChange);
-	}
-
 	private static void menuToTransactionChange(Player player) {
 		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
-		state.setState(new TransactionGuiState());
+		state.setStage(new TransactionGuiState());
 		player.openInventory(state.getMenuInventory());
 	}
 

@@ -1,7 +1,5 @@
 package me.delected.coinvestors.util;
 
-import java.util.Optional;
-
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -15,6 +13,7 @@ public class PersistentDataManager {
 	private static final JavaPlugin COINVESTORS = Coinvestors.INSTANCE();
 	private static final NamespacedKey UNMODIFIABLE_KEY = new NamespacedKey(COINVESTORS, "UNMODIFIABLE");
 	private static final NamespacedKey LINK_KEY = new NamespacedKey(COINVESTORS, "LINK");
+	private static final NamespacedKey ANVIL_INPUT_KEY = new NamespacedKey(COINVESTORS, "ANVIL_INPUT");
 
 	public static ItemStack setUnmodifiable(ItemStack target) {
 		addPersistentDatum(target, UNMODIFIABLE_KEY, PersistentDataType.INTEGER, 1);
@@ -37,6 +36,7 @@ public class PersistentDataManager {
 	}
 
 	public static ItemStack setLink(ItemStack target, String link) {
+		setUnmodifiable(target);
 		addPersistentDatum(target, LINK_KEY, PersistentDataType.STRING, link);
 		return target;
 	}
@@ -46,7 +46,7 @@ public class PersistentDataManager {
 	}
 
 
-	public static String getLink(ItemStack stack) {
+	public static String getLinkID(ItemStack stack) {
 		if (!isLink(stack))
 			return null;
 		return getPersistentDatum(stack, LINK_KEY, PersistentDataType.STRING);

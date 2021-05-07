@@ -3,11 +3,11 @@ package me.delected.coinvestors.menu;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
-public abstract class GuiState {
+public abstract class GuiStage {
 
 	private final MenuState state;
 
-	protected GuiState(final MenuState state) {
+	protected GuiStage(final MenuState state) {
 		this.state = state;
 	}
 
