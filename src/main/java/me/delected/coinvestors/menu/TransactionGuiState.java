@@ -74,23 +74,43 @@ public class TransactionGuiState extends GuiStage {
 	}
 
 	private static void openSourceInput(Player player) {
-		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
-		StringInputGuiStage nextStage = new StringInputGuiStage(MenuState.TRANSACTION,
-				((TransactionGuiState) state.getActualStage())::retrieveSource);
-		state.setStage(nextStage);
-		player.openInventory(state.getMenuInventory());
+		TransactionGuiState actualStage = stateOf(player);
+		InputStageManager.openStringInput(player, actualStage::retrieveSource, () -> actualStage.build(player));
 	}
 
+	private static void openAmountInput(Player player) {
+		TransactionGuiState actualStage = stateOf(player);
+		InputStageManager.openNumberInput(player, actualStage::setAmount, () -> actualStage.build(player));
+	}
+
+	private static void openTargetInput(Player player) {
+		TransactionGuiState actualStage = stateOf(player);
+		InputStageManager.openStringInput(player, actualStage::retrieveSource, () -> actualStage.build(player));
+	}
+
+	private static TransactionGuiState stateOf(Player player) {
+		return (TransactionGuiState) Coinvestors.getManager().getStateOf(player).getActualStage();
+	}
+
+	//TODO: When wallet access logic is implemented, retrieve the wallets here
 
 	public void retrieveSource(final String raw) {
-		this.source = null;
+		setSource(null);
 	}
 
-	public void setAmount(final BigDecimal amount) {
+	private void setSource(Wallet source) {
+		this.source = source;
+	}
+
+	public void retrieveTarget(String raw) {
+		setTarget(null);
+	}
+
+	private void setAmount(final BigDecimal amount) {
 		this.amount = amount;
 	}
 
-	public void setTarget(final Wallet target) {
+	private void setTarget(final Wallet target) {
 		this.target = target;
 	}
 }
