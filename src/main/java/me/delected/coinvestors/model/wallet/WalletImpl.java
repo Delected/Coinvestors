@@ -28,13 +28,4 @@ public class WalletImpl implements Wallet {
 	public void setBalance(BigDecimal newAmount) {
 
 	}
-
-	@Override
-	public WalletType getWalletType() {
-		return null;
-	}
-
-
-
-
 }

@@ -17,10 +17,11 @@ public class CsvImporter extends CsvAccessor {
 		this(filePath, ";");
 	}
 
-	public List<String[]> toListByRow() {
+	public List<String[]> readContent() {
 		List<String[]> strs;
 		try {
 			strs = new BufferedReader(new FileReader(file)).lines()
+					.skip(1)
 					.map(s -> s.split(delimiter))
 					.filter(str -> str.length != 0)
 					.collect(Collectors.toList());
@@ -29,6 +30,5 @@ public class CsvImporter extends CsvAccessor {
 			return null;
 		}
 		return strs;
-
 	}
 }

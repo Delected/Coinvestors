@@ -11,6 +11,4 @@ public interface Wallet {
 	BigDecimal getBalance();
 
 	void setBalance(BigDecimal newAmount);
-
-	WalletType getWalletType();
 }

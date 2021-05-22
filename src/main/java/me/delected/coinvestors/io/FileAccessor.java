@@ -15,15 +15,7 @@ public abstract class FileAccessor {
 		if (isTyped(file, type)) {
 			throw new IncorrectFileTypeException(file, type);
 		}
-		try {
-			if (file.createNewFile()) {
-				Bukkit.getLogger().warning("There was no File at the path " + file.getPath() + " . Created a new one!");
-			}
-		} catch (IOException e) {
-			Bukkit.getLogger().severe("Could not access " + file.getPath() + "!");
-			throw e;
-		}
-
+		tryCreatingFile();
 	}
 
 	protected FileAccessor(String path, String type) throws IOException, IncorrectFileTypeException {
@@ -32,6 +24,17 @@ public abstract class FileAccessor {
 
 	private static boolean isTyped(File file, String fileType) {
 		return file.getPath().endsWith(fileType);
+	}
+
+	private void tryCreatingFile() throws IOException {
+		try {
+			if (file.createNewFile()) {
+				Bukkit.getLogger().warning("There was no File at the path " + file.getPath() + " . Created a new one!");
+			}
+		} catch (IOException e) {
+			Bukkit.getLogger().severe("Could not access " + file.getPath() + "!");
+			throw e;
+		}
 	}
 
 }
