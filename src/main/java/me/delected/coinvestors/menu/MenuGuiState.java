@@ -14,7 +14,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.util.ItemStackCreator;
 
@@ -52,7 +51,7 @@ public class MenuGuiState extends GuiStage {
 	}
 
 	private static void onMenuToTransactionClick(Player player) {
-		redirect(player, new TransactionGuiState());
+		redirect(player, new WalletTransactionGuiState());
 	}
 
 	private static void onMenuToWalletCreationClick(Player player) {
