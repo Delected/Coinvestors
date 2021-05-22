@@ -12,6 +12,7 @@ public class GuiPlayerState {
 	private final Map<MenuState, GuiStage> stateMap = new HashMap<>();
 	private Inventory menuInventory;
 	private GuiStage actualState;
+	private boolean doingInput = false;
 
 	public GuiPlayerState(final UUID playerId) {
 		this.playerId = playerId;
@@ -34,5 +35,13 @@ public class GuiPlayerState {
 
 	public GuiStage getActualStage() {
 		return actualState;
+	}
+
+	public boolean isDoingInput() {
+		return doingInput;
+	}
+
+	public void setDoingInput(final boolean doingInput) {
+		this.doingInput = doingInput;
 	}
 }

@@ -6,6 +6,7 @@ import org.bukkit.inventory.Inventory;
 public abstract class GuiStage {
 
 	private final MenuState state;
+	private boolean doingInput;
 
 	protected GuiStage(final MenuState state) {
 		this.state = state;
@@ -16,4 +17,6 @@ public abstract class GuiStage {
 	public MenuState getState() {
 		return state;
 	}
+
+
 }

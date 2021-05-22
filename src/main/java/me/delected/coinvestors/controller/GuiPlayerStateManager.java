@@ -22,4 +22,8 @@ public class GuiPlayerStateManager {
 		guiStateMap.remove(player.getUniqueId());
 	}
 
+	public void setDoingInput(Player player, boolean doingInput) {
+		getStateOf(player).setDoingInput(doingInput);
+	}
+
 }

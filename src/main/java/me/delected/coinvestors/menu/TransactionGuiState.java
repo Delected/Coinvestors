@@ -2,8 +2,6 @@ package me.delected.coinvestors.menu;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,12 +9,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.model.wallet.Wallet;
-import me.delected.coinvestors.util.PersistentDataManager;
+import me.delected.coinvestors.util.ItemStackCreator;
 
 public class TransactionGuiState extends GuiStage {
 
@@ -30,6 +27,8 @@ public class TransactionGuiState extends GuiStage {
 
 	static {
 		MenuLinker.registerLink(SOURCE_INPUT_LINK, TransactionGuiState::openSourceInput);
+		MenuLinker.registerLink(DESTINATION_INPUT_LINK, TransactionGuiState::openTargetInput);
+		MenuLinker.registerLink(AMOUNT_INPUT_LINK, TransactionGuiState::openAmountInput);
 	}
 
 	public TransactionGuiState() {
@@ -39,56 +38,73 @@ public class TransactionGuiState extends GuiStage {
 	@Override
 	public Inventory build(final Player player) {
 		Inventory result = Bukkit.createInventory(player, 27, "Transaction Menu");
-		result.setItem(12, PersistentDataManager.setUnmodifiable(createSourceStack()));
+		result.setItem(11, sourceStack());
+		result.setItem(13, amountStack());
+		result.setItem(15, targetStack());
 		return result;
 	}
 
-	private ItemStack createSourceStack() {
-		if (source == null) {
-			return createNoSourceStack();
-		}
-		return createSourceInfoStack();
+	private ItemStack sourceStack() {
+		return source == null ? sourcePrompt() : sourceInfo();
 	}
 
-	private ItemStack createSourceInfoStack() {
-		ItemStack result = new ItemStack(Material.GREEN_WOOL);
-		ItemMeta meta = result.getItemMeta();
-		meta.setLore(Arrays.asList(ChatColor.BOLD + "" + source.getWalletType(), "", "Balance: " + source.getBalance()));
-		result.setItemMeta(meta);
-		return result;
+	private ItemStack sourceInfo() {
+		return new ItemStackCreator(Material.GREEN_WOOL).setName("Source Wallet")
+				.setLore(Arrays.asList(ChatColor.BOLD + "" + source.getWalletType(), "Balance: " + source.getBalance()))
+				.setUnmodifiable().build();
 	}
 
-	private static ItemStack createNoSourceStack() {
-		ItemStack result = new ItemStack(Material.RED_WOOL);
-		ItemMeta meta = result.getItemMeta();
-		meta.setLore(Collections.singletonList(ChatColor.GREEN + "Click here to select a source Wallet"));
-		result.setItemMeta(meta);
-		PersistentDataManager.setLink(result, SOURCE_INPUT_LINK);
-		return result;
+	private static ItemStack sourcePrompt() {
+		return new ItemStackCreator(Material.RED_WOOL).setName(ChatColor.GREEN + "Click here to select a source Wallet")
+				.setLink(SOURCE_INPUT_LINK).build();
 	}
 
+	private ItemStack targetStack() {
+		return target == null ? targetPrompt() : targetInfo();
+	}
 
-	private static ItemStack createColored(Object nullable) {
-		Material material = Objects.isNull(nullable) ? Material.GREEN_WOOL : Material.RED_WOOL;
-		return new ItemStack(material, 1);
+	private ItemStack targetInfo() {
+		return new ItemStackCreator(Material.GREEN_WOOL).setName("Target")
+				.setLore(Arrays.asList(ChatColor.BOLD + "" + target.getWalletType(), "Balance: " + source.getBalance()))
+				.setUnmodifiable().build();
+	}
+
+	private static ItemStack targetPrompt() {
+		return new ItemStackCreator(Material.RED_WOOL).setName(ChatColor.GREEN + "Click here to select a target Wallet")
+				.setLink(DESTINATION_INPUT_LINK).build();
+	}
+
+	private ItemStack amountStack() {
+		return amount == null ? amountPrompt() : amountInfo();
+	}
+
+	private ItemStack amountInfo() {
+		String name = ChatColor.BOLD + "" + ChatColor.GOLD + "Amount: " + amount;
+		return new ItemStackCreator(Material.SUNFLOWER).setName(name).setUnmodifiable().build();
+	}
+
+	private static ItemStack amountPrompt() {
+		return new ItemStackCreator(Material.RED_WOOL).setLink(AMOUNT_INPUT_LINK)
+				.setName(ChatColor.GREEN + "Click here to select the transaction amount").build();
 	}
 
 	private static void openSourceInput(Player player) {
-		TransactionGuiState actualStage = stateOf(player);
-		InputStageManager.openStringInput(player, actualStage::retrieveSource, () -> actualStage.build(player));
+		TransactionGuiState actualStage = prepareInputFor(player);
+		InputStageManager.openStringInput(player, actualStage::retrieveSource, actualStage::build);
 	}
 
 	private static void openAmountInput(Player player) {
-		TransactionGuiState actualStage = stateOf(player);
-		InputStageManager.openNumberInput(player, actualStage::setAmount, () -> actualStage.build(player));
+		TransactionGuiState actualStage = prepareInputFor(player);
+		InputStageManager.openNumberInput(player, actualStage::setAmount, actualStage::build);
 	}
 
 	private static void openTargetInput(Player player) {
-		TransactionGuiState actualStage = stateOf(player);
-		InputStageManager.openStringInput(player, actualStage::retrieveSource, () -> actualStage.build(player));
+		TransactionGuiState actualStage = prepareInputFor(player);
+		InputStageManager.openStringInput(player, actualStage::retrieveTarget, actualStage::build);
 	}
 
-	private static TransactionGuiState stateOf(Player player) {
+	private static TransactionGuiState prepareInputFor(Player player) {
+		Coinvestors.getManager().setDoingInput(player, true);
 		return (TransactionGuiState) Coinvestors.getManager().getStateOf(player).getActualStage();
 	}
 
