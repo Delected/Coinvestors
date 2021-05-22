@@ -12,7 +12,7 @@ import org.bukkit.inventory.Inventory;
 
 import me.delected.coinvestors.model.wallet.Wallet;
 
-public class WithdrawGuiStage extends GuiStage implements TransactionGui {
+public class WithdrawGuiStage extends GuiStage implements TransactionGui, ExchangeGui {
 
 	private static final String TITLE = ChatColor.GOLD + "Withdraw money";
 
@@ -61,5 +61,15 @@ public class WithdrawGuiStage extends GuiStage implements TransactionGui {
 	@Override
 	public void setAmount(final BigDecimal amount) {
 		this.amount = amount;
+	}
+
+	@Override
+	public void retrieveSourceCrypto(final String raw) {
+
+	}
+
+	@Override
+	public void retrieveTargetCrypto(final String raw) {
+
 	}
 }

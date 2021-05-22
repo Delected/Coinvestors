@@ -14,7 +14,7 @@ import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.model.wallet.Wallet;
 import me.delected.coinvestors.util.ItemStackCreator;
 
-public interface TransactionGui {
+interface TransactionGui extends Confirmable {
 
 	String SOURCE_INPUT_LINK = "WALLET_TRANSACTION_SOURCE_INPUT";
 	String AMOUNT_INPUT_LINK = "WALLET_TRANSACTION_AMOUNT_INPUT";
@@ -23,24 +23,6 @@ public interface TransactionGui {
 
 	//fixme: replace wallet type with properly done wallet information
 
-	default ItemStack confirmStack() {
-		return isValid() ? validStack() : invalidStack();
-	}
-
-	default ItemStack validStack() {
-		return new ItemStackCreator(Material.GREEN_WOOL).setLink(GuiStage.MAIN_MENU_LINK)
-				.setName(ChatColor.GREEN + "Confirm transaction!").build();
-	}
-
-	default ItemStack invalidStack() {
-		String name = ChatColor.RED + "There are still information missing for: ";
-		return new ItemStackCreator(Material.LIGHT_GRAY_WOOL).setUnmodifiable()
-				.setName(name).setLore(invalids()).build();
-	}
-
-	List<String> invalids();
-
-	boolean isValid();
 
 	default ItemStack sourceStack(Wallet source) {
 		return source == null ? sourcePrompt() : sourceInfo(source);

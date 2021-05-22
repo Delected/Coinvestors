@@ -58,6 +58,10 @@ public class MenuGuiState extends GuiStage {
 		redirect(player, new WalletCreationGuiStage());
 	}
 
+	private static void onMenuToWithdrawClick(Player player) {
+		redirect(player, new WithdrawGuiStage());
+	}
+
 	@Override
 	public Inventory build(final Player player) {
 		return INVENTORY;
