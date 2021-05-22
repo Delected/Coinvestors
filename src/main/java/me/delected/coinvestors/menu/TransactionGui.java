@@ -3,6 +3,7 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -32,9 +33,9 @@ public interface TransactionGui {
 	}
 
 	default ItemStack invalidStack() {
-		String name = ChatColor.RED + "There are still information missing for: "
-					  + String.join(", ", invalids()) + "!";
-		return new ItemStackCreator(Material.LIGHT_GRAY_WOOL).setUnmodifiable().setName(name).build();
+		String name = ChatColor.RED + "There are still information missing for: ";
+		return new ItemStackCreator(Material.LIGHT_GRAY_WOOL).setUnmodifiable()
+				.setName(name).setLore(invalids()).build();
 	}
 
 	List<String> invalids();
@@ -121,6 +122,10 @@ public interface TransactionGui {
 	static TransactionGui prepareInputFor(Player player) {
 		Coinvestors.guiManager().setDoingInput(player, true);
 		return (TransactionGui) Coinvestors.guiManager().getStateOf(player).getActualStage();
+	}
+
+	static List<String> makeLoreWhite(List<String> unformatted) {
+		return unformatted.stream().map(s -> ChatColor.WHITE + s).collect(Collectors.toList());
 	}
 
 }

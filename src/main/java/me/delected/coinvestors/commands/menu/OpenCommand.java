@@ -22,11 +22,11 @@ public class OpenCommand implements CommandExecutor {
 		if (player.getInventory().getItemInMainHand().getType() == Material.DEBUG_STICK) {
 			return true;
 		}
-		if (Coinvestors.cryptoManager().getAccountManager().hasAccount(player)) {
+		/*if (Coinvestors.cryptoManager().getAccountManager().hasAccount(player)) {*/
 			GuiStage.toMainMenu(player);
-		} else {
+		/*} else {
 			GuiStage.toAccountCreation(player);
-		}
+		}*/
 		return true;
 	}
 

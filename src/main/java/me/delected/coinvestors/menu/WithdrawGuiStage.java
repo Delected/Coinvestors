@@ -3,6 +3,7 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,7 +43,7 @@ public class WithdrawGuiStage extends GuiStage implements TransactionGui {
 		if (amount == null) {
 			invalids.add("transaction amount");
 		}
-		return invalids;
+		return TransactionGui.makeLoreWhite(invalids);
 	}
 
 	@Override

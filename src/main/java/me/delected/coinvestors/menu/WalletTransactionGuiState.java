@@ -3,8 +3,10 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -43,7 +45,7 @@ public class WalletTransactionGuiState extends GuiStage implements TransactionGu
 		if (target == null) {
 			invalids.add("destination wallet");
 		}
-		return invalids;
+		return TransactionGui.makeLoreWhite(invalids);
 	}
 
 	@Override
