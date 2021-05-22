@@ -16,6 +16,9 @@ public abstract class GuiStage {
 	protected static final String MAIN_MENU_LINK = "MAIN_MENU_LINK";
 
 	static {
+		MenuLinker.registerLink(TransactionGui.SOURCE_INPUT_LINK, TransactionGui::openSourceInput);
+		MenuLinker.registerLink(TransactionGui.DESTINATION_INPUT_LINK, TransactionGui::openTargetInput);
+		MenuLinker.registerLink(TransactionGui.AMOUNT_INPUT_LINK, TransactionGui::openAmountInput);
 		MenuLinker.registerLink(MENU_CLOSE_LINK, Player::closeInventory);
 		MenuLinker.registerLink(MAIN_MENU_LINK, GuiStage::toMainMenu);
 	}

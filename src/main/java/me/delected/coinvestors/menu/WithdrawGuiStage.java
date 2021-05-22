@@ -5,31 +5,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import me.delected.coinvestors.model.wallet.Wallet;
 
-public class WalletTransactionGuiState extends GuiStage implements TransactionGui {
+public class WithdrawGuiStage extends GuiStage implements TransactionGui {
+
+	private static final String TITLE = ChatColor.GOLD + "Withdraw money";
 
 	private Wallet source;
 	private BigDecimal amount;
-	private Wallet target;
 
-	public WalletTransactionGuiState() {
-		super(MenuState.TRANSACTION);
+	protected WithdrawGuiStage() {
+		super(MenuState.WITHDRAW);
 	}
 
 	@Override
 	public Inventory build(final Player player) {
-		Inventory result = Bukkit.createInventory(player, 27, "Transaction Menu");
-		result.setItem(11, sourceStack(source));
-		result.setItem(13, amountStack(amount));
-		result.setItem(15, targetStack(target));
+		Inventory result = Bukkit.createInventory(null, 27, TITLE);
+		result.setItem(12, sourceStack(source));
+		result.setItem(14, amountStack(amount));
 		result.setItem(25, confirmStack());
 		result.setItem(26, backLinkStack());
-		return result;
+		return null;
 	}
+
 
 	@Override
 	public List<String> invalids() {
@@ -40,41 +42,23 @@ public class WalletTransactionGuiState extends GuiStage implements TransactionGu
 		if (amount == null) {
 			invalids.add("transaction amount");
 		}
-		if (target == null) {
-			invalids.add("destination wallet");
-		}
 		return invalids;
 	}
 
 	@Override
 	public boolean isValid() {
-		return amount != null && source != null && target != null;
+		return source != null && amount != null;
 	}
 
-	//TODO: When wallet access logic is implemented, retrieve the wallets here
+	//TODO: connect when functionality is implemented
 
 	@Override
 	public void retrieveSource(final String raw) {
-		setSource(null);
-	}
 
-	@Override
-	public void retrieveTarget(String raw) {
-		setTarget(null);
 	}
 
 	@Override
 	public void setAmount(final BigDecimal amount) {
 		this.amount = amount;
 	}
-
-	private void setSource(Wallet source) {
-		this.source = source;
-	}
-
-	private void setTarget(final Wallet target) {
-		this.target = target;
-	}
-
-
 }
