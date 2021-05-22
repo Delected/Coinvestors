@@ -65,8 +65,9 @@ public class WalletTransactionGuiState extends GuiStage implements TransactionGu
 
 	public List<String> invalids() {
 		List<String> invalids = new ArrayList<>();
-		if (source == null)
+		if (source == null) {
 			invalids.add("source wallet");
+		}
 		if (amount == null) {
 			invalids.add("transaction amount");
 		}
