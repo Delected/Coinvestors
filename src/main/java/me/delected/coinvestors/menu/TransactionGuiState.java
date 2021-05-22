@@ -41,6 +41,7 @@ public class TransactionGuiState extends GuiStage {
 		result.setItem(11, sourceStack());
 		result.setItem(13, amountStack());
 		result.setItem(15, targetStack());
+		result.setItem(26, backLinkStack());
 		return result;
 	}
 

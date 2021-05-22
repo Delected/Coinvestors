@@ -14,10 +14,6 @@ import org.bukkit.persistence.PersistentDataType;
 
 public class ItemStackCreator {
 
-	public static ItemStack[] fromMaterials(Material... materials) {
-		return Arrays.stream(materials).map(ItemStack::new).toArray(ItemStack[]::new);
-	}
-
 	private final ItemStack stack;
 	private final ItemMeta meta;
 
