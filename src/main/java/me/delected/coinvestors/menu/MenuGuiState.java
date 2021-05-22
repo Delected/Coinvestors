@@ -22,9 +22,11 @@ public class MenuGuiState extends GuiStage {
 
 	private static final Inventory INVENTORY = createInventory();
 	private static final String MENU_TRANSACTION_LINK = "MENU_TO_TRANSACTION";
+	private static final String MENU_WALLET_CREATION_LINK = "MENU_TO_WALLET_CREATION";
 
 	static {
 		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::onMenuToTransactionClick);
+		MenuLinker.registerLink(MENU_WALLET_CREATION_LINK, MenuGuiState::onMenuToWalletCreationClick);
 	}
 
 	public MenuGuiState() {
@@ -43,16 +45,18 @@ public class MenuGuiState extends GuiStage {
 				.setUnmodifiable().build();
 		menu[4] = new ItemStackCreator(LIGHT_BLUE_WOOL).setName(ChatColor.GREEN + "Exchange").setUnmodifiable().build();
 		menu[5] = new ItemStackCreator(LIME_WOOL).setName(ChatColor.GREEN + "Create new Wallet")
-				.setUnmodifiable().build();
+				.setLink(MENU_WALLET_CREATION_LINK).build();
 		menu[8] = new ItemStackCreator(BARRIER).setName(ChatColor.RED + "Close").setLink(MENU_CLOSE_LINK).build();
 		result.setContents(menu);
 		return result;
 	}
 
 	private static void onMenuToTransactionClick(Player player) {
-		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
-		state.setStage(new TransactionGuiState());
-		player.openInventory(state.getMenuInventory());
+		redirect(player, new TransactionGuiState());
+	}
+
+	private static void onMenuToWalletCreationClick(Player player) {
+		redirect(player, new WalletCreationGuiStage());
 	}
 
 	@Override

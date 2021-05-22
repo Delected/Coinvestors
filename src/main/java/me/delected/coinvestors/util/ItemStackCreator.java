@@ -1,9 +1,9 @@
 package me.delected.coinvestors.util;
 
+import static me.delected.coinvestors.util.PersistentDataManager.EVENT_LINK_KEY;
 import static me.delected.coinvestors.util.PersistentDataManager.LINK_KEY;
 import static me.delected.coinvestors.util.PersistentDataManager.UNMODIFIABLE_KEY;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -54,6 +54,11 @@ public class ItemStackCreator {
 
 	public ItemStackCreator setLink(String link) {
 		addPersistentDatum(LINK_KEY, PersistentDataType.STRING, link);
+		return setUnmodifiable();
+	}
+
+	public ItemStackCreator setEventLink(String link) {
+		addPersistentDatum(EVENT_LINK_KEY, PersistentDataType.STRING, link);
 		return setUnmodifiable();
 	}
 }

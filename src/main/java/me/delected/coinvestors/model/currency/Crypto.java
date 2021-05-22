@@ -40,7 +40,7 @@ public enum Crypto {
 	 */
 	@Deprecated
 	Crypto(String fullName) {
-
+		this.fullName = fullName;
 	}
 
 	Crypto(String fullName, Wallet walletClass) {

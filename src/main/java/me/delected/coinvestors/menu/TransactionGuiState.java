@@ -49,9 +49,11 @@ public class TransactionGuiState extends GuiStage {
 		return source == null ? sourcePrompt() : sourceInfo();
 	}
 
+	//fixme new info for source and target wallets
+
 	private ItemStack sourceInfo() {
 		return new ItemStackCreator(Material.GREEN_WOOL).setName("Source Wallet")
-				.setLore(Arrays.asList(ChatColor.BOLD + "" + source.getWalletType(), "Balance: " + source.getBalance()))
+				.setLore(Arrays.asList(ChatColor.BOLD + "WAS_TYPE", "Balance: " + source.getBalance()))
 				.setUnmodifiable().build();
 	}
 
@@ -66,7 +68,7 @@ public class TransactionGuiState extends GuiStage {
 
 	private ItemStack targetInfo() {
 		return new ItemStackCreator(Material.GREEN_WOOL).setName("Target")
-				.setLore(Arrays.asList(ChatColor.BOLD + "" + target.getWalletType(), "Balance: " + source.getBalance()))
+				.setLore(Arrays.asList(ChatColor.BOLD + "WAS_TYPE", "Balance: " + source.getBalance()))
 				.setUnmodifiable().build();
 	}
 
