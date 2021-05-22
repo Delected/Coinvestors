@@ -15,11 +15,15 @@ public class InventoryClickListener extends AbstractListener<InventoryClickEvent
 	@EventHandler
 	public void handle(final InventoryClickEvent e) {
 		ItemStack item = e.getCurrentItem();
+		Player player = (Player) e.getWhoClicked();
 		if (PersistentDataManager.isUnmodifiable(item)) {
 			e.setCancelled(true);
 		}
 		if (PersistentDataManager.isLink(item)) {
-			MenuLinker.getAction(PersistentDataManager.getLinkID(item)).accept((Player) e.getWhoClicked());
+			MenuLinker.getAction(PersistentDataManager.getLinkID(item)).accept(player);
+		}
+		if (PersistentDataManager.isEventLink(item)) {
+			MenuLinker.getEventAction(PersistentDataManager.getEventLinkID(item)).accept(player, e);
 		}
 	}
 }

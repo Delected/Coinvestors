@@ -12,6 +12,7 @@ public class PersistentDataManager {
 	private static final JavaPlugin COINVESTORS = Coinvestors.INSTANCE();
 	public static final NamespacedKey UNMODIFIABLE_KEY = new NamespacedKey(COINVESTORS, "UNMODIFIABLE");
 	public static final NamespacedKey LINK_KEY = new NamespacedKey(COINVESTORS, "LINK");
+	public static final NamespacedKey EVENT_LINK_KEY = new NamespacedKey(COINVESTORS, "EVENT_LINK_KEY");
 
 	public static boolean isUnmodifiable(@Nullable ItemStack stack) {
 		return hasPersistentDatum(stack, UNMODIFIABLE_KEY, PersistentDataType.INTEGER);
@@ -29,6 +30,16 @@ public class PersistentDataManager {
 		if (!isLink(stack))
 			return null;
 		return getPersistentDatum(stack, LINK_KEY, PersistentDataType.STRING);
+	}
+
+	public static boolean isEventLink(ItemStack stack) {
+		return hasPersistentDatum(stack, EVENT_LINK_KEY, PersistentDataType.STRING);
+	}
+
+	public static String getEventLinkID(ItemStack stack) {
+		if (!isEventLink(stack))
+			return null;
+		return getPersistentDatum(stack, EVENT_LINK_KEY, PersistentDataType.STRING);
 	}
 
 	private static <T> boolean hasPersistentDatum(ItemStack stack, NamespacedKey key, PersistentDataType<?, T> type) {
