@@ -70,20 +70,20 @@ public class WalletCreationGuiStage extends GuiStage {
 	}
 
 	private static void openCryptoSelection(Player player) {
-		WalletCreationGuiStage stage = (WalletCreationGuiStage) Coinvestors.getManager().getStateOf(player).getActualStage();
+		WalletCreationGuiStage stage = (WalletCreationGuiStage) Coinvestors.guiManager().getStateOf(player).getActualStage();
 		redirect(player, new CryptoSelectionGuiStage(c -> stage.setCrypto(c, player)));
 	}
 
 	private void setCrypto(Crypto crypto, Player player) {
 		this.crypto = crypto;
-		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
+		GuiPlayerState state = Coinvestors.guiManager().getStateOf(player);
 		state.setStage(this);
 		player.openInventory(state.getMenuInventory());
 	}
 
 	private static void onCreationConfirm(Player player) {
 		//TODO: Create Wallet when functionality exists
-		backToMainMenu(player);
+		toMainMenu(player);
 	}
 
 

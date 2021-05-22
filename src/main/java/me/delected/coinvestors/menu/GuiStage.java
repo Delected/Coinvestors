@@ -17,7 +17,7 @@ public abstract class GuiStage {
 
 	static {
 		MenuLinker.registerLink(MENU_CLOSE_LINK, Player::closeInventory);
-		MenuLinker.registerLink(MAIN_MENU_LINK, GuiStage::backToMainMenu);
+		MenuLinker.registerLink(MAIN_MENU_LINK, GuiStage::toMainMenu);
 	}
 
 	private final MenuState state;
@@ -37,12 +37,16 @@ public abstract class GuiStage {
 				.setName(ChatColor.RED + "Back to main menu").build();
 	}
 
-	protected static void backToMainMenu(Player player) {
+	public static void toMainMenu(Player player) {
 		redirect(player, new MenuGuiState());
 	}
 
+	public static void toAccountCreation(Player player) {
+		redirect(player, new AccountCreationGuiStage());
+	}
+
 	protected static void redirect(Player player, GuiStage next) {
-		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
+		GuiPlayerState state = Coinvestors.guiManager().getStateOf(player);
 		state.setStage(next);
 		player.openInventory(state.getMenuInventory());
 	}

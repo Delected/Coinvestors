@@ -75,11 +75,11 @@ public class CryptoSelectionGuiStage extends GuiStage {
 	}
 
 	private static void displayNextPage(Player player) {
-		((CryptoSelectionGuiStage) Coinvestors.getManager().getStateOf(player).getActualStage()).displayNextPage();
+		((CryptoSelectionGuiStage) Coinvestors.guiManager().getStateOf(player).getActualStage()).displayNextPage();
 	}
 
 	private static void displayPrevPage(Player player) {
-		((CryptoSelectionGuiStage) Coinvestors.getManager().getStateOf(player).getActualStage()).displayPrevPage();
+		((CryptoSelectionGuiStage) Coinvestors.guiManager().getStateOf(player).getActualStage()).displayPrevPage();
 	}
 
 	private void displayNextPage() {
@@ -97,7 +97,7 @@ public class CryptoSelectionGuiStage extends GuiStage {
 	}
 
 	private static void selectCrypto(Player player, InventoryClickEvent e) {
-		CryptoSelectionGuiStage guiStage = (CryptoSelectionGuiStage) Coinvestors.getManager().getStateOf(player).getActualStage();
+		CryptoSelectionGuiStage guiStage = (CryptoSelectionGuiStage) Coinvestors.guiManager().getStateOf(player).getActualStage();
 		Crypto crypto = Crypto.values()[45 * guiStage.page + e.getSlot()];
 		guiStage.onSelect.accept(crypto);
 	}

@@ -7,7 +7,7 @@ import me.delected.coinvestors.Coinvestors;
 public interface PlayerLeaveListener {
 
 	default void handleLeave(PlayerEvent event) {
-		Coinvestors.getManager().removePlayer(event.getPlayer());
+		Coinvestors.guiManager().removePlayer(event.getPlayer());
 	}
 
 }

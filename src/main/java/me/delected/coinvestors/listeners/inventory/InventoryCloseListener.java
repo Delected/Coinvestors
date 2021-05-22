@@ -16,7 +16,7 @@ public class InventoryCloseListener extends AbstractListener<InventoryCloseEvent
 	@EventHandler
 	public void handle(final InventoryCloseEvent e) {
 		Player player = (Player) e.getPlayer();
-		if (e.getInventory() == Coinvestors.getManager().getStateOf(player).getMenuInventory()) {
+		if (e.getInventory() == Coinvestors.guiManager().getStateOf(player).getMenuInventory()) {
 			World world = player.getWorld();
 			Location location = player.getLocation();
 			ItemStack[] contents = e.getInventory().getContents();

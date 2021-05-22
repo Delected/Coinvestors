@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import me.delected.coinvestors.commands.menu.OpenCommand;
-import me.delected.coinvestors.controller.CryptoRegulator;
+import me.delected.coinvestors.controller.CryptoManager;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
@@ -14,13 +14,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import me.delected.coinvestors.commands.CommandDistributor;
 import me.delected.coinvestors.controller.GuiPlayerStateManager;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
-import me.delected.coinvestors.io.yaml.Yaml;
 import me.delected.coinvestors.listeners.AbstractListener;
 import me.delected.coinvestors.util.SubtypeInstanceBuilder;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
-	private final GuiPlayerStateManager manager = new GuiPlayerStateManager();
+	private final GuiPlayerStateManager guiPlayerStateManager = new GuiPlayerStateManager();
+	private final CryptoManager cryptoManager = new CryptoManager();
 
 	@Override
 	public void onLoad() {
@@ -51,8 +51,12 @@ public final class Coinvestors extends JavaPlugin {
 		return INSTANCE;
 	}
 
-	public static GuiPlayerStateManager getManager() {
-		return INSTANCE.manager;
+	public static GuiPlayerStateManager guiManager() {
+		return INSTANCE.guiPlayerStateManager;
+	}
+
+	public static CryptoManager cryptoManager(){
+		return INSTANCE.cryptoManager;
 	}
 
 }

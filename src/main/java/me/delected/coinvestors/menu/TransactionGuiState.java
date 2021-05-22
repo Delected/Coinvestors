@@ -107,8 +107,8 @@ public class TransactionGuiState extends GuiStage {
 	}
 
 	private static TransactionGuiState prepareInputFor(Player player) {
-		Coinvestors.getManager().setDoingInput(player, true);
-		return (TransactionGuiState) Coinvestors.getManager().getStateOf(player).getActualStage();
+		Coinvestors.guiManager().setDoingInput(player, true);
+		return (TransactionGuiState) Coinvestors.guiManager().getStateOf(player).getActualStage();
 	}
 
 	//TODO: When wallet access logic is implemented, retrieve the wallets here

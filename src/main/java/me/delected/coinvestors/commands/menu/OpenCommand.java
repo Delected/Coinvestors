@@ -8,8 +8,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import me.delected.coinvestors.Coinvestors;
-import me.delected.coinvestors.menu.GuiPlayerState;
-import me.delected.coinvestors.menu.MenuGuiState;
+import me.delected.coinvestors.menu.GuiStage;
 
 
 public class OpenCommand implements CommandExecutor {
@@ -23,9 +22,11 @@ public class OpenCommand implements CommandExecutor {
 		if (player.getInventory().getItemInMainHand().getType() == Material.DEBUG_STICK) {
 			return true;
 		}
-		GuiPlayerState state = Coinvestors.getManager().getStateOf(player);
-		state.setStage(new MenuGuiState());
-		player.openInventory(state.getMenuInventory());
+		if (Coinvestors.cryptoManager().getAccountManager().hasAccount(player)) {
+			GuiStage.toMainMenu(player);
+		} else {
+			GuiStage.toAccountCreation(player);
+		}
 		return true;
 	}
 

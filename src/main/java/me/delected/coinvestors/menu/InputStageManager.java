@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -23,7 +22,7 @@ public class InputStageManager {
 	public static void openStringInput(Player player, Consumer<String> resultAcceptor, Function<Player, Inventory> prevGui) {
 		createBuilder().onComplete((p, s) -> {
 			resultAcceptor.accept(s);
-			Coinvestors.getManager().setDoingInput(player, false);
+			Coinvestors.guiManager().setDoingInput(player, false);
 			return AnvilGUI.Response.openInventory(prevGui.apply(p));
 		}).open(player);
 	}
@@ -33,7 +32,7 @@ public class InputStageManager {
 			try {
 				BigDecimal bigDecimal = new BigDecimal(s);
 				resultAcceptor.accept(bigDecimal);
-				Coinvestors.getManager().setDoingInput(player, false);
+				Coinvestors.guiManager().setDoingInput(player, false);
 			} catch (NumberFormatException e) {
 				resultAcceptor.accept(null);
 			}

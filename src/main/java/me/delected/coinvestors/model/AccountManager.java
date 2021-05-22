@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.bukkit.entity.Player;
+
 public class AccountManager {
 	private final Map<UUID, Account> accountMap = new HashMap<>();
 
@@ -17,6 +19,10 @@ public class AccountManager {
 
 	public Optional<Account> getAccountOf(UUID userUUID) {
 		return Optional.ofNullable(accountMap.get(userUUID));
+	}
+
+	public boolean hasAccount(Player player) {
+		return accountMap.containsKey(player.getUniqueId());
 	}
 
 }
