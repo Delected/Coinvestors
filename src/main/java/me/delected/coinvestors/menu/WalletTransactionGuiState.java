@@ -3,20 +3,14 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.model.wallet.Wallet;
-import me.delected.coinvestors.util.ItemStackCreator;
 
 public class WalletTransactionGuiState extends GuiStage implements TransactionGui {
 
