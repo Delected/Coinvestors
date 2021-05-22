@@ -1,6 +1,7 @@
 package me.delected.coinvestors.menu;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -34,7 +35,6 @@ public class InputStageManager {
 				resultAcceptor.accept(bigDecimal);
 				Coinvestors.getManager().setDoingInput(player, false);
 			} catch (NumberFormatException e) {
-				Bukkit.getLogger().severe(s + " was NaN!");
 				resultAcceptor.accept(null);
 			}
 			return AnvilGUI.Response.openInventory(prevGui.apply(p));
@@ -47,7 +47,8 @@ public class InputStageManager {
 
 	private static ItemStack createFirst() {
 		String message = ChatColor.GREEN + "Put your input into the rename field and craft to confirm!";
-		return new ItemStackCreator(Material.LIME_STAINED_GLASS_PANE).setName(message).setUnmodifiable().build();
+		return new ItemStackCreator(Material.LIME_STAINED_GLASS_PANE).setLore(Collections.singletonList(message))
+				.setUnmodifiable().build();
 	}
 
 

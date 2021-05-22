@@ -7,7 +7,6 @@ import static org.bukkit.Material.GREEN_WOOL;
 import static org.bukkit.Material.LIGHT_BLUE_WOOL;
 import static org.bukkit.Material.LIME_WOOL;
 import static org.bukkit.Material.RED_WOOL;
-import static org.bukkit.Material.YELLOW_WOOL;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
