@@ -26,7 +26,7 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 	List<Wallet> wallets = generateWallets();
 
 	private List<Wallet> generateWallets() {
-		Optional<Account> accountOf = Coinvestors.cryptoManager().getAccountManager().getAccountOf(playerUuid);
+		Optional<Account> accountOf = Coinvestors.cryptoManager().getAccountOf(playerUuid);
 		return accountOf.map(account -> account.wallets.entrySet().stream().flatMap(e -> e.getValue().stream())
 				.collect(Collectors.toList())).orElse(Collections.emptyList());
 	}
