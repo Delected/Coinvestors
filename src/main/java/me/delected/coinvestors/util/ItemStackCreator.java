@@ -4,6 +4,8 @@ import static me.delected.coinvestors.util.PersistentDataManager.EVENT_LINK_KEY;
 import static me.delected.coinvestors.util.PersistentDataManager.LINK_KEY;
 import static me.delected.coinvestors.util.PersistentDataManager.UNMODIFIABLE_KEY;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -35,6 +37,16 @@ public class ItemStackCreator {
 
 	public ItemStackCreator setLore(final List<String> lore) {
 		meta.setLore(lore);
+		return this;
+	}
+
+	public ItemStackCreator setLore(String... lore) {
+		if (lore.length == 0)
+			meta.setLore(Collections.emptyList());
+		else if (lore.length == 1)
+			meta.setLore(Collections.singletonList(lore[0]));
+		else
+			meta.setLore(Arrays.asList(lore));
 		return this;
 	}
 
