@@ -3,24 +3,26 @@ package me.delected.coinvestors;
 import java.util.Objects;
 import java.util.Optional;
 
-import me.delected.coinvestors.commands.menu.OpenCommand;
-import me.delected.coinvestors.controller.CryptoManager;
-
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.delected.coinvestors.commands.CommandDistributor;
+import me.delected.coinvestors.commands.menu.OpenCommand;
+import me.delected.coinvestors.controller.CryptoRegulator;
 import me.delected.coinvestors.controller.GuiPlayerStateManager;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.listeners.AbstractListener;
+import me.delected.coinvestors.model.accounts.AccountService;
 import me.delected.coinvestors.util.SubtypeInstanceBuilder;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
 	private final GuiPlayerStateManager guiPlayerStateManager = new GuiPlayerStateManager();
-	private final CryptoManager cryptoManager = new CryptoManager();
+	private final AccountService accountService = new AccountService();
+	//fixme
+	private final CryptoRegulator cryptoRegulator = new CryptoRegulator();
 
 	@Override
 	public void onLoad() {
@@ -55,8 +57,8 @@ public final class Coinvestors extends JavaPlugin {
 		return INSTANCE.guiPlayerStateManager;
 	}
 
-	public static CryptoManager cryptoManager(){
-		return INSTANCE.cryptoManager;
+	public static AccountService accountService() {
+		return INSTANCE.accountService;
 	}
 
 }
