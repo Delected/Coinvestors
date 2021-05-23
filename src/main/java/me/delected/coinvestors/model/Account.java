@@ -3,21 +3,19 @@ package me.delected.coinvestors.model;
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.model.wallet.Wallet;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class Account {
-	UUID id;
 
-	public Account(UUID id) {
-		this.id = id;
-	}
+	public final Map<Crypto, List<Wallet>> wallets = new HashMap<>();
 
-	public Map<Crypto, List<Wallet>> wallets = new HashMap<>();
-
-	public void addWallet() {
-
+	public void addWallet(Wallet wallet) {
+		Crypto crypto = wallet.getCrypto();
+		wallets.computeIfAbsent(wallet.getCrypto(), c -> new ArrayList<>());
+		wallets.get(crypto).add(wallet);
 	}
 }

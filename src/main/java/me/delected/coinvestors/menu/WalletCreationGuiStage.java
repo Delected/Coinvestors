@@ -11,7 +11,10 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
+//import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.model.currency.Crypto;
+//import me.delected.coinvestors.model.wallet.Wallet;
+//import me.delected.coinvestors.model.wallet.WalletFactory;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 //TODO: redirect to the Wallet overview instead to the main menu when wallet overview exists
@@ -81,8 +84,12 @@ public class WalletCreationGuiStage extends GuiStage {
 		player.openInventory(state.getMenuInventory());
 	}
 
+	//fixme
 	private static void onCreationConfirm(Player player) {
-		//TODO: Create Wallet when functionality exists
+		/*
+		Wallet wallet = WalletFactory.getInstance().createFor(Crypto.ETC);
+		Coinvestors.cryptoManager().getAccountOf(player.getUniqueId()).orElseThrow(ContactTheDevsException::new)
+				.addWallet(wallet);*/
 		toMainMenu(player);
 	}
 

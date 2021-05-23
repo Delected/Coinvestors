@@ -36,14 +36,14 @@ public class ExchangePair {
 
 	public boolean makeAsk(final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
 		Ask ask = new Ask(this, amount, prize, source, target);
-		if (!target.withdraw(ask.getTotalCost()))
+		if (!target.canWithdraw(ask.getTotalCost()))
 			return false;
 		asks.add(ask);
 		return true;
 	}
 
 	public boolean makeBid(final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
-		if (!target.withdraw(amount))
+		if (!target.canWithdraw(amount))
 			return false;
 		Bid bid = new Bid(this, amount, prize, source, target);
 		bids.add(bid);
@@ -52,7 +52,7 @@ public class ExchangePair {
 
 	public synchronized boolean buy(Bid bid, Wallet source, Wallet target) {
 		if (bids.contains(bid))
-			if (source.withdraw(bid.getTotalCost())) {
+			if (source.canWithdraw(bid.getTotalCost())) {
 				bid.fulfill();
 				target.deposit(bid.getAmount());
 				return true;
@@ -62,7 +62,7 @@ public class ExchangePair {
 
 	public synchronized boolean sell(Ask ask, Wallet source, Wallet target) {
 		if (asks.contains(ask))
-			if (source.withdraw(ask.getAmount())) {
+			if (source.canWithdraw(ask.getAmount())) {
 				ask.fulfill();
 				target.deposit(ask.getTotalCost());
 				return true;
