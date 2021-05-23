@@ -1,6 +1,6 @@
 package me.delected.coinvestors.commands;
 
-import me.delected.coinvestors.util.ChatUtils;
+import me.delected.coinvestors.color.ChatUtil;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -50,8 +50,8 @@ public interface SubCommand extends NewSubCommand {
 	@Deprecated
 	// sends an incorrect usage message with proper usage
 	default void sendIncorrectArgMsg(CommandSender sender, String category, String sub) {
-		sender.sendMessage(ChatUtils.color("&8&m----------&8[ &2" + category + "&f - &a" + sub + " &8]&m----------"));
-		sender.sendMessage(ChatUtils.color("&cIncorrect usage! " + getActualUsage()));
-		sender.sendMessage(ChatUtils.color("&8&m-------------------------------------------"));
+		sender.sendMessage(ChatUtil.color("&8&m----------&8[ &2" + category + "&f - &a" + sub + " &8]&m----------"));
+		sender.sendMessage(ChatUtil.color("&cIncorrect usage! " + getActualUsage()));
+		sender.sendMessage(ChatUtil.color("&8&m-------------------------------------------"));
 	}
 }

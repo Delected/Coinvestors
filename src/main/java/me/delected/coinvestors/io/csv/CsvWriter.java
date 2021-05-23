@@ -1,6 +1,7 @@
 package me.delected.coinvestors.io.csv;
 
 import me.delected.coinvestors.exceptions.IncorrectFileTypeException;
+import me.delected.coinvestors.listeners.inventory.InventoryClickListener;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -20,10 +21,10 @@ public class CsvWriter extends CsvAccessor {
 	}
 
 	public void addRow(String... strings) {
-		try (BufferedWriter write = new BufferedWriter(new FileWriter(file))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			String s = String.join(delimiter, strings);
-			write.append(s);
-			write.flush();
+			writer.append(s);
+			writer.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

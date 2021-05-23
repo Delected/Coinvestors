@@ -1,6 +1,6 @@
 //package me.delected.coinvestors.commands.profilecommands;
 //
-//import me.delected.coinvestors.util.ChatUtils;
+//import me.delected.coinvestors.color.ChatUtils;
 //import me.delected.coinvestors.commands.SubCommand;
 //import me.delected.coinvestors.io.yaml.YamlUtils;
 //import org.bukkit.ChatColor;

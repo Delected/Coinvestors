@@ -1,6 +1,6 @@
 package me.delected.coinvestors.commands;
 
-import me.delected.coinvestors.util.ChatUtils;
+import me.delected.coinvestors.color.ChatUtil;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -22,11 +22,11 @@ public abstract class BaseCommand implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         // if no arguments are provided (/<command>), send a message with each subcommand
         if (args.length == 0) {
-            sender.sendMessage(ChatUtils.color("&8&m----------&8[ &2" + PLUGIN_NAME + " &f- &a" + getCommandName() + " &8]&m----------"));
+            sender.sendMessage(ChatUtil.color("&8&m----------&8[ &2" + PLUGIN_NAME + " &f- &a" + getCommandName() + " &8]&m----------"));
             Arrays.stream(getSubCommands())
                     .map(SubCommand::getDescription)
                     .forEach(sender::sendMessage);
-            sender.sendMessage(ChatUtils.color("&8&m-------------------------------------------"));
+            sender.sendMessage(ChatUtil.color("&8&m-------------------------------------------"));
             return true;
 
         }
@@ -37,7 +37,7 @@ public abstract class BaseCommand implements TabExecutor {
             if (!cmd.getAliases().contains(args[0].toLowerCase())) continue;
             // if the sender is console, and the command does not allow console to run it, then send an error message
             if (sender instanceof ConsoleCommandSender && !cmd.canConsoleRun()) {
-                sender.sendMessage(ChatUtils.color("&cThis command can only be used by a player!"));
+                sender.sendMessage(ChatUtil.color("&cThis command can only be used by a player!"));
                 return true;
             }
             // if the command has permissions, but the sender does not have them, send an error message
