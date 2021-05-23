@@ -1,5 +1,7 @@
 package me.delected.coinvestors.model.wallet;
 
+import me.delected.coinvestors.model.currency.Crypto;
+
 import java.math.BigDecimal;
 
 //TODO
@@ -28,4 +30,7 @@ public class WalletImpl implements Wallet {
 	public void setBalance(BigDecimal newAmount) {
 
 	}
+
+	@Override
+	public Crypto getCrypto() { return null; }
 }
