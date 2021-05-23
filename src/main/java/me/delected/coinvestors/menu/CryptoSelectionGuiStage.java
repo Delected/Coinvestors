@@ -11,26 +11,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.delected.coinvestors.Coinvestors;
-import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.util.ItemStackCreator;
 
-public class CryptoSelectionGuiStage extends PagedGui {
+public class CryptoSelectionGuiStage extends SelectionGui<Crypto> {
 
-	private static final String SELECT_CONFIRM = "CRYPTO_SELECTION_CONFIRM";
 	private static final List<ItemStack> STACKS = createInfoStacks();
 	private static final String TITLE = ChatColor.DARK_RED + "Select your crypto currency!";
 
-	static {
-		MenuLinker.registerEventLink(SELECT_CONFIRM, CryptoSelectionGuiStage::selectCrypto);
-	}
-
-	private final Consumer<Crypto> onSelect;
 
 	protected CryptoSelectionGuiStage(final Consumer<Crypto> onSelect) {
-		super(MenuState.CRYPTO_SELECT, 54, TITLE);
-		this.onSelect = onSelect;
+		super(MenuState.CRYPTO_SELECT, 54, TITLE, onSelect);
 		buildPageInventory();
 	}
 
@@ -48,10 +39,9 @@ public class CryptoSelectionGuiStage extends PagedGui {
 		return STACKS;
 	}
 
-	private static void selectCrypto(Player player, InventoryClickEvent e) {
-		CryptoSelectionGuiStage guiStage = (CryptoSelectionGuiStage) Coinvestors.guiManager().getStateOf(player).getActualStage();
-		Crypto crypto = Crypto.values()[guiStage.getFirstField() + e.getSlot()];
-		guiStage.onSelect.accept(crypto);
-	}
 
+	@Override
+	protected Crypto retrieveT(final Player player, final InventoryClickEvent e) {
+		return Crypto.values()[getFirstField() + e.getSlot()];
+	}
 }
