@@ -32,7 +32,7 @@ public class AccountService {
     public Optional<Wallet> getWalletByKey(String s) {
         return walletDictionary.getWalletByKey(s);
     }
-
+	//todo: making this really save
     // no need to return bool, just check if the person can make a transaction beforehand
     public void sendCurrency(Wallet sender, BigDecimal amount, Wallet recipient) {
 

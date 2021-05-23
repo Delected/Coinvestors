@@ -15,6 +15,7 @@ public abstract class Wallet {
 		this(BigDecimal.ZERO, crypto, owner);
 	}
 
+	//fixme: uuid generation is needed
 	public Wallet(BigDecimal balance, Crypto crypto, UUID owner) {
 		this.balance = balance;
 		this.crypto = crypto;

@@ -35,14 +35,15 @@ public enum Crypto {
 	String fullName;
 	Wallet walletClass;
 
-	/**
-	@Deprecated only used to omit errors.
-	 */
-	@Deprecated
+
 	Crypto(String fullName) {
 		this.fullName = fullName;
 	}
 
+	/**
+	 * @deprecated old way is fine again
+	 */
+	@Deprecated
 	Crypto(String fullName, Wallet walletClass) {
 		this.fullName = fullName;
 		this.walletClass = walletClass;
@@ -52,6 +53,7 @@ public enum Crypto {
 		return fullName;
 	}
 
+	@Deprecated
 	public Wallet getWalletClass() {
 		return walletClass;
 	}

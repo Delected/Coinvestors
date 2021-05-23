@@ -6,13 +6,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import me.delected.coinvestors.model.accounts.Account;
+
 import org.bukkit.entity.Player;
 
 public class AccountManager {
 	private final Map<UUID, Account> accounts = new HashMap<>();
 
 	public void createAccount(UUID id) {
-		accounts.putIfAbsent(id, new Account());
+		accounts.computeIfAbsent(id, uuid -> new Account());
 	}
 
 	public boolean hasAccount(Player player) {
