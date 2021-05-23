@@ -6,14 +6,12 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.model.wallet.Wallet;
-import me.delected.coinvestors.util.ItemStackCreator;
 
 public class ExchangeGuiStage extends GuiStage implements ExchangeGui, TransactionGui {
 
