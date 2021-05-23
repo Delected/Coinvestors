@@ -1,6 +1,5 @@
 package me.delected.coinvestors.commands.menu;
 
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,15 +17,11 @@ public class OpenCommand implements CommandExecutor {
 		if (!(commandSender instanceof Player))
 			return true;
 		Player player = (Player) commandSender;
-		//DEBUG
-		if (player.getInventory().getItemInMainHand().getType() == Material.DEBUG_STICK) {
-			return true;
-		}
-		/*if (Coinvestors.cryptoManager().getAccountManager().hasAccount(player)) {*/
+		if (Coinvestors.accountService().hasAccount(player)) {
 			GuiStage.toMainMenu(player);
-		/*} else {
+		} else {
 			GuiStage.toAccountCreation(player);
-		}*/
+		}
 		return true;
 	}
 

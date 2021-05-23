@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
@@ -22,8 +23,8 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 
 	private static final String TITLE = ChatColor.GREEN + "Select your wallet";
 
-	private UUID playerUuid;
-	List<Wallet> wallets = generateWallets();
+	private final UUID playerUuid;
+	private final List<Wallet> wallets;
 
 	private List<Wallet> generateWallets() {
 		Optional<Account> accountOf = Coinvestors.accountService().getAccountOf(playerUuid);
@@ -31,8 +32,11 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 				.collect(Collectors.toList())).orElse(Collections.emptyList());
 	}
 
-	protected WalletSelectionGUIStage(Player player, Consumer<Wallet> onSelect) {
+	protected WalletSelectionGUIStage(UUID uuid, Consumer<Wallet> onSelect) {
 		super(MenuState.WALLET_SELECT, 36, TITLE, onSelect);
+		this.playerUuid = uuid;
+		wallets = generateWallets();
+		buildPageInventory();
 	}
 
 	@Override
@@ -41,12 +45,15 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 	}
 
 	private ItemStack createWalletStack(Wallet wallet) {
-		return new ItemStackCreator(Material.SUNFLOWER).setName(wallet.getCrypto() + " Wallet").setLink(SELECT_CONFIRM)
-				.setLore(ChatColor.YELLOW + "Balance: " + ChatColor.WHITE + wallet.getBalance()).build();
+		return new ItemStackCreator(Material.SUNFLOWER).setName(wallet.getCrypto() + " Wallet")
+				.setEventLink(SELECT_CONFIRM)
+				.setLore(ChatColor.YELLOW + "Balance: " + ChatColor.WHITE + wallet.getBalance(),
+						ChatColor.YELLOW + "Wallet-ID: " + ChatColor.WHITE + wallet.getCompleteAddress()).build();
 	}
 
 	@Override
 	protected Wallet retrieveT(final Player player, final InventoryClickEvent e) {
 		return wallets.get(getFirstField() + e.getSlot());
 	}
+
 }

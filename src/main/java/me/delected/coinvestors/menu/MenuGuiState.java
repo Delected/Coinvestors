@@ -22,10 +22,12 @@ public class MenuGuiState extends GuiStage {
 	private static final Inventory INVENTORY = createInventory();
 	private static final String MENU_TRANSACTION_LINK = "MENU_TO_TRANSACTION";
 	private static final String MENU_WALLET_CREATION_LINK = "MENU_TO_WALLET_CREATION";
+	private static final String MENU_WALLET_OVERVIEW_LINK = "MENU_TO_WALLET_OVERVIEW";
 
 	static {
 		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::onMenuToTransactionClick);
 		MenuLinker.registerLink(MENU_WALLET_CREATION_LINK, MenuGuiState::onMenuToWalletCreationClick);
+		MenuLinker.registerLink(MENU_WALLET_OVERVIEW_LINK, MenuGuiState::onMenuToWalletOverviewClick);
 	}
 
 	public MenuGuiState() {
@@ -36,7 +38,7 @@ public class MenuGuiState extends GuiStage {
 		Inventory result = Bukkit.createInventory(null, 9, "MENU");
 		ItemStack[] menu = new ItemStack[9];
 		menu[0] = new ItemStackCreator(RED_WOOL).setName(ChatColor.GREEN + "My Wallets")
-				.setUnmodifiable().build();
+				.setLink(MENU_WALLET_OVERVIEW_LINK).build();
 		menu[1] = new ItemStackCreator(BLUE_WOOL).setLink(MENU_TRANSACTION_LINK)
 				.setName(ChatColor.GREEN + "Make transaction").build();
 		menu[2] = new ItemStackCreator(GREEN_WOOL).setName(ChatColor.GREEN + "Deposit money").setUnmodifiable().build();
@@ -56,6 +58,11 @@ public class MenuGuiState extends GuiStage {
 
 	private static void onMenuToWalletCreationClick(Player player) {
 		redirect(player, new WalletCreationGuiStage());
+	}
+
+	private static void onMenuToWalletOverviewClick(Player player) {
+		redirect(player, new WalletSelectionGUIStage(player.getUniqueId(), p -> {
+		}));
 	}
 
 	private static void onMenuToWithdrawClick(Player player) {

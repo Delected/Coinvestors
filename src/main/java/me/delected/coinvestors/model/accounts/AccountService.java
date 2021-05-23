@@ -11,8 +11,8 @@ import me.delected.coinvestors.model.currency.Crypto;
 
 public class AccountService {
 
-	private final AccountManager accountManager= new AccountManager();
-	private final WalletDictionary walletDictionary= new WalletDictionary();
+	private final AccountManager accountManager = new AccountManager();
+	private final WalletDictionary walletDictionary = new WalletDictionary();
 	private final WalletFactory factory = new WalletFactory();
 
 
@@ -25,7 +25,11 @@ public class AccountService {
 	}
 
 	public void createAccount(Player player) {
-		accountManager.createAccount(player.getUniqueId());
+		createAccount(player.getUniqueId());
+	}
+
+	public void createAccount(UUID player) {
+		accountManager.createAccount(player);
 	}
 
 	public boolean hasAccount(Player player) {
@@ -51,6 +55,15 @@ public class AccountService {
 	public Wallet createWallet(Player player, Crypto crypto) {
 		if (!hasAccount(player))
 			return null;
+		Wallet result = factory.createWallet(crypto, walletDictionary);
+		getAccountOf(player).orElseThrow(ContactTheDevsException::new).addWallet(result);
+		return result;
+	}
+
+	public Wallet createWallet(UUID player, Crypto crypto){
+		if(!accountManager.getAccountOf(player).isPresent()){
+			return null;
+		}
 		Wallet result = factory.createWallet(crypto, walletDictionary);
 		getAccountOf(player).orElseThrow(ContactTheDevsException::new).addWallet(result);
 		return result;

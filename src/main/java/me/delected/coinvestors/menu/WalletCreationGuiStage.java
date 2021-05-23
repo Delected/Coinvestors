@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 //import me.delected.coinvestors.exceptions.ContactTheDevsException;
+import me.delected.coinvestors.model.accounts.Wallet;
 import me.delected.coinvestors.model.currency.Crypto;
 //import me.delected.coinvestors.model.wallet.Wallet;
 //import me.delected.coinvestors.model.wallet.WalletFactory;
@@ -69,7 +70,7 @@ public class WalletCreationGuiStage extends GuiStage {
 
 	private ItemStack confirm() {
 		String name = ChatColor.GREEN + "Confirm the creation of your new " + crypto + " wallet!";
-		return new ItemStackCreator(Material.GREEN_WOOL).setName(name).setLink(MAIN_MENU_LINK).build();
+		return new ItemStackCreator(Material.GREEN_WOOL).setName(name).setLink(CONFIRMATION_LINK).build();
 	}
 
 	private static void openCryptoSelection(Player player) {
@@ -84,12 +85,11 @@ public class WalletCreationGuiStage extends GuiStage {
 		player.openInventory(state.getMenuInventory());
 	}
 
+
 	//fixme
 	private static void onCreationConfirm(Player player) {
-		/*
-		Wallet wallet = WalletFactory.getInstance().createFor(Crypto.ETC);
-		Coinvestors.cryptoManager().getAccountOf(player.getUniqueId()).orElseThrow(ContactTheDevsException::new)
-				.addWallet(wallet);*/
+		WalletCreationGuiStage stage = (WalletCreationGuiStage) actualStage(player);
+		Coinvestors.accountService().createWallet(player, stage.crypto);
 		toMainMenu(player);
 	}
 

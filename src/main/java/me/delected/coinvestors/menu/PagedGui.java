@@ -46,7 +46,7 @@ public abstract class PagedGui extends GuiStage {
 		inventory.clear();
 		inventory.setItem(itemSpace, prevPage());
 		inventory.setItem(size - 1, nextPage());
-		getRawItems().stream().skip((long) page * itemSpace).limit(itemSpace).forEach(inventory::addItem);
+		getRawItems().stream().skip(getFirstField()).limit(itemSpace).forEach(inventory::addItem);
 	}
 
 	protected abstract List<ItemStack> getRawItems();

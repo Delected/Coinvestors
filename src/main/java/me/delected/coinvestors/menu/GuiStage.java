@@ -56,4 +56,8 @@ public abstract class GuiStage {
 		player.openInventory(state.getMenuInventory());
 	}
 
+	protected static GuiStage actualStage(Player player) {
+		return Coinvestors.guiManager().getStateOf(player).getActualStage();
+	}
+
 }

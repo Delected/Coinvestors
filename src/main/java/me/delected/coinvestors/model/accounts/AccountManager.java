@@ -22,6 +22,8 @@ class AccountManager {
 	}
 
 	public Optional<Account> getAccountOf(UUID id) {
+		System.out.println(id);
+		System.out.println(accounts);
 		return Optional.ofNullable(accounts.get(id));
 	}
 

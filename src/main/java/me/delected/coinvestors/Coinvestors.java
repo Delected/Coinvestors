@@ -27,11 +27,11 @@ public final class Coinvestors extends JavaPlugin {
 	@Override
 	public void onLoad() {
 		INSTANCE = this;
-		SubtypeInstanceBuilder.setLogger(Bukkit.getLogger());
 	}
 
 	@Override
 	public void onEnable() {
+		SubtypeInstanceBuilder.setLogger(Bukkit.getLogger());
 		// have a log of all transactions maybe
 		saveDefaultConfig();
 		//register commands
@@ -60,5 +60,6 @@ public final class Coinvestors extends JavaPlugin {
 	public static AccountService accountService() {
 		return INSTANCE.accountService;
 	}
+
 
 }
