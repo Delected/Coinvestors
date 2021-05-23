@@ -10,9 +10,6 @@ public class CryptoManager {
 	private final AccountManager accountManager = new AccountManager();
 	private final CryptoRegulator regulator = new CryptoRegulator();
 
-	public AccountManager getAccountManager() {
-		return accountManager;
-	}
 
 	public Optional<Account> getAccountOf(UUID playerUuid) {
 		return accountManager.getAccountOf(playerUuid);
