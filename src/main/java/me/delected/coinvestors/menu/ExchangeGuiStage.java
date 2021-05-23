@@ -45,20 +45,15 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 	@Override
 	public ItemStack sourceStack(final Wallet source) {
 		if (sourceCrypto == null)
-			return walletInputUnavailable();
+			return ExchangeGui.walletInputUnavailable();
 		return TransactionGui.super.sourceStack(source);
 	}
 
 	@Override
 	public ItemStack targetStack(final Wallet target) {
 		if (targetCrypto == null)
-			return walletInputUnavailable();
+			return ExchangeGui.walletInputUnavailable();
 		return TransactionGui.super.targetStack(target);
-	}
-
-	private ItemStack walletInputUnavailable() {
-		return new ItemStackCreator(Material.GRAY_WOOL).setUnmodifiable()
-				.setName(ChatColor.DARK_RED + "Select a Crypto before selecting the wallet!").build();
 	}
 
 	@Override

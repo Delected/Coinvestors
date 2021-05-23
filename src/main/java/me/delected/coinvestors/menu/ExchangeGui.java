@@ -72,6 +72,11 @@ public interface ExchangeGui extends Confirmable {
 		InputStageManager.openStringInput(player, transactionGui::retrieveSourceCrypto, guiStage::build);
 	}
 
+	static ItemStack walletInputUnavailable() {
+		return new ItemStackCreator(Material.GRAY_WOOL).setUnmodifiable()
+				.setName(ChatColor.DARK_RED + "Select a Crypto before selecting the wallet!").build();
+	}
+
 	void retrieveSourceCrypto(String raw);
 
 	void retrieveTargetCrypto(String raw);
