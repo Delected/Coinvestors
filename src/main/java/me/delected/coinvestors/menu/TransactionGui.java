@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
-import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.model.accounts.Wallet;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 interface TransactionGui extends Confirmable {

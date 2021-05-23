@@ -1,4 +1,4 @@
-package me.delected.coinvestors.model.wallet;
+package me.delected.coinvestors.model.accounts;
 
 import me.delected.coinvestors.model.currency.Crypto;
 
@@ -6,9 +6,10 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public abstract class Wallet {
-	BigDecimal balance;
-	Crypto crypto;
-	UUID owner;
+	private BigDecimal balance;
+	private final Crypto crypto;
+	private final UUID owner;
+	private final String completeAddress;
 
 	public Wallet(Crypto crypto, UUID owner) {
 		this(BigDecimal.ZERO, crypto, owner);
@@ -18,6 +19,7 @@ public abstract class Wallet {
 		this.balance = balance;
 		this.crypto = crypto;
 		this.owner = owner;
+		this.completeAddress = crypto + "-" + owner;
 	}
 
 	public void withdraw(BigDecimal amount) {

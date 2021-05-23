@@ -1,21 +1,25 @@
-package me.delected.coinvestors.model;
+package me.delected.coinvestors.model.accounts;
 
 import me.delected.coinvestors.model.currency.Crypto;
-import me.delected.coinvestors.model.wallet.Wallet;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Account {
 
 	public final Map<Crypto, List<Wallet>> wallets = new HashMap<>();
+	public TradingServiceStatus serviceStauts;
 
 	public void addWallet(Wallet wallet) {
 		Crypto crypto = wallet.getCrypto();
 		wallets.computeIfAbsent(wallet.getCrypto(), c -> new ArrayList<>());
 		wallets.get(crypto).add(wallet);
+	}
+
+	public Map<Crypto, List<Wallet>> getWallets() {
+		return wallets;
+	}
+
+	public List<Wallet> getWallets(Crypto crypto) {
+		return wallets.get(crypto);
 	}
 }

@@ -3,7 +3,6 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -11,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import me.delected.coinvestors.model.currency.Crypto;
-import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.model.accounts.Wallet;
 
 public class WithdrawGuiStage extends GuiStage implements TransactionGui, ExchangeGui {
 

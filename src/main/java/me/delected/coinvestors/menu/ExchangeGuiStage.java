@@ -11,7 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.model.currency.Crypto;
-import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.model.accounts.Wallet;
 
 public class ExchangeGuiStage extends GuiStage implements ExchangeGui, TransactionGui {
 

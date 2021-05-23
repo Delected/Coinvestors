@@ -3,7 +3,7 @@ package me.delected.coinvestors.model.market;
 import java.math.BigDecimal;
 
 import me.delected.coinvestors.model.currency.ExchangePair;
-import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.model.accounts.Wallet;
 
 public abstract class MarketTransactionRequest {
 	private final ExchangePair pair;

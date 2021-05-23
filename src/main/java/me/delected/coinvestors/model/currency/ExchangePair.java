@@ -5,7 +5,7 @@ import java.util.TreeSet;
 
 import me.delected.coinvestors.model.market.Ask;
 import me.delected.coinvestors.model.market.Bid;
-import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.model.accounts.Wallet;
 
 public class ExchangePair {
 	private final Crypto major;

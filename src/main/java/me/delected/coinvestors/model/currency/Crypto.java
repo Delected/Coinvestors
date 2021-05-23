@@ -1,6 +1,6 @@
 package me.delected.coinvestors.model.currency;
 
-import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.model.accounts.Wallet;
 
 public enum Crypto {
 	BTC("Bitcoin"),
