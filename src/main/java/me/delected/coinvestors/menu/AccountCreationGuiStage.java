@@ -32,7 +32,7 @@ public class AccountCreationGuiStage extends GuiStage {
 	}
 
 	private ItemStack accountCreationStack() {
-		return new ItemStackCreator(Material.GREEN_WOOL).setLink(CREATE_LINK)
+		return new ItemStackCreator(Material.CRAFTING_TABLE).setLink(CREATE_LINK)
 				.setName(ChatColor.GREEN + "Confirm!").build();
 	}
 

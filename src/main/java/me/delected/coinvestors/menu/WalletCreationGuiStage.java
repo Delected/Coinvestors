@@ -64,7 +64,7 @@ public class WalletCreationGuiStage extends GuiStage {
 	}
 
 	private ItemStack confirmUnavailable() {
-		String name = ChatColor.RED + "You need to select a crypto before confirming the creation";
+		String name = ChatColor.RED + "You need to select a currency before confirming the creation";
 		return new ItemStackCreator(Material.LIGHT_GRAY_WOOL).setName(name).setUnmodifiable().build();
 	}
 

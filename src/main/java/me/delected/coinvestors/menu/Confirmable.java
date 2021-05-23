@@ -1,6 +1,7 @@
 package me.delected.coinvestors.menu;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,9 +24,13 @@ public interface Confirmable {
 	}
 
 	default ItemStack invalidStack() {
-		String name = ChatColor.RED + "There are still information missing for: ";
+		String name = ChatColor.RED + "The following information is still missing: ";
+		final List<String> listedInvalids = invalids().stream()
+				.map(item -> String.join(" ", "◆", item))
+				.collect(Collectors.toList());
 		return new ItemStackCreator(Material.LIGHT_GRAY_WOOL).setUnmodifiable()
-				.setName(name).setLore(invalids()).build();
+				.setName(name).setLore(listedInvalids)
+				.build();
 	}
 
 }

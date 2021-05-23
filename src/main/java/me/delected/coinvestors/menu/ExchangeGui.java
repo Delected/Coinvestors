@@ -87,7 +87,7 @@ public interface ExchangeGui extends Confirmable {
 
 	static ItemStack walletInputUnavailable() {
 		return new ItemStackCreator(Material.GRAY_WOOL).setUnmodifiable()
-				.setName(ChatColor.DARK_RED + "Select a Crypto before selecting the wallet!").build();
+				.setName(ChatColor.DARK_RED + "Select a currency before selecting the wallet!").build();
 	}
 
 	void setSourceCrypto(Crypto crypto);
