@@ -37,7 +37,7 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 		result.setItem(24, targetStack(target));
 		result.setItem(34, confirmStack());
 		result.setItem(35, backLinkStack());
-		return null;
+		return result;
 	}
 
 	@Override
@@ -81,16 +81,6 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 	}
 
 	@Override
-	public void retrieveSourceCrypto(final String raw) {
-		sourceCrypto = ExchangeGui.parseCrypto(raw);
-	}
-
-	@Override
-	public void retrieveTargetCrypto(final String raw) {
-		targetCrypto = ExchangeGui.parseCrypto(raw);
-	}
-
-	@Override
 	public void retrieveSource(final String raw) {
 		setSource(null);
 	}
@@ -111,5 +101,15 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 
 	private void setTarget(final Wallet target) {
 		this.target = target;
+	}
+
+	@Override
+	public void setSourceCrypto(final Crypto crypto) {
+		this.sourceCrypto = crypto;
+	}
+
+	@Override
+	public void setTargetCrypto(final Crypto crypto) {
+		this.targetCrypto = crypto;
 	}
 }

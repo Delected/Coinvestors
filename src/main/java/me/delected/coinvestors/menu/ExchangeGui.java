@@ -66,10 +66,23 @@ public interface ExchangeGui extends Confirmable {
 		return (ExchangeGui) Coinvestors.guiManager().getStateOf(player).getActualStage();
 	}
 
-	static void openSourceInput(Player player) {
-		ExchangeGui transactionGui = prepareInputFor(player);
-		GuiStage guiStage = (GuiStage) transactionGui;
-		InputStageManager.openStringInput(player, transactionGui::retrieveSourceCrypto, guiStage::build);
+	static void openSourceCryptoInput(Player player) {
+		ExchangeGui exchangeGui = prepareInputFor(player);
+		GuiStage guiStage = (GuiStage) exchangeGui;
+
+		GuiStage.redirect(player, new CryptoSelectionGuiStage(crypto -> {
+			exchangeGui.setSourceCrypto(crypto);
+			player.openInventory(guiStage.build(player));
+		}));
+	}
+
+	static void openTargetCryptoInput(Player player) {
+		ExchangeGui exchangeGui = prepareInputFor(player);
+		GuiStage guiStage = (GuiStage) exchangeGui;
+		GuiStage.redirect(player, new CryptoSelectionGuiStage(crypto -> {
+			exchangeGui.setTargetCrypto(crypto);
+			player.openInventory(guiStage.build(player));
+		}));
 	}
 
 	static ItemStack walletInputUnavailable() {
@@ -77,17 +90,10 @@ public interface ExchangeGui extends Confirmable {
 				.setName(ChatColor.DARK_RED + "Select a Crypto before selecting the wallet!").build();
 	}
 
-	void retrieveSourceCrypto(String raw);
+	void setSourceCrypto(Crypto crypto);
 
-	void retrieveTargetCrypto(String raw);
+	void setTargetCrypto(Crypto crypto);
 
-	static Crypto parseCrypto(String s) {
-		try {
-			return Crypto.valueOf(s.toUpperCase());
-		} catch (IllegalArgumentException e) {
-			return null;
-		}
-	}
 
 	static BigDecimal calcExchangeCourse(Crypto one, Crypto two) {
 		return BigDecimal.ONE;

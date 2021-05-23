@@ -19,6 +19,8 @@ public abstract class GuiStage {
 		MenuLinker.registerLink(TransactionGui.SOURCE_INPUT_LINK, TransactionGui::openSourceInput);
 		MenuLinker.registerLink(TransactionGui.DESTINATION_INPUT_LINK, TransactionGui::openTargetInput);
 		MenuLinker.registerLink(TransactionGui.AMOUNT_INPUT_LINK, TransactionGui::openAmountInput);
+		MenuLinker.registerLink(ExchangeGui.TARGET_CRYPTO_INPUT_LINK, ExchangeGui::openTargetCryptoInput);
+		MenuLinker.registerLink(ExchangeGui.SOURCE_CRYPTO_INPUT_LINK, ExchangeGui::openSourceCryptoInput);
 		MenuLinker.registerLink(MENU_CLOSE_LINK, Player::closeInventory);
 		MenuLinker.registerLink(MAIN_MENU_LINK, GuiStage::toMainMenu);
 	}

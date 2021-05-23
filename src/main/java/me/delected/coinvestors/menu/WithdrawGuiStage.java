@@ -10,6 +10,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.model.wallet.Wallet;
 
 public class WithdrawGuiStage extends GuiStage implements TransactionGui, ExchangeGui {
@@ -64,12 +65,12 @@ public class WithdrawGuiStage extends GuiStage implements TransactionGui, Exchan
 	}
 
 	@Override
-	public void retrieveSourceCrypto(final String raw) {
+	public void setSourceCrypto(final Crypto crypto) {
 
 	}
 
 	@Override
-	public void retrieveTargetCrypto(final String raw) {
+	public void setTargetCrypto(final Crypto crypto) {
 
 	}
 }
