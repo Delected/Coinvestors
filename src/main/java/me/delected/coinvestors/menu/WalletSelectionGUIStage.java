@@ -26,7 +26,7 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 	List<Wallet> wallets = generateWallets();
 
 	private List<Wallet> generateWallets() {
-		Optional<Account> accountOf = Coinvestors.cryptoManager().getAccountManager().getAccountOf(playerUuid);
+		Optional<Account> accountOf = Coinvestors.cryptoManager().getAccountOf(playerUuid);
 		return accountOf.map(account -> account.wallets.entrySet().stream().flatMap(e -> e.getValue().stream())
 				.collect(Collectors.toList())).orElse(Collections.emptyList());
 	}
@@ -41,7 +41,7 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 	}
 
 	private ItemStack createWalletStack(Wallet wallet) {
-		return new ItemStackCreator(Material.SUNFLOWER).setName("Wallet").setLink(SELECT_CONFIRM)
+		return new ItemStackCreator(Material.SUNFLOWER).setName(wallet.getCrypto() + " Wallet").setLink(SELECT_CONFIRM)
 				.setLore(ChatColor.YELLOW + "Balance: " + ChatColor.WHITE + wallet.getBalance()).build();
 	}
 

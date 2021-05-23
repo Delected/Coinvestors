@@ -86,19 +86,19 @@ interface TransactionGui extends Confirmable {
 	static void openSourceInput(Player player) {
 		TransactionGui transactionGui = prepareInputFor(player);
 		GuiStage guiStage = (GuiStage) transactionGui;
-		InputStageManager.openStringInput(player, transactionGui::retrieveSource, guiStage::build);
+		InputStageProvider.openStringInput(player, transactionGui::retrieveSource, guiStage::build);
 	}
 
 	static void openAmountInput(Player player) {
 		TransactionGui transactionGui = prepareInputFor(player);
 		GuiStage guiStage = (GuiStage) transactionGui;
-		InputStageManager.openNumberInput(player, transactionGui::setAmount, guiStage::build);
+		InputStageProvider.openNumberInput(player, transactionGui::setAmount, guiStage::build);
 	}
 
 	static void openTargetInput(Player player) {
 		TransactionGui transactionGui = prepareInputFor(player);
 		GuiStage guiStage = (GuiStage) transactionGui;
-		InputStageManager.openStringInput(player, transactionGui::retrieveTarget, guiStage::build);
+		InputStageProvider.openStringInput(player, transactionGui::retrieveTarget, guiStage::build);
 	}
 
 	static TransactionGui prepareInputFor(Player player) {
