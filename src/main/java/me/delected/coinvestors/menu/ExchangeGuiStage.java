@@ -6,11 +6,14 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.model.wallet.Wallet;
+import me.delected.coinvestors.util.ItemStackCreator;
 
 public class ExchangeGuiStage extends GuiStage implements ExchangeGui, TransactionGui {
 
@@ -37,6 +40,25 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 		result.setItem(34, confirmStack());
 		result.setItem(35, backLinkStack());
 		return null;
+	}
+
+	@Override
+	public ItemStack sourceStack(final Wallet source) {
+		if (sourceCrypto == null)
+			return walletInputUnavailable();
+		return TransactionGui.super.sourceStack(source);
+	}
+
+	@Override
+	public ItemStack targetStack(final Wallet target) {
+		if (targetCrypto == null)
+			return walletInputUnavailable();
+		return TransactionGui.super.targetStack(target);
+	}
+
+	private ItemStack walletInputUnavailable() {
+		return new ItemStackCreator(Material.GRAY_WOOL).setUnmodifiable()
+				.setName(ChatColor.DARK_RED + "Select a Crypto before selecting the wallet!").build();
 	}
 
 	@Override
@@ -74,6 +96,7 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 	public void retrieveTargetCrypto(final String raw) {
 		targetCrypto = ExchangeGui.parseCrypto(raw);
 	}
+
 	@Override
 	public void retrieveSource(final String raw) {
 		setSource(null);
