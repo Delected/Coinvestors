@@ -41,7 +41,7 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 	}
 
 	private ItemStack createWalletStack(Wallet wallet) {
-		return new ItemStackCreator(Material.SUNFLOWER).setName("Wallet").setLink(SELECT_CONFIRM)
+		return new ItemStackCreator(Material.SUNFLOWER).setName(wallet.getCrypto() + " Wallet").setLink(SELECT_CONFIRM)
 				.setLore(ChatColor.YELLOW + "Balance: " + ChatColor.WHITE + wallet.getBalance()).build();
 	}
 

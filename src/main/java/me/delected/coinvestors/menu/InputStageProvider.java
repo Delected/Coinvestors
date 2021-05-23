@@ -15,7 +15,7 @@ import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.util.ItemStackCreator;
 import net.wesjd.anvilgui.AnvilGUI;
 
-public class InputStageManager {
+public class InputStageProvider {
 
 	private static final ItemStack FIRST = createFirst();
 
