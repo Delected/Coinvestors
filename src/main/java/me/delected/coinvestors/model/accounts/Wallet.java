@@ -8,19 +8,17 @@ import java.util.UUID;
 public abstract class Wallet {
 	private BigDecimal balance;
 	private final Crypto crypto;
-	private final UUID owner;
 	private final String completeAddress;
 
-	public Wallet(Crypto crypto, UUID owner) {
-		this(BigDecimal.ZERO, crypto, owner);
+	protected Wallet(Crypto crypto, UUID id) {
+		this(BigDecimal.ZERO, crypto, id);
 	}
 
 	//fixme: uuid generation is needed
-	public Wallet(BigDecimal balance, Crypto crypto, UUID owner) {
+	protected Wallet(BigDecimal balance, Crypto crypto, UUID id) {
 		this.balance = balance;
 		this.crypto = crypto;
-		this.owner = owner;
-		this.completeAddress = crypto + "-" + owner;
+		this.completeAddress = crypto + "-" + id;
 	}
 
 	public void withdraw(BigDecimal amount) {
@@ -44,7 +42,7 @@ public abstract class Wallet {
 		return crypto;
 	}
 
-	public UUID getOwner() {
-		return owner;
+	public String getCompleteAddress() {
+		return completeAddress;
 	}
 }

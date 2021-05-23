@@ -6,10 +6,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 import me.delected.coinvestors.model.accounts.Account;
+import me.delected.coinvestors.model.currency.Crypto;
 
 import org.bukkit.entity.Player;
 
-public class AccountManager {
+class AccountManager {
 	private final Map<UUID, Account> accounts = new HashMap<>();
 
 	public void createAccount(UUID id) {
