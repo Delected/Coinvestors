@@ -11,11 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
-//import me.delected.coinvestors.exceptions.ContactTheDevsException;
-import me.delected.coinvestors.model.accounts.Wallet;
 import me.delected.coinvestors.model.currency.Crypto;
-//import me.delected.coinvestors.model.wallet.Wallet;
-//import me.delected.coinvestors.model.wallet.WalletFactory;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 //TODO: redirect to the Wallet overview instead to the main menu when wallet overview exists

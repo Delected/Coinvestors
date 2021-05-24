@@ -11,7 +11,7 @@ public class GuiPlayerState {
 	private final UUID playerId;
 	private final Map<MenuState, GuiStage> stateMap = new HashMap<>();
 	private Inventory menuInventory;
-	private GuiStage actualState;
+	private GuiStage actualState = new MenuGuiState();
 	private boolean doingInput = false;
 
 	public GuiPlayerState(final UUID playerId) {

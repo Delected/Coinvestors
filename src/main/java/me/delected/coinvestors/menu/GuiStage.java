@@ -42,18 +42,16 @@ public abstract class GuiStage {
 				.setName(ChatColor.RED + "Back to main menu").build();
 	}
 
+	protected static void redirect(Player player, GuiStage next) {
+		Coinvestors.guiManager().redirect(player, next);
+	}
+
 	public static void toMainMenu(Player player) {
 		redirect(player, new MenuGuiState());
 	}
 
 	public static void toAccountCreation(Player player) {
 		redirect(player, new AccountCreationGuiStage());
-	}
-
-	protected static void redirect(Player player, GuiStage next) {
-		GuiPlayerState state = Coinvestors.guiManager().getStateOf(player);
-		state.setStage(next);
-		player.openInventory(state.getMenuInventory());
 	}
 
 	protected static GuiStage actualStage(Player player) {

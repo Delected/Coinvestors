@@ -7,6 +7,8 @@ import java.util.UUID;
 import org.bukkit.entity.Player;
 
 import me.delected.coinvestors.menu.GuiPlayerState;
+import me.delected.coinvestors.menu.GuiStage;
+import me.delected.coinvestors.menu.MenuGuiState;
 
 
 public class GuiPlayerStateManager {
@@ -26,4 +28,9 @@ public class GuiPlayerStateManager {
 		getStateOf(player).setDoingInput(doingInput);
 	}
 
+	public void redirect(Player player, GuiStage next) {
+		GuiPlayerState state = getStateOf(player);
+		state.setStage(next);
+		player.openInventory(state.getMenuInventory());
+	}
 }

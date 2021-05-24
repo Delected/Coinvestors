@@ -23,6 +23,7 @@ public class MenuGuiState extends GuiStage {
 	private static final String MENU_TRANSACTION_LINK = "MENU_TO_TRANSACTION";
 	private static final String MENU_WALLET_CREATION_LINK = "MENU_TO_WALLET_CREATION";
 	private static final String MENU_WALLET_OVERVIEW_LINK = "MENU_TO_WALLET_OVERVIEW";
+	private static final String MENU_WITHDRAW_LINK = "MENU_TO_WITHDRAW";
 
 	static {
 		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::onMenuToTransactionClick);
