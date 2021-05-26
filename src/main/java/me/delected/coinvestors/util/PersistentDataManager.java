@@ -9,7 +9,7 @@ import org.jetbrains.annotations.Nullable;
 import me.delected.coinvestors.Coinvestors;
 
 public class PersistentDataManager {
-	private static final JavaPlugin COINVESTORS = Coinvestors.INSTANCE();
+	private static final JavaPlugin COINVESTORS = Coinvestors.instance();
 	public static final NamespacedKey UNMODIFIABLE_KEY = new NamespacedKey(COINVESTORS, "UNMODIFIABLE");
 	public static final NamespacedKey LINK_KEY = new NamespacedKey(COINVESTORS, "LINK");
 	public static final NamespacedKey EVENT_LINK_KEY = new NamespacedKey(COINVESTORS, "EVENT_LINK_KEY");

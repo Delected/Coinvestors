@@ -36,7 +36,7 @@ public abstract class AbstractCommand implements TabExecutor {
 	}
 
 	private Optional<Command> getCommand() {
-		return Optional.ofNullable(Coinvestors.INSTANCE().getCommand(PREFIX + " " + name));
+		return Optional.ofNullable(Coinvestors.instance().getCommand(PREFIX + " " + name));
 	}
 
 	public String getHelp() {

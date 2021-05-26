@@ -3,6 +3,7 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -46,6 +47,15 @@ public class WithdrawGuiStage extends GuiStage implements TransactionGui, Exchan
 		return TransactionGui.makeLoreWhite(invalids);
 	}
 
+
+	//todo
+	@Override
+	public Consumer<Player> confirmAction() {
+		return p -> {
+			Bukkit.getLogger().warning("not yet implemented");
+		};
+	}
+
 	@Override
 	public boolean isValid() {
 		return source != null && amount != null;
@@ -65,11 +75,11 @@ public class WithdrawGuiStage extends GuiStage implements TransactionGui, Exchan
 
 	@Override
 	public void setSourceCrypto(final Crypto crypto) {
-
+		//empty in this case
 	}
 
 	@Override
 	public void setTargetCrypto(final Crypto crypto) {
-
+		//empty in this case
 	}
 }

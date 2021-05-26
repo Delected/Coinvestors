@@ -3,11 +3,13 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
+import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.model.accounts.Wallet;
 
 public class WalletTransactionGuiState extends GuiStage implements TransactionGui {
@@ -47,6 +49,11 @@ public class WalletTransactionGuiState extends GuiStage implements TransactionGu
 	}
 
 	@Override
+	public Consumer<Player> confirmAction() {
+		return p -> Coinvestors.accountService().sendCurrency(source, amount, target);
+	}
+
+	@Override
 	public boolean isValid() {
 		return amount != null && source != null && target != null;
 	}
@@ -55,12 +62,12 @@ public class WalletTransactionGuiState extends GuiStage implements TransactionGu
 
 	@Override
 	public void retrieveSource(final String raw) {
-		setSource(null);
+		setSource(Coinvestors.accountService().getWalletByKey(raw).orElse(null));
 	}
 
 	@Override
 	public void retrieveTarget(String raw) {
-		setTarget(null);
+		setTarget(Coinvestors.accountService().getWalletByKey(raw).orElse(null));
 	}
 
 	@Override

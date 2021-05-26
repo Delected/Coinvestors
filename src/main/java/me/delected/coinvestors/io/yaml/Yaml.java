@@ -23,7 +23,7 @@ public class Yaml {
 	This can be private, as it is only used internally in this class.
 	 */
 	private void create() throws IOException {
-		file = new File(Coinvestors.INSTANCE().getDataFolder(), name + ".yml");
+		file = new File(Coinvestors.instance().getDataFolder(), name + ".yml");
 
 		if (file.createNewFile())
 			Bukkit.getLogger().warning("There was no existing " + name + " file. Successfully created a new one.");

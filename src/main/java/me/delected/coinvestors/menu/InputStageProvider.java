@@ -41,7 +41,7 @@ public class InputStageProvider {
 	}
 
 	private static AnvilGUI.Builder createBuilder() {
-		return new AnvilGUI.Builder().plugin(Coinvestors.INSTANCE()).itemLeft(FIRST).text("Put your input here!");
+		return new AnvilGUI.Builder().plugin(Coinvestors.instance()).itemLeft(FIRST).text("Put your input here!");
 	}
 
 	private static ItemStack createFirst() {
