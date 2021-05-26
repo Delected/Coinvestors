@@ -3,6 +3,7 @@ package me.delected.coinvestors.menu;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -73,6 +74,13 @@ public class ExchangeGuiStage extends GuiStage implements ExchangeGui, Transacti
 			invalids.add("Destination wallet");
 		}
 		return TransactionGui.makeLoreWhite(invalids);
+	}
+
+	//TODO
+	@Override
+	public Consumer<Player> confirmAction() {
+		return p -> {
+		};
 	}
 
 	@Override

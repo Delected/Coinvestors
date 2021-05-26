@@ -51,9 +51,7 @@ public class WithdrawGuiStage extends GuiStage implements TransactionGui, Exchan
 	//todo
 	@Override
 	public Consumer<Player> confirmAction() {
-		return p -> {
-			Bukkit.getLogger().warning("not yet implemented");
-		};
+		return p -> Bukkit.getLogger().warning("not yet implemented");
 	}
 
 	@Override

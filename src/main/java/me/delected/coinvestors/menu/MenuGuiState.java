@@ -1,6 +1,5 @@
 package me.delected.coinvestors.menu;
 
-import static org.bukkit.Material.BARRIER;
 import static org.bukkit.Material.BLUE_WOOL;
 import static org.bukkit.Material.BROWN_WOOL;
 import static org.bukkit.Material.GREEN_WOOL;
@@ -19,11 +18,12 @@ import me.delected.coinvestors.util.ItemStackCreator;
 
 public class MenuGuiState extends GuiStage {
 
-	private static final Inventory INVENTORY = createInventory();
 	private static final String MENU_TRANSACTION_LINK = "MENU_TO_TRANSACTION";
 	private static final String MENU_WALLET_CREATION_LINK = "MENU_TO_WALLET_CREATION";
 	private static final String MENU_WALLET_OVERVIEW_LINK = "MENU_TO_WALLET_OVERVIEW";
 	private static final String MENU_WITHDRAW_LINK = "MENU_TO_WITHDRAW";
+
+	private final Inventory inventory = createInventory();
 
 	static {
 		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::onMenuToTransactionClick);
@@ -48,7 +48,7 @@ public class MenuGuiState extends GuiStage {
 		menu[4] = new ItemStackCreator(LIGHT_BLUE_WOOL).setName(ChatColor.GREEN + "Exchange").setUnmodifiable().build();
 		menu[5] = new ItemStackCreator(LIME_WOOL).setName(ChatColor.GREEN + "Create new Wallet")
 				.setLink(MENU_WALLET_CREATION_LINK).build();
-		menu[8] = new ItemStackCreator(BARRIER).setName(ChatColor.RED + "Close").setLink(MENU_CLOSE_LINK).build();
+		menu[8] = closeStack();
 		result.setContents(menu);
 		return result;
 	}
@@ -72,7 +72,12 @@ public class MenuGuiState extends GuiStage {
 
 	@Override
 	public Inventory build(final Player player) {
-		return INVENTORY;
+		if (player.isOp()) {
+			inventory.setItem(7, disableStack());
+		} else {
+			inventory.setItem(7, null);
+		}
+		return inventory;
 	}
 
 }
