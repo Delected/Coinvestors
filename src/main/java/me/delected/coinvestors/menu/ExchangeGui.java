@@ -90,7 +90,9 @@ public interface ExchangeGui extends Confirmable {
 				.setName(ChatColor.DARK_RED + "Select a currency before selecting the wallet!").build();
 	}
 
-	void setSourceCrypto(Crypto crypto);
+	default void setSourceCrypto(Crypto crypto) {
+
+	}
 
 	void setTargetCrypto(Crypto crypto);
 

@@ -8,7 +8,7 @@ public enum TradingServiceStatus {
 	PREMIUM_TRADER(),
 	MARKET_MAKER();
 
-	BigDecimal fee;
+	private BigDecimal fee;
 
 	// temp until we decide fees
 	TradingServiceStatus() {
@@ -17,5 +17,9 @@ public enum TradingServiceStatus {
 
 	TradingServiceStatus(BigDecimal fee) {
 		this.fee = fee;
+	}
+
+	public BigDecimal getFee() {
+		return fee;
 	}
 }

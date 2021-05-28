@@ -22,17 +22,21 @@ public class WalletSelectionGUIStage extends SelectionGui<Wallet> {
 
 	private static final String TITLE = ChatColor.GREEN + "Select your wallet";
 
-	private final UUID playerUuid;
+	protected final UUID playerUuid;
 	private final List<Wallet> wallets;
 
-	private List<Wallet> generateWallets() {
+	protected List<Wallet> generateWallets() {
 		Optional<Account> accountOf = Coinvestors.accountService().getAccountOf(playerUuid);
 		return accountOf.map(account -> account.wallets.entrySet().stream().flatMap(e -> e.getValue().stream())
 				.collect(Collectors.toList())).orElse(Collections.emptyList());
 	}
 
 	protected WalletSelectionGUIStage(UUID uuid, Consumer<Wallet> onSelect) {
-		super(MenuState.WALLET_SELECT, 36, TITLE, onSelect);
+		this(uuid, onSelect, TITLE);
+	}
+
+	protected WalletSelectionGUIStage(UUID uuid, Consumer<Wallet> onSelect, String title) {
+		super(MenuState.WALLET_SELECT, 36, title, onSelect);
 		this.playerUuid = uuid;
 		wallets = generateWallets();
 		buildPageInventory();

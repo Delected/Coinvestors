@@ -17,7 +17,6 @@ public abstract class GuiStage {
 
 	protected static final String MENU_CLOSE_LINK = "CLOSE_LINK";
 	protected static final String MAIN_MENU_LINK = "MAIN_MENU_LINK";
-	protected static final String DISABLE_LINK = "DISABLE_LINK";
 
 	static {
 		MenuLinker.registerLink(TransactionGui.SOURCE_INPUT_LINK, TransactionGui::openSourceInput);
@@ -28,7 +27,6 @@ public abstract class GuiStage {
 		MenuLinker.registerLink(Confirmable.CONFIRM_LINK, Confirmable::confirm);
 		MenuLinker.registerLink(MENU_CLOSE_LINK, Player::closeInventory);
 		MenuLinker.registerLink(MAIN_MENU_LINK, GuiStage::toMainMenu);
-		MenuLinker.registerLink(DISABLE_LINK, p -> Coinvestors.instance().disable());
 	}
 
 	private final MenuState state;
@@ -73,12 +71,4 @@ public abstract class GuiStage {
 	protected static GuiStage actualStage(Player player) {
 		return Coinvestors.guiManager().getStateOf(player).getActualStage();
 	}
-
-	protected static ItemStack disableStack() {
-		return new ItemStackCreator(WITHER_SKELETON_SKULL)
-				.setLink(DISABLE_LINK)
-				.setName(ChatColor.RED + "KILL PLUGIN")
-				.build();
-	}
-
 }

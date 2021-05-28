@@ -19,4 +19,4 @@ commands:
     description: test
     aliases: [ cv profile, cv p , coinvestors p ]
 
-softdepend: [ Vault ]
+depend: [ Vault ]

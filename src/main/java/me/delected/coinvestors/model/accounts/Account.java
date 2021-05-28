@@ -7,7 +7,7 @@ import java.util.*;
 public class Account {
 
 	public final Map<Crypto, List<Wallet>> wallets = new HashMap<>();
-	public TradingServiceStatus serviceStatus;
+	private TradingServiceStatus serviceStatus;
 
 	public void addWallet(Wallet wallet) {
 		Crypto crypto = wallet.getCrypto();
@@ -21,5 +21,13 @@ public class Account {
 
 	public List<Wallet> getWallets(Crypto crypto) {
 		return wallets.get(crypto);
+	}
+
+	public TradingServiceStatus getServiceStatus() {
+		return serviceStatus;
+	}
+
+	public void setServiceStatus(final TradingServiceStatus serviceStatus) {
+		this.serviceStatus = serviceStatus;
 	}
 }

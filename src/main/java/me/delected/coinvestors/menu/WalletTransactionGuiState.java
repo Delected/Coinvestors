@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -50,7 +51,13 @@ public class WalletTransactionGuiState extends GuiStage implements TransactionGu
 
 	@Override
 	public Consumer<Player> confirmAction() {
-		return p -> Coinvestors.accountService().sendCurrency(source, amount, target);
+		return p -> {
+			if (!Coinvestors.accountService().sendCurrency(source, amount, target)) {
+				p.sendMessage(ChatColor.DARK_RED + "You could not afford this transaction!");
+			} else {
+				p.sendMessage(ChatColor.GREEN + "Your order was fulfilled successfully!");
+			}
+		};
 	}
 
 	@Override

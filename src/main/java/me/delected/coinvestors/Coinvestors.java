@@ -21,7 +21,7 @@ import net.milkbowl.vault.economy.Economy;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
-	private static Economy economy = null;
+	private static Economy ECONOMY = null;
 	private final GuiPlayerStateManager guiPlayerStateManager = new GuiPlayerStateManager();
 	private final AccountService accountService = new AccountService();
 	//fixme
@@ -40,7 +40,10 @@ public final class Coinvestors extends JavaPlugin {
 			Bukkit.getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
 			//disable();
 			//return;
+		} else {
+			System.out.println("success");
 		}
+		accountService.setEconomy(ECONOMY);
 		saveDefaultConfig();
 		//register commands
 		Optional<PluginCommand> cvCommand = Optional.ofNullable(getCommand("coinvestors"));
@@ -65,7 +68,7 @@ public final class Coinvestors extends JavaPlugin {
 		if (rsp == null) {
 			return false;
 		}
-		economy = rsp.getProvider();
+		ECONOMY = rsp.getProvider();
 		return true;
 	}
 
@@ -75,10 +78,6 @@ public final class Coinvestors extends JavaPlugin {
 
 	public static GuiPlayerStateManager guiManager() {
 		return INSTANCE.guiPlayerStateManager;
-	}
-
-	public void disable() {
-		getServer().getPluginManager().disablePlugin(this);
 	}
 
 	public static AccountService accountService() {

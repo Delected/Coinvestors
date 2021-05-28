@@ -11,6 +11,7 @@ import me.delected.coinvestors.controller.MenuLinker;
 public abstract class SelectionGui<T> extends PagedGui {
 
 	protected static final String SELECT_CONFIRM = "SELECT_GUI_CONFIRM";
+	private T data;
 
 	static {
 		MenuLinker.registerEventLink(SELECT_CONFIRM, SelectionGui::select);

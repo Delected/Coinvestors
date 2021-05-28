@@ -1,5 +1,10 @@
 package me.delected.coinvestors.model.currency;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import me.delected.coinvestors.model.accounts.Wallet;
 
 public enum Crypto {
@@ -34,7 +39,7 @@ public enum Crypto {
 
 	String fullName;
 	Wallet walletClass;
-
+	BigDecimal price = BigDecimal.ZERO;
 
 	Crypto(String fullName) {
 		this.fullName = fullName;
@@ -56,5 +61,17 @@ public enum Crypto {
 	@Deprecated
 	public Wallet getWalletClass() {
 		return walletClass;
+	}
+
+	public static List<Crypto> valueList() {
+		return Arrays.asList(values());
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(final BigDecimal price) {
+		this.price = price;
 	}
 }
