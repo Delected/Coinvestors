@@ -3,6 +3,7 @@ package me.delected.coinvestors;
 import java.util.Objects;
 import java.util.Optional;
 
+import me.delected.coinvestors.menu.newmnu.SelectionGui;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
