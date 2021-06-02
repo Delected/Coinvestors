@@ -39,7 +39,7 @@ public abstract class SelectionGui<T> extends PagedGui {
 			return collection.stream().map(renderer).collect(Collectors.toList());
 		};
 		this.next = next;
-		buildPageInventory();
+		initCleanUp();
 	}
 
 

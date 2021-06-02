@@ -38,12 +38,16 @@ public abstract class PagedGui extends GuiStage {
 		this.size = size;
 		inventory = Bukkit.createInventory(null, size, title);
 		this.itemSpace = size - 9;
-		current = renderData();
 	}
 
 	@Override
 	public Inventory build(final Player player) {
 		return inventory;
+	}
+
+	protected void initCleanUp() {
+		current = renderData();
+		buildPageInventory();
 	}
 
 	protected void buildPageInventory() {
