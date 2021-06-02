@@ -27,9 +27,9 @@ public abstract class InputGui<T> {
 
 	public ItemStack getInfoStack(String link) {
 		if (data == null) {
-			return presentStack(link);
+			return absentStack(link);
 		}
-		return absentStack(link);
+		return presentStack(link);
 	}
 
 	protected abstract ItemStack presentStack(String link);
