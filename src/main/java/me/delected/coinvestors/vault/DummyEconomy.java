@@ -258,4 +258,9 @@ public class DummyEconomy implements Economy {
 	public boolean createPlayerAccount(final OfflinePlayer player, final String worldName) {
 		return createPlayerAccount(player);
 	}
+
+	public void addDebug(OfflinePlayer player) {
+		depositPlayer(player, 100d);
+	}
+
 }

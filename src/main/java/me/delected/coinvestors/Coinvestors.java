@@ -23,7 +23,7 @@ import net.milkbowl.vault.economy.Economy;
 
 public final class Coinvestors extends JavaPlugin {
 	private static Coinvestors INSTANCE;
-	private static Economy ECONOMY = null;
+	private static DummyEconomy ECONOMY = null;
 	private final GuiPlayerStateManager guiPlayerStateManager = new GuiPlayerStateManager();
 	private final AccountService accountService = new AccountService();
 	//fixme
@@ -70,8 +70,8 @@ public final class Coinvestors extends JavaPlugin {
 		return true;
 	}
 
-	private Economy registerEconomy() {
-		Economy result = new DummyEconomy();
+	private DummyEconomy registerEconomy() {
+		DummyEconomy result = new DummyEconomy();
 		getServer().getServicesManager().register(Economy.class, result, this, ServicePriority.Highest);
 		return result;
 	}
@@ -88,5 +88,7 @@ public final class Coinvestors extends JavaPlugin {
 		return INSTANCE.accountService;
 	}
 
-
+	public static DummyEconomy economy() {
+		return ECONOMY;
+	}
 }
