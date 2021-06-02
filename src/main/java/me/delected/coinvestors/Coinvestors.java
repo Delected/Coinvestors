@@ -3,11 +3,11 @@ package me.delected.coinvestors;
 import java.util.Objects;
 import java.util.Optional;
 
-import me.delected.coinvestors.menu.newmnu.SelectionGui;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.plugin.ServicePriority;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import me.delected.coinvestors.commands.CommandDistributor;
@@ -18,6 +18,7 @@ import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.listeners.AbstractListener;
 import me.delected.coinvestors.model.accounts.AccountService;
 import me.delected.coinvestors.util.SubtypeInstanceBuilder;
+import me.delected.coinvestors.vault.DummyEconomy;
 import net.milkbowl.vault.economy.Economy;
 
 public final class Coinvestors extends JavaPlugin {
@@ -65,12 +66,14 @@ public final class Coinvestors extends JavaPlugin {
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
-		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-		if (rsp == null) {
-			return false;
-		}
-		ECONOMY = rsp.getProvider();
+		ECONOMY = registerEconomy();
 		return true;
+	}
+
+	private Economy registerEconomy() {
+		Economy result = new DummyEconomy();
+		getServer().getServicesManager().register(Economy.class, result, this, ServicePriority.Highest);
+		return result;
 	}
 
 	public static Coinvestors instance() {
