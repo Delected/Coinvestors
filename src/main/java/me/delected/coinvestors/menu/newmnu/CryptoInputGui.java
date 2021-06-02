@@ -29,8 +29,9 @@ public class CryptoInputGui extends InputGui<Crypto> {
 
 	@Override
 	public void open(final Player player) {
-		SelectionGuiProvider.openSelectionGui(player, size, title, Crypto::valueList, this::setData,
-				CryptoInputGui::cryptoInfoStack, prev);
+		new SelectionGui.Builder<Crypto>(title, size).consumer(this::setData).nextGui(prev)
+				.dataSupplier(Crypto::valueList).renderer(CryptoInputGui::cryptoInfoStack)
+				.buildAndOpen(player);
 	}
 
 	private static ItemStackCreator cryptoStackCreator(Crypto c) {
