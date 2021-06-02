@@ -51,6 +51,6 @@ public class CryptoInputGui extends InputGui<Crypto> {
 
 	@Override
 	protected final ItemStack absentStack(String link) {
-		return new ItemStackCreator(Material.RED_WOOL).setName(ChatColor.RED + "Select a currency!").build();
+		return new ItemStackCreator(Material.RED_WOOL).setLink(link).setName(ChatColor.RED + "Select a currency!").build();
 	}
 }
