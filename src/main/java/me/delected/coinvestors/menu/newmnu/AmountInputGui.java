@@ -2,11 +2,14 @@ package me.delected.coinvestors.menu.newmnu;
 
 import java.math.BigDecimal;
 
+import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.menu.InputStageProvider;
+import me.delected.coinvestors.util.ItemStackCreator;
 
 public class AmountInputGui extends InputGui<BigDecimal> {
 
@@ -16,16 +19,23 @@ public class AmountInputGui extends InputGui<BigDecimal> {
 
 	@Override
 	public void open(final Player player) {
-		InputStageProvider.openNumberInput(player, this::setData, prev::build);
+		InputStageProvider.openNumberInput(player, this::setData, nextGui::build);
 	}
 
 	@Override
 	protected ItemStack presentStack(String link) {
-		return null;
+		return new ItemStackCreator(Material.WARPED_SIGN)
+				.setLink(link)
+				.setName(ChatColor.GREEN + "Amount:")
+				.setLore(ChatColor.WHITE + getData().toString())
+				.build();
 	}
 
 	@Override
 	protected ItemStack absentStack(String link) {
-		return null;
+		return new ItemStackCreator(Material.RED_WOOL)
+				.setName(ChatColor.RED + "Click here to choose an amount!")
+				.setLink(link)
+				.build();
 	}
 }

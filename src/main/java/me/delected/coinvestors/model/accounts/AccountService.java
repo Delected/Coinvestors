@@ -6,9 +6,14 @@ import org.bukkit.entity.Player;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.model.currency.Crypto;
 import net.milkbowl.vault.economy.Economy;
@@ -50,6 +55,25 @@ public class AccountService {
 
 	public Optional<Wallet> getWalletByKey(String s) {
 		return walletDictionary.getWalletByKey(s);
+	}
+
+
+	public List<Wallet> getWalletsOfPlayer(Player player) {
+		return Coinvestors.accountService()
+				.getAccountOf(player)
+				.map(a -> a.getWallets()
+						.values()
+						.stream()
+						.flatMap(Collection::stream)
+						.collect(Collectors.toList()))
+				.orElse(Collections.emptyList());
+	}
+
+	public List<Wallet> getWalletsOfPlayer(Player player, Crypto crypto) {
+		return Coinvestors.accountService()
+				.getAccountOf(player)
+				.map(a -> a.getWallets(crypto))
+				.orElse(Collections.emptyList());
 	}
 
 	//todo: making this really save

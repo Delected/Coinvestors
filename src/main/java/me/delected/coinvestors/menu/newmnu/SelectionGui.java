@@ -14,6 +14,7 @@ import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.menu.MenuState;
+import me.delected.coinvestors.util.ItemStackCreator;
 
 public abstract class SelectionGui<T> extends PagedGui {
 
@@ -43,7 +44,9 @@ public abstract class SelectionGui<T> extends PagedGui {
 
 	@Override
 	protected final List<ItemStack> renderData() {
-		return supplier.get();
+		return supplier.get().stream().map(ItemStackCreator::new)
+				.map(i -> i.setEventLink(SELECT_CONFIRM).build())
+				.collect(Collectors.toList());
 	}
 
 	protected T retrieveT(final InventoryClickEvent e) {

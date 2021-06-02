@@ -8,10 +8,10 @@ import me.delected.coinvestors.menu.GuiStage;
 public abstract class InputGui<T> {
 
 	private T data;
-	protected final GuiStage prev;
+	protected final GuiStage nextGui;
 
-	protected InputGui(final GuiStage prev) {
-		this.prev = prev;
+	protected InputGui(final GuiStage nextGui) {
+		this.nextGui = nextGui;
 	}
 
 	public abstract void open(Player player);

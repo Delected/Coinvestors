@@ -1,10 +1,15 @@
 package me.delected.coinvestors.model.accounts;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
+import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.model.accounts.Account;
 import me.delected.coinvestors.model.currency.Crypto;
 
@@ -30,4 +35,5 @@ class AccountManager {
 	public Optional<Account> getAccountOf(Player player) {
 		return Optional.ofNullable(accounts.get(player.getUniqueId()));
 	}
+
 }

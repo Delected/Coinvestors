@@ -71,4 +71,9 @@ public abstract class GuiStage {
 	protected static GuiStage actualStage(Player player) {
 		return Coinvestors.guiManager().getStateOf(player).getActualStage();
 	}
+
+	protected static <T extends GuiStage> T actualStage(Player player, Class<T> guiCLass) {
+		return guiCLass.cast(actualStage(player));
+	}
+
 }
