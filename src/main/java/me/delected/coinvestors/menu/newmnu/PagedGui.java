@@ -39,7 +39,6 @@ public abstract class PagedGui extends GuiStage {
 		inventory = Bukkit.createInventory(null, size, title);
 		this.itemSpace = size - 9;
 		current = renderData();
-		buildPageInventory();
 	}
 
 	@Override

@@ -16,7 +16,6 @@ public abstract class InputGui<T> {
 
 	public abstract void open(Player player);
 
-
 	protected void setData(T data) {
 		this.data = data;
 	}
