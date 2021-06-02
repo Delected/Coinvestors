@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
@@ -39,9 +38,8 @@ public abstract class SelectionGui<T> extends PagedGui {
 			return collection.stream().map(renderer).collect(Collectors.toList());
 		};
 		this.next = next;
-		initCleanUp();
+		reloadData();
 	}
-
 
 	@Override
 	protected final List<ItemStack> renderData() {

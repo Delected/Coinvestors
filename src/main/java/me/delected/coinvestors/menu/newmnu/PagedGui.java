@@ -42,10 +42,11 @@ public abstract class PagedGui extends GuiStage {
 
 	@Override
 	public Inventory build(final Player player) {
+		reloadData();
 		return inventory;
 	}
 
-	protected void initCleanUp() {
+	protected void reloadData() {
 		current = renderData();
 		buildPageInventory();
 	}
