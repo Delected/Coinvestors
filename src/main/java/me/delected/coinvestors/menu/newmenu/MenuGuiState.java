@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.newmenu;
 
 import static org.bukkit.Material.BLUE_WOOL;
 import static org.bukkit.Material.BROWN_WOOL;
@@ -14,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.controller.MenuLinker;
-import me.delected.coinvestors.menu.newmnu.DepositGui;
+import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 public class MenuGuiState extends GuiStage {

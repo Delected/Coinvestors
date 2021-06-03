@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu.newmnu;
+package me.delected.coinvestors.menu.newmenu;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -6,25 +6,28 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
-import me.delected.coinvestors.menu.MenuState;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 public abstract class SelectionGui<T> extends PagedGui {
 
 	protected static final String SELECT_CONFIRM = "SELECT_GUI_CONFIRM";
+	private static final String SELECT_ABORT = "SELECT_GUI_ABORT";
 	private final Supplier<List<ItemStack>> supplier;
 	private final GuiStage next;
 	private List<T> collection;
 
 	static {
 		MenuLinker.registerEventLink(SELECT_CONFIRM, SelectionGui::select);
+		MenuLinker.registerLink(SELECT_ABORT, SelectionGui::abort);
 	}
 
 	private final Consumer<T> tConsumer;
@@ -43,6 +46,15 @@ public abstract class SelectionGui<T> extends PagedGui {
 	}
 
 	@Override
+	public Inventory build(final Player player) {
+		Inventory result = super.build(player);
+		ItemStack abort = returnLinkStack(SELECT_ABORT, ChatColor.RED + "Abort input!",
+				ChatColor.WHITE + "Returns to the previous menu");
+		result.setItem(result.getSize() - 2, abort);
+		return result;
+	}
+
+	@Override
 	protected final List<ItemStack> renderData() {
 		return supplier.get().stream().map(ItemStackCreator::new)
 				.map(i -> i.setEventLink(SELECT_CONFIRM).build())
@@ -58,6 +70,10 @@ public abstract class SelectionGui<T> extends PagedGui {
 		T t = this.retrieveT(e);
 		tConsumer.accept(t);
 		Coinvestors.guiManager().redirect(player, next);
+	}
+
+	private static void abort(Player player) {
+		redirect(player, actualStage(player, SelectionGui.class).next);
 	}
 
 	private static void select(Player player, InventoryClickEvent e) {

@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 
 import me.delected.coinvestors.menu.GuiPlayerState;
 import me.delected.coinvestors.menu.GuiStage;
-import me.delected.coinvestors.menu.MenuGuiState;
 
 
 public class GuiPlayerStateManager {

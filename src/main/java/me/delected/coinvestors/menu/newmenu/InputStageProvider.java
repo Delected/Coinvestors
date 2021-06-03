@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.newmenu;
 
 import java.math.BigDecimal;
 import java.util.Collections;

@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.deprecated;
 
 import java.util.function.Consumer;
 
@@ -7,6 +7,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
+import me.delected.coinvestors.menu.newmenu.MenuState;
 
 public abstract class SelectionGui<T> extends PagedGui {
 

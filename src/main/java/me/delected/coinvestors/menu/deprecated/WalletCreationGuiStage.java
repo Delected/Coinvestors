@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.deprecated;
 
 import java.util.Collections;
 
@@ -11,6 +11,9 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
+import me.delected.coinvestors.menu.GuiPlayerState;
+import me.delected.coinvestors.menu.GuiStage;
+import me.delected.coinvestors.menu.newmenu.MenuState;
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.util.ItemStackCreator;
 

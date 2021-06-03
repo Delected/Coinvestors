@@ -7,6 +7,9 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
+import me.delected.coinvestors.menu.newmenu.MenuGuiState;
+import me.delected.coinvestors.menu.newmenu.MenuState;
+
 public class GuiPlayerState {
 	private final UUID playerId;
 	private final Map<MenuState, GuiStage> stateMap = new HashMap<>();

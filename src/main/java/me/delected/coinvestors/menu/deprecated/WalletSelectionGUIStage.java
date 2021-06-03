@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.deprecated;
 
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +14,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
+import me.delected.coinvestors.menu.newmenu.MenuState;
 import me.delected.coinvestors.model.accounts.Account;
 import me.delected.coinvestors.model.accounts.Wallet;
 import me.delected.coinvestors.util.ItemStackCreator;

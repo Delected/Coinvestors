@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu.newmnu;
+package me.delected.coinvestors.menu.newmenu;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -13,7 +13,6 @@ import org.bukkit.inventory.Inventory;
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
-import me.delected.coinvestors.menu.MenuState;
 import me.delected.coinvestors.model.accounts.Wallet;
 import me.delected.coinvestors.model.currency.Crypto;
 import net.milkbowl.vault.economy.EconomyResponse;

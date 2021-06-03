@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu.newmnu;
+package me.delected.coinvestors.menu.newmenu;
 
 import java.math.BigDecimal;
 
@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.menu.GuiStage;
-import me.delected.coinvestors.menu.InputStageProvider;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 public class AmountInputGui extends InputGui<BigDecimal> {

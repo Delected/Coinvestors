@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.deprecated;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
+import me.delected.coinvestors.menu.GuiStage;
+import me.delected.coinvestors.menu.newmenu.MenuState;
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.model.accounts.Wallet;
 

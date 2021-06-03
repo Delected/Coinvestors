@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu.newmnu;
+package me.delected.coinvestors.menu.newmenu;
 
 import java.util.function.Supplier;
 

@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.newmenu;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
+import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 

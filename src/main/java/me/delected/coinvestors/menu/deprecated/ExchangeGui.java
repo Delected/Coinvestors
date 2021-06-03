@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.deprecated;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
+import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.model.currency.Crypto;
 import me.delected.coinvestors.util.ItemStackCreator;
 
@@ -69,20 +70,21 @@ public interface ExchangeGui extends Confirmable {
 	static void openSourceCryptoInput(Player player) {
 		ExchangeGui exchangeGui = prepareInputFor(player);
 		GuiStage guiStage = (GuiStage) exchangeGui;
-
+		/* DOES NOT COMPILE ANY MORE
 		GuiStage.redirect(player, new CryptoSelectionGuiStage(crypto -> {
 			exchangeGui.setSourceCrypto(crypto);
 			player.openInventory(guiStage.build(player));
-		}));
+		}));*/
 	}
 
 	static void openTargetCryptoInput(Player player) {
 		ExchangeGui exchangeGui = prepareInputFor(player);
 		GuiStage guiStage = (GuiStage) exchangeGui;
+		/* DOES NOT COMPILE ANY MORE
 		GuiStage.redirect(player, new CryptoSelectionGuiStage(crypto -> {
 			exchangeGui.setTargetCrypto(crypto);
 			player.openInventory(guiStage.build(player));
-		}));
+		}));*/
 	}
 
 	static ItemStack walletInputUnavailable() {

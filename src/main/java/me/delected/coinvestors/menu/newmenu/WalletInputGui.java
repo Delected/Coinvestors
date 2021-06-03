@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu.newmnu;
+package me.delected.coinvestors.menu.newmenu;
 
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

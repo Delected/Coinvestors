@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.deprecated;
 
 import java.util.List;
 
@@ -10,6 +10,8 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
+import me.delected.coinvestors.menu.GuiStage;
+import me.delected.coinvestors.menu.newmenu.MenuState;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 public abstract class PagedGui extends GuiStage {

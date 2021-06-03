@@ -1,7 +1,6 @@
 package me.delected.coinvestors.menu;
 
 import static org.bukkit.Material.BARRIER;
-import static org.bukkit.Material.WITHER_SKELETON_SKULL;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -11,6 +10,11 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
+import me.delected.coinvestors.menu.deprecated.Confirmable;
+import me.delected.coinvestors.menu.deprecated.ExchangeGui;
+import me.delected.coinvestors.menu.newmenu.AccountCreationGuiStage;
+import me.delected.coinvestors.menu.newmenu.MenuGuiState;
+import me.delected.coinvestors.menu.newmenu.MenuState;
 import me.delected.coinvestors.util.ItemStackCreator;
 
 public abstract class GuiStage {
@@ -19,9 +23,6 @@ public abstract class GuiStage {
 	protected static final String MAIN_MENU_LINK = "MAIN_MENU_LINK";
 
 	static {
-		MenuLinker.registerLink(TransactionGui.SOURCE_INPUT_LINK, TransactionGui::openSourceInput);
-		MenuLinker.registerLink(TransactionGui.DESTINATION_INPUT_LINK, TransactionGui::openTargetInput);
-		MenuLinker.registerLink(TransactionGui.AMOUNT_INPUT_LINK, TransactionGui::openAmountInput);
 		MenuLinker.registerLink(ExchangeGui.TARGET_CRYPTO_INPUT_LINK, ExchangeGui::openTargetCryptoInput);
 		MenuLinker.registerLink(ExchangeGui.SOURCE_CRYPTO_INPUT_LINK, ExchangeGui::openSourceCryptoInput);
 		MenuLinker.registerLink(Confirmable.CONFIRM_LINK, Confirmable::confirm);
@@ -42,9 +43,13 @@ public abstract class GuiStage {
 	}
 
 	protected static ItemStack backLinkStack(String... lore) {
+		return returnLinkStack(MAIN_MENU_LINK, ChatColor.RED + "Back to main menu", lore);
+	}
+
+	protected static ItemStack returnLinkStack(String link, String name, String... lore) {
 		return new ItemStackCreator(Material.BARRIER)
-				.setLink(MAIN_MENU_LINK)
-				.setName(ChatColor.RED + "Back to main menu")
+				.setLink(link)
+				.setName(name)
 				.setLore(lore)
 				.build();
 	}

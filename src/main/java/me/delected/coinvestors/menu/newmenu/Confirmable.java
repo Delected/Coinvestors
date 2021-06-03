@@ -1,4 +1,4 @@
-package me.delected.coinvestors.menu;
+package me.delected.coinvestors.menu.newmenu;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -20,12 +20,12 @@ public interface Confirmable {
 
 	List<String> invalids();
 
-	default ItemStack confirmStack() {
-		return isValid() ? validStack() : invalidStack();
+	default ItemStack confirmStack(String link) {
+		return isValid() ? validStack(link) : invalidStack();
 	}
 
-	default ItemStack validStack() {
-		return new ItemStackCreator(Material.GREEN_WOOL).setLink(GuiStage.MAIN_MENU_LINK)
+	default ItemStack validStack(String link) {
+		return new ItemStackCreator(Material.GREEN_WOOL).setLink(link)
 				.setName(ChatColor.GREEN + "Confirm!").build();
 	}
 
