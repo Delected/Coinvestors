@@ -138,14 +138,20 @@ public class AccountService {
 
 	}
 
-	public boolean exchangeCryptoIfPossible(Crypto sCrypto, Wallet sWallet, BigDecimal sAmount,
-											Crypto tCrypto, Wallet tWallet, Player player) {
+	public boolean exchangeCryptoIfPossible(Player player, Wallet sWallet, BigDecimal sAmount, Wallet tWallet) {
+		Crypto sCrypto = sWallet.getCrypto();
+		Crypto tCrypto = tWallet.getCrypto();
+		String message;
 		BigDecimal tetherValue = calcPrice(sCrypto, sAmount);
 		BigDecimal exchangedAmount = calculateAmount(tCrypto, tetherValue).multiply(calcFeeMultiplier(player));
 		if (sWallet.withDrawIfPossible(sAmount)) {
 			tWallet.deposit(exchangedAmount);
-			return true;
+			message = ChatColor.GREEN + "Successfully exchanged " + infoMessage(sWallet, sCrypto, sAmount)
+					  + " to " + tCrypto + " and stored it in wallet " + tWallet;
+		} else {
+			message = "You had not enough to withdraw " + infoMessage(sWallet, sCrypto, sAmount);
 		}
+		player.sendMessage(message);
 		return false;
 	}
 
