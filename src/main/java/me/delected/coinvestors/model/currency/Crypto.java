@@ -39,7 +39,7 @@ public enum Crypto {
 
 	String fullName;
 	Wallet walletClass;
-	BigDecimal price = BigDecimal.ZERO;
+	BigDecimal price = BigDecimal.ONE;
 
 	Crypto(String fullName) {
 		this.fullName = fullName;

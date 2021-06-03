@@ -1,6 +1,7 @@
 package me.delected.coinvestors.menu.newmenu;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -13,7 +14,7 @@ import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.util.ItemStackCreator;
 
-public abstract class PagedGui extends GuiStage {
+public abstract class PagedGui extends ReturningGuiStage {
 
 	private static final String NEXT_PAGE = "PAGED_GUI_NEXT_PAGE";
 	private static final String PREV_PAGE = "PAGED_GUI_PREV_PAGE";
@@ -29,8 +30,8 @@ public abstract class PagedGui extends GuiStage {
 	private List<ItemStack> current;
 	private int page = 0;
 
-	protected PagedGui(final MenuState state, final int size, final String title) {
-		super(state);
+	protected PagedGui(final MenuState state, final int size, final String title, GuiStage prevStage) {
+		super(state, prevStage);
 		if (size < 18) {
 			throw new IllegalArgumentException("Inventory must have at least 2 full rows!");
 		}

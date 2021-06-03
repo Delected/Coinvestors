@@ -20,22 +20,21 @@ import me.delected.coinvestors.util.ItemStackCreator;
 public abstract class SelectionGui<T> extends PagedGui {
 
 	protected static final String SELECT_CONFIRM = "SELECT_GUI_CONFIRM";
-	private static final String SELECT_ABORT = "SELECT_GUI_ABORT";
 	private final Supplier<List<ItemStack>> supplier;
-	private final GuiStage next;
+	private final Function<T, GuiStage> next;
 	private List<T> collection;
 
 	static {
 		MenuLinker.registerEventLink(SELECT_CONFIRM, SelectionGui::select);
-		MenuLinker.registerLink(SELECT_ABORT, SelectionGui::abort);
 	}
 
 	private final Consumer<T> tConsumer;
 
 	protected SelectionGui(final int size, final String title, final Consumer<T> tConsumer,
 						   final Supplier<List<T>> rawDataSupplier, final Function<T, ItemStack> renderer,
-						   final GuiStage next) {
-		super(MenuState.INPUT, size, title);
+						   final GuiStage prev,
+						   final Function<T, GuiStage> next) {
+		super(MenuState.INPUT, size, title, prev);
 		this.tConsumer = tConsumer;
 		this.supplier = () -> {
 			collection = rawDataSupplier.get();
@@ -48,10 +47,12 @@ public abstract class SelectionGui<T> extends PagedGui {
 	@Override
 	public Inventory build(final Player player) {
 		Inventory result = super.build(player);
-		ItemStack abort = returnLinkStack(SELECT_ABORT, ChatColor.RED + "Abort input!",
-				ChatColor.WHITE + "Returns to the previous menu");
-		result.setItem(result.getSize() - 2, abort);
+		result.setItem(result.getSize() - 2, abortStack());
 		return result;
+	}
+
+	protected ItemStack abortStack() {
+		return returnStack(ChatColor.RED + "Abort input!", ChatColor.WHITE + "Returns to the previous menu");
 	}
 
 	@Override
@@ -69,11 +70,7 @@ public abstract class SelectionGui<T> extends PagedGui {
 	private void acceptT(Player player, InventoryClickEvent e) {
 		T t = this.retrieveT(e);
 		tConsumer.accept(t);
-		Coinvestors.guiManager().redirect(player, next);
-	}
-
-	private static void abort(Player player) {
-		redirect(player, actualStage(player, SelectionGui.class).next);
+		Coinvestors.guiManager().redirect(player, next.apply(t));
 	}
 
 	private static void select(Player player, InventoryClickEvent e) {
@@ -88,6 +85,7 @@ public abstract class SelectionGui<T> extends PagedGui {
 		private Consumer<T> tConsumer;
 		private Supplier<List<T>> rawDataSupplier;
 		private Function<T, ItemStack> renderer;
+		private GuiStage prev;
 		private GuiStage next;
 
 		public Builder(final String name, final int size) {
@@ -110,6 +108,11 @@ public abstract class SelectionGui<T> extends PagedGui {
 			return this;
 		}
 
+		public Builder<T> prevGui(final GuiStage previous) {
+			this.prev = previous;
+			return this;
+		}
+
 		public Builder<T> nextGui(final GuiStage next) {
 			this.next = next;
 			return this;
@@ -124,7 +127,7 @@ public abstract class SelectionGui<T> extends PagedGui {
 				|| renderer == null || next == null) {
 				throw new IllegalArgumentException("one or more arguments was null!");
 			}
-			return new SelectionGui<T>(size, name, tConsumer, rawDataSupplier, renderer, next) {
+			return new SelectionGui<T>(size, name, tConsumer, rawDataSupplier, renderer, prev, t -> next) {
 			};
 		}
 	}

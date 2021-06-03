@@ -45,6 +45,7 @@ public class AccountCreationGuiStage extends GuiStage {
 	}
 
 	private static void createAccountFor(Player player) {
+		Coinvestors.economy().createPlayerAccount(player);
 		Coinvestors.accountService().createAccount(player);
 		GuiStage.toMainMenu(player);
 	}

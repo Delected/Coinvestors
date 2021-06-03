@@ -97,7 +97,7 @@ public class DepositGui extends GuiStage implements Confirmable {
 	public Consumer<Player> confirmAction() {
 		return p -> {
 			EconomyResponse response = Coinvestors.economy()
-					.depositPlayer(p, calcPrice(cryptoInputGui.getData(), amountInputGui.getData()).doubleValue());
+					.withdrawPlayer(p, calcPrice(cryptoInputGui.getData(), amountInputGui.getData()).doubleValue());
 			if (response.transactionSuccess()) {
 				walletRestrictedInputGui.getData().deposit(amountInputGui.getData());
 			} else {
