@@ -31,6 +31,6 @@ public class Bid extends MarketTransactionRequest implements Comparable<Bid> {
 
 	@Override
 	public int compareTo(final Bid o) {
-		return Double.compare(this.getPrize(), o.getPrize());
+		return Double.compare(this.getPrice(), o.getPrice());
 	}
 }

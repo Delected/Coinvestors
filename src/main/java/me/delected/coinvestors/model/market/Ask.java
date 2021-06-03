@@ -30,6 +30,6 @@ public class Ask extends MarketTransactionRequest implements Comparable<Ask> {
 
 	@Override
 	public int compareTo(final Ask o) {
-		return -Double.compare(this.getPrize(), o.getPrize());
+		return -Double.compare(this.getPrice(), o.getPrice());
 	}
 }

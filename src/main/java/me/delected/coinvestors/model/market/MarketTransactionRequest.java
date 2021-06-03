@@ -21,7 +21,7 @@ public abstract class MarketTransactionRequest {
 	}
 
 	public BigDecimal getTotalCost() {
-		return amount.multiply(BigDecimal.valueOf(prize));
+		return amount.multiply(BigDecimal.valueOf(price));
 	}
 
 	public BigDecimal getAmount() {

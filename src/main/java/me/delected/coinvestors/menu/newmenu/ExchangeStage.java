@@ -1,11 +1,13 @@
 package me.delected.coinvestors.menu.newmenu;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
+import me.delected.coinvestors.model.accounts.AccountService;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -25,12 +27,13 @@ public class ExchangeStage extends ReturningGuiStage implements Confirmable {
 	//CONSTANTS
 	private static final String TITLE = ChatColor.YELLOW + "Exchange crypto";
 	private static final int SIZE = 36;
-	//LINKS TODO: create the other ones
-	private static final String SOURCE_CRYPTO_INPUT_LINK = "EXCHANGE_SOURCE_C_INPUT";
 
-	//LINK REGISTRATION TODO: register the recently created ones
+	private static final String SOURCE_CRYPTO_INPUT_LINK = "EXCHANGE_SOURCE_C_INPUT";
+	private static final String TARGET_CRYPTO_INPUT_LINK = "EXCHANGE_SOURCE_S_TARGET";
+
 	static {
 		MenuLinker.registerLink(SOURCE_CRYPTO_INPUT_LINK, ExchangeStage::openSourceCryptoInput);
+		MenuLinker.registerLink(TARGET_CRYPTO_INPUT_LINK, ExchangeStage::openTargetCryptoInput);
 	}
 
 	//INPUT PROVIDERS
@@ -56,7 +59,7 @@ public class ExchangeStage extends ReturningGuiStage implements Confirmable {
 	public Inventory build(final Player player) {
 		Inventory result = Bukkit.createInventory(null, SIZE, TITLE);
 		result.setItem(11, sourceCryptoInputGui.getInfoStack(SOURCE_CRYPTO_INPUT_LINK));
-		result.setItem(15, targetCryptoInputGui.getInfoStack("null"));
+		result.setItem(15, targetCryptoInputGui.getInfoStack(TARGET_CRYPTO_INPUT_LINK));
 		result.setItem(20, sourceWalletInputGui.getInfoStack("null"));
 		result.setItem(22, amountInputGui.getInfoStack("null"));
 		result.setItem(24, targetWalletInputGui.getInfoStack("null"));
@@ -93,17 +96,19 @@ public class ExchangeStage extends ReturningGuiStage implements Confirmable {
 		return actualStage(player, ExchangeStage.class);
 	}
 
-	//working link action
 	private static void openSourceCryptoInput(Player player) {
 		getGui(player).sourceCryptoInputGui.open(player);
 	}
-	//TODO: Create link actions for the created links
 
+	private static void openTargetCryptoInput(Player player) {
+		getGui(player).targetCryptoInputGui.open(player);
+	}
 
 	//TODO: Perform the exchange using the AccountService
 	@Override
 	public Consumer<Player> confirmAction() {
 		return p -> {
+			new AccountService().exchangeCryptoIfPossible(p, sourceWalletInputGui.getData(), amountInputGui.getData(), targetWalletInputGui.getData());
 		};
 	}
 
