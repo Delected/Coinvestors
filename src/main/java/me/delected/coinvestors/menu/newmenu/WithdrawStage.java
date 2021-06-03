@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
 import me.delected.coinvestors.Coinvestors;
+import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.model.accounts.Wallet;
 
@@ -21,6 +22,11 @@ public class WithdrawStage extends ReturningGuiStage implements Confirmable {
 
 	private static final String AMOUNT_INPUT_LINK = "WITHDRAW_AMOUNT_INPUT";
 	private static final String WALLET_INPUT_LINK = "WITHDRAW_WALLET_INPUT";
+
+	static {
+		MenuLinker.registerLink(AMOUNT_INPUT_LINK, WithdrawStage::openAmountInput);
+		MenuLinker.registerLink(WALLET_INPUT_LINK, WithdrawStage::openWalletInput);
+	}
 
 	private final WalletInputGui walletInputGui = new WalletInputGui(this);
 	private final AmountInputGui amountInputGui = new AmountInputGui(this);
@@ -62,6 +68,18 @@ public class WithdrawStage extends ReturningGuiStage implements Confirmable {
 			Coinvestors.accountService().sellCryptoIfPossible(p, wallet, amount);
 			turnBack(p);
 		};
+	}
+
+	private static WithdrawStage getGui(Player player) {
+		return actualStage(player, WithdrawStage.class);
+	}
+
+	private static void openWalletInput(Player player) {
+		getGui(player).walletInputGui.open(player);
+	}
+
+	private static void openAmountInput(Player player) {
+		getGui(player).amountInputGui.open(player);
 	}
 
 	@Override

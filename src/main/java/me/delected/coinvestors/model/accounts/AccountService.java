@@ -138,20 +138,15 @@ public class AccountService {
 
 	}
 
-	public boolean exchangeCrypto(Crypto sCrypto, Wallet sWallet, BigDecimal sAmount,
-								  Crypto tCrypto, Wallet tWallet, BigDecimal fee) {
+	public boolean exchangeCryptoIfPossible(Crypto sCrypto, Wallet sWallet, BigDecimal sAmount,
+											Crypto tCrypto, Wallet tWallet, Player player) {
 		BigDecimal tetherValue = calcPrice(sCrypto, sAmount);
-		BigDecimal exchangedAmount = calculateAmount(tCrypto, tetherValue).multiply(fee);
-		if (sWallet.canWithdraw(sAmount)) {
-			sWallet.withdraw(sAmount);
+		BigDecimal exchangedAmount = calculateAmount(tCrypto, tetherValue).multiply(calcFeeMultiplier(player));
+		if (sWallet.withDrawIfPossible(sAmount)) {
 			tWallet.deposit(exchangedAmount);
 			return true;
 		}
 		return false;
-	}
-
-	public boolean hasVaultBalance(Player player, double amount) {
-		return economy.getBalance(player) > amount;
 	}
 
 	public TradingServiceStatus getStatus(Player player) {
