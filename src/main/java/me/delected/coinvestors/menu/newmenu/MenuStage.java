@@ -33,6 +33,7 @@ public class MenuStage extends GuiStage {
 		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuStage::onMenuToTransactionClick);
 		MenuLinker.registerLink(MENU_WALLET_CREATION_LINK, MenuStage::onMenuToWalletCreationClick);
 		MenuLinker.registerLink(MENU_WALLET_OVERVIEW_LINK, MenuStage::onMenuToWalletOverviewClick);
+		MenuLinker.registerLink(MENU_WITHDRAW_LINK, MenuStage::onMenuToWithdrawClick);
 		MenuLinker.registerLink(MENU_DEPOSIT_LINK, MenuStage::onMenuToDepositClick);
 		MenuLinker.registerLink(MENU_CHEAT_LINK, p -> Coinvestors.economy().depositPlayer(p, 100d));
 	}
@@ -51,7 +52,7 @@ public class MenuStage extends GuiStage {
 		menu[2] = new ItemStackCreator(GREEN_WOOL).setName(ChatColor.GREEN + "Deposit money")
 				.setLink(MENU_DEPOSIT_LINK).build();
 		menu[3] = new ItemStackCreator(BROWN_WOOL).setName(ChatColor.YELLOW + "Withdraw money")
-				.setUnmodifiable().build();
+				.setLink(MENU_WITHDRAW_LINK).build();
 		menu[4] = new ItemStackCreator(LIGHT_BLUE_WOOL).setName(ChatColor.GREEN + "Exchange").setUnmodifiable().build();
 		menu[5] = new ItemStackCreator(LIME_WOOL).setName(ChatColor.GREEN + "Create new Wallet")
 				.setLink(MENU_WALLET_CREATION_LINK).build();
@@ -63,7 +64,7 @@ public class MenuStage extends GuiStage {
 	}
 
 	private static void onMenuToDepositClick(Player player) {
-		redirect(player, new DepositGui());
+		redirect(player, new DepositGui(actualStage(player)));
 	}
 
 	private static void onMenuToTransactionClick(Player player) {
@@ -79,7 +80,7 @@ public class MenuStage extends GuiStage {
 	}
 
 	private static void onMenuToWithdrawClick(Player player) {
-		//redirect(player, new WithdrawGuiStage());
+		redirect(player, new WithdrawStage(actualStage(player)));
 	}
 
 	@Override

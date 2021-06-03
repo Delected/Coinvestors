@@ -21,6 +21,14 @@ public abstract class Wallet {
 		this.completeAddress = crypto + "-" + id;
 	}
 
+	public synchronized boolean withDrawIfPossible(BigDecimal amount) {
+		boolean allowed = canWithdraw(amount);
+		if (allowed) {
+			withdraw(amount);
+		}
+		return allowed;
+	}
+
 	public void withdraw(BigDecimal amount) {
 		balance = balance.subtract(amount);
 	}
@@ -29,7 +37,7 @@ public abstract class Wallet {
 		return balance.compareTo(amount) > -1;
 	}
 
-	public void deposit(BigDecimal amount) {
+	public synchronized void deposit(BigDecimal amount) {
 		balance = balance.add(amount);
 	}
 

@@ -124,7 +124,7 @@ public abstract class SelectionGui<T> extends PagedGui {
 
 		private SelectionGui<T> build() {
 			if (name == null || tConsumer == null || rawDataSupplier == null
-				|| renderer == null || next == null) {
+				|| renderer == null || prev == null || next == null) {
 				throw new IllegalArgumentException("one or more arguments was null!");
 			}
 			return new SelectionGui<T>(size, name, tConsumer, rawDataSupplier, renderer, prev, t -> next) {

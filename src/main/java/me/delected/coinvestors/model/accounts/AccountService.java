@@ -1,6 +1,7 @@
 package me.delected.coinvestors.model.accounts;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
@@ -78,8 +79,7 @@ public class AccountService {
 
 	//todo: making this really save
 	public boolean sendCurrency(Wallet sWallet, BigDecimal sAmount, Wallet tWallet) {
-		if (sWallet.canWithdraw(sAmount)) {
-			sWallet.withdraw(sAmount);
+		if (sWallet.withDrawIfPossible(sAmount)) {
 			tWallet.deposit(sAmount);
 			return true;
 		}
@@ -107,20 +107,41 @@ public class AccountService {
 		return result;
 	}
 
-	public boolean buyCryptoIfPossible(Player player, Crypto crypto, Wallet wallet, BigDecimal amount) {
-		BigDecimal price = calculatePrice(crypto, amount);
-		if (hasVaultBalance(player, price.doubleValue())) {
-			economy.withdrawPlayer(player, price.doubleValue());
-			wallet.deposit(amount.multiply(getStatus(player).getFee()));
-			return true;
+	public void sellCryptoIfPossible(Player player, Wallet wallet, BigDecimal amount) {
+		Crypto crypto = wallet.getCrypto();
+		String message;
+		if (wallet.withDrawIfPossible(amount)) {
+			BigDecimal revenue = amount.multiply(crypto.getPrice()).multiply(calcFeeMultiplier(player));
+			if (!Coinvestors.economy().depositPlayer(player, revenue.doubleValue()).transactionSuccess()) {
+				wallet.deposit(amount);
+				message = "Internal error selling" + infoMessage(wallet, crypto, amount);
+			} else {
+				message = ChatColor.GREEN + "Successfully sold " + infoMessage(wallet, crypto, amount);
+			}
+		} else {
+			message = "You can't sell more crypto than you have!";
 		}
-		return false;
+		player.sendMessage(message);
+	}
+
+	private static String infoMessage(Wallet wallet, Crypto crypto, BigDecimal amount) {
+		return amount + " of " + crypto.getFullName()
+			   + " from wallet " + wallet.getCompleteAddress();
+	}
+
+	public void buyCryptoIfPossible(Player player, Wallet wallet, BigDecimal amount) {
+		Crypto crypto = wallet.getCrypto();
+		BigDecimal price = calcPrice(crypto, amount);
+		if (economy.withdrawPlayer(player, price.doubleValue()).transactionSuccess()) {
+			wallet.deposit(amount.multiply(calcFeeMultiplier(player)));
+		}
+
 	}
 
 	public boolean exchangeCrypto(Crypto sCrypto, Wallet sWallet, BigDecimal sAmount,
-								  Crypto tCrypto, Wallet tWallet, double fee) {
-		BigDecimal tetherValue = calculatePrice(sCrypto, sAmount);
-		BigDecimal exchangedAmount = calculateAmount(tCrypto, tetherValue).multiply(new BigDecimal(fee));
+								  Crypto tCrypto, Wallet tWallet, BigDecimal fee) {
+		BigDecimal tetherValue = calcPrice(sCrypto, sAmount);
+		BigDecimal exchangedAmount = calculateAmount(tCrypto, tetherValue).multiply(fee);
 		if (sWallet.canWithdraw(sAmount)) {
 			sWallet.withdraw(sAmount);
 			tWallet.deposit(exchangedAmount);
@@ -142,8 +163,12 @@ public class AccountService {
 		return vaultC.divide(BigDecimal.TEN, RoundingMode.HALF_DOWN);
 	}
 
-	public BigDecimal calculatePrice(Crypto crypto, BigDecimal amount) {
-		return amount;
+	public BigDecimal calcPrice(Crypto crypto, BigDecimal amount) {
+		return crypto.getPrice().multiply(amount);
+	}
+
+	private BigDecimal calcFeeMultiplier(Player player) {
+		return BigDecimal.ONE.subtract(getStatus(player).getFee());
 	}
 
 }

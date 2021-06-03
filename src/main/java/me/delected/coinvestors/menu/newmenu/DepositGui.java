@@ -14,10 +14,8 @@ import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.model.accounts.Wallet;
-import me.delected.coinvestors.model.currency.Crypto;
-import net.milkbowl.vault.economy.EconomyResponse;
 
-public class DepositGui extends GuiStage implements Confirmable {
+public class DepositGui extends ReturningGuiStage implements Confirmable {
 
 	private static final String CRYPTO_SELECT_LINK = "DEPOSIT_CRYPTO_INPUT";
 	private static final String AMOUNT_SELECT_LINK = "DEPOSIT_AMOUNT_INPUT";
@@ -32,20 +30,20 @@ public class DepositGui extends GuiStage implements Confirmable {
 
 	private final AmountInputGui amountInputGui = new AmountInputGui(this);
 	private final CryptoInputGui cryptoInputGui = new CryptoInputGui(this);
-	private final RestrictedInputGui<Wallet> walletRestrictedInputGui;
+	private final RestrictedInputGui<Wallet> walletInputGui;
 
 
-	public DepositGui() {
-		super(MenuState.DEPOSIT);
+	public DepositGui(GuiStage previous) {
+		super(MenuState.DEPOSIT, previous);
 		WalletByCryptoInputGui walletByCryptoInputGui = new WalletByCryptoInputGui(this, cryptoInputGui::getData);
-		walletRestrictedInputGui = new RestrictedInputGui<>(this, walletByCryptoInputGui, cryptoInputGui);
+		walletInputGui = new RestrictedInputGui<>(this, walletByCryptoInputGui, cryptoInputGui);
 	}
 
 	@Override
 	public Inventory build(final Player player) {
 		Inventory result = Bukkit.createInventory(null, 27, TITLE);
 		result.setItem(12, cryptoInputGui.getInfoStack(CRYPTO_SELECT_LINK));
-		result.setItem(13, walletRestrictedInputGui.getInfoStack(WALLET_SELECT_LINK));
+		result.setItem(13, walletInputGui.getInfoStack(WALLET_SELECT_LINK));
 		result.setItem(14, amountInputGui.getInfoStack(AMOUNT_SELECT_LINK));
 		result.setItem(25, confirmStack(CONFIRM_LINK));
 		result.setItem(26, backLinkStack(ChatColor.WHITE + "Aborts the transaction"));
@@ -61,7 +59,7 @@ public class DepositGui extends GuiStage implements Confirmable {
 	}
 
 	private static void openWalletSelect(Player player) {
-		getGui(player).walletRestrictedInputGui.open(player);
+		getGui(player).walletInputGui.open(player);
 	}
 
 	private static DepositGui getGui(Player player) {
@@ -71,7 +69,7 @@ public class DepositGui extends GuiStage implements Confirmable {
 	@Override
 	public boolean isValid() {
 		return amountInputGui.getData() != null && cryptoInputGui.getData() != null
-			   && walletRestrictedInputGui.getData() != null;
+			   && walletInputGui.getData() != null;
 	}
 
 	@Override
@@ -83,27 +81,22 @@ public class DepositGui extends GuiStage implements Confirmable {
 		if (cryptoInputGui.getData() == null) {
 			result.add("crypto currency");
 		}
-		if (walletRestrictedInputGui.getData() == null) {
+		if (walletInputGui.getData() == null) {
 			result.add("destination wallet");
 		}
 		return result;
 	}
 
-	private BigDecimal calcPrice(Crypto crypto, BigDecimal amount) {
-		return crypto.getPrice().multiply(amount);
-	}
-
 	@Override
 	public Consumer<Player> confirmAction() {
 		return p -> {
-			EconomyResponse response = Coinvestors.economy()
-					.withdrawPlayer(p, calcPrice(cryptoInputGui.getData(), amountInputGui.getData()).doubleValue());
-			if (response.transactionSuccess()) {
-				walletRestrictedInputGui.getData().deposit(amountInputGui.getData());
-			} else {
-				p.sendMessage("You hadn't enough money to afford the desired amount of " + cryptoInputGui.getData());
-			}
-			toMainMenu(p);
+			BigDecimal amount = amountInputGui.getData();
+			Wallet wallet = walletInputGui.getData();
+			Coinvestors.accountService().buyCryptoIfPossible(p, wallet, amount);
+			turnBack(p);
 		};
+
 	}
+
 }
+

@@ -33,6 +33,7 @@ public class WalletInputGui extends InputGui<Wallet> {
 
 	protected SelectionGui.Builder<Wallet> preBuild() {
 		return new SelectionGui.Builder<Wallet>(title, size)
+				.prevGui(nextGui)
 				.nextGui(nextGui)
 				.consumer(this::setData)
 				.renderer(RenderUtils::renderWalletNoAction);
