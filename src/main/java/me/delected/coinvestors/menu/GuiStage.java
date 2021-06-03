@@ -10,7 +10,7 @@ import org.bukkit.inventory.ItemStack;
 
 import me.delected.coinvestors.Coinvestors;
 import me.delected.coinvestors.controller.MenuLinker;
-import me.delected.coinvestors.menu.deprecated.Confirmable;
+import me.delected.coinvestors.menu.newmenu.Confirmable;
 import me.delected.coinvestors.menu.deprecated.ExchangeGui;
 import me.delected.coinvestors.menu.newmenu.AccountCreationGuiStage;
 import me.delected.coinvestors.menu.newmenu.MenuGuiState;
