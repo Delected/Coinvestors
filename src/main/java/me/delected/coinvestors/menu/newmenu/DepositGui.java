@@ -103,6 +103,7 @@ public class DepositGui extends GuiStage implements Confirmable {
 			} else {
 				p.sendMessage("You hadn't enough money to afford the desired amount of " + cryptoInputGui.getData());
 			}
+			toMainMenu(p);
 		};
 	}
 }
