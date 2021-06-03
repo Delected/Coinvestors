@@ -8,14 +8,14 @@ import me.delected.coinvestors.model.accounts.Wallet;
 public abstract class MarketTransactionRequest {
 	private final ExchangePair pair;
 	private final BigDecimal amount;
-	private final double prize;
+	private final double price;
 	private final Wallet source;
 	private final Wallet target;
 
-	protected MarketTransactionRequest(final ExchangePair pair, final BigDecimal amount, final double prize, final Wallet source, final Wallet target) {
+	protected MarketTransactionRequest(final ExchangePair pair, final BigDecimal amount, final double price, final Wallet source, final Wallet target) {
 		this.pair = pair;
 		this.amount = amount;
-		this.prize = prize;
+		this.price = price;
 		this.source = source;
 		this.target = target;
 	}
@@ -28,8 +28,8 @@ public abstract class MarketTransactionRequest {
 		return amount;
 	}
 
-	public double getPrize() {
-		return prize;
+	public double getPrice() {
+		return price;
 	}
 
 	public Wallet getSource() {
