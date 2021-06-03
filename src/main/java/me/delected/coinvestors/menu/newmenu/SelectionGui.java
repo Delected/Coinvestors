@@ -96,30 +96,22 @@ public abstract class SelectionGui<T> extends PagedGui {
 		}
 
 		public Builder<T> consumer(final Consumer<T> tConsumer) {
-			if (this.tConsumer == null) {
-				this.tConsumer = tConsumer;
-			}
+			this.tConsumer = tConsumer;
 			return this;
 		}
 
 		public Builder<T> dataSupplier(final Supplier<List<T>> rawDataSupplier) {
-			if (this.rawDataSupplier == null) {
-				this.rawDataSupplier = rawDataSupplier;
-			}
+			this.rawDataSupplier = rawDataSupplier;
 			return this;
 		}
 
 		public Builder<T> renderer(final Function<T, ItemStack> renderer) {
-			if (this.renderer == null) {
-				this.renderer = renderer;
-			}
+			this.renderer = renderer;
 			return this;
 		}
 
 		public Builder<T> nextGui(final GuiStage next) {
-			if (this.next == null) {
-				this.next = next;
-			}
+			this.next = next;
 			return this;
 		}
 
