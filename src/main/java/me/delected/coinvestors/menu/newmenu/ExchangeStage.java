@@ -1,6 +1,5 @@
 package me.delected.coinvestors.menu.newmenu;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -18,18 +17,16 @@ import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.model.accounts.Wallet;
 
-/* Todo summary: create links and static methods like the already
-    existing one, put the right ones in the ItemStack creation methods, register the links,
-       call the exchange method of the AccountService in the confirmAction method,
-       Finally, remove the todos ;)
- */
 public class ExchangeStage extends ReturningGuiStage implements Confirmable {
 	//CONSTANTS
 	private static final String TITLE = ChatColor.YELLOW + "Exchange crypto";
 	private static final int SIZE = 36;
 
 	private static final String SOURCE_CRYPTO_INPUT_LINK = "EXCHANGE_SOURCE_C_INPUT";
-	private static final String TARGET_CRYPTO_INPUT_LINK = "EXCHANGE_SOURCE_S_TARGET";
+	private static final String TARGET_CRYPTO_INPUT_LINK = "EXCHANGE_TARGET_C_INPUT";
+	private static final String SOURCE_WALLET_INPUT_LINK = "EXCHANGE_SOURCE_W_INPUT";
+	private static final String TARGET_WALLET_INPUT_LINK = "EXCHANGE_TARGET_W_INPUT";
+	private static final String AMOUNT_INPUT_LINK = "EXCHANGE_AMOUNT_INPUT";
 
 	static {
 		MenuLinker.registerLink(SOURCE_CRYPTO_INPUT_LINK, ExchangeStage::openSourceCryptoInput);
@@ -60,9 +57,9 @@ public class ExchangeStage extends ReturningGuiStage implements Confirmable {
 		Inventory result = Bukkit.createInventory(null, SIZE, TITLE);
 		result.setItem(11, sourceCryptoInputGui.getInfoStack(SOURCE_CRYPTO_INPUT_LINK));
 		result.setItem(15, targetCryptoInputGui.getInfoStack(TARGET_CRYPTO_INPUT_LINK));
-		result.setItem(20, sourceWalletInputGui.getInfoStack("null"));
-		result.setItem(22, amountInputGui.getInfoStack("null"));
-		result.setItem(24, targetWalletInputGui.getInfoStack("null"));
+		result.setItem(20, sourceWalletInputGui.getInfoStack(SOURCE_WALLET_INPUT_LINK));
+		result.setItem(22, amountInputGui.getInfoStack(AMOUNT_INPUT_LINK));
+		result.setItem(24, targetWalletInputGui.getInfoStack(TARGET_WALLET_INPUT_LINK));
 		result.setItem(34, confirmStack(CONFIRM_LINK));
 		ItemStack rs = returnStack(ChatColor.RED + "Return to previous menu",
 				ChatColor.WHITE + "Aborts the exchange");
@@ -104,12 +101,10 @@ public class ExchangeStage extends ReturningGuiStage implements Confirmable {
 		getGui(player).targetCryptoInputGui.open(player);
 	}
 
-	//TODO: Perform the exchange using the AccountService
 	@Override
 	public Consumer<Player> confirmAction() {
-		return p -> {
-			new AccountService().exchangeCryptoIfPossible(p, sourceWalletInputGui.getData(), amountInputGui.getData(), targetWalletInputGui.getData());
-		};
+		return p -> new AccountService().exchangeCryptoIfPossible(p, sourceWalletInputGui.getData(),
+				amountInputGui.getData(), targetWalletInputGui.getData());
 	}
 
 	//Checks if all input is done
