@@ -13,7 +13,7 @@ import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.newmenu.Confirmable;
 import me.delected.coinvestors.menu.deprecated.ExchangeGui;
 import me.delected.coinvestors.menu.newmenu.AccountCreationGuiStage;
-import me.delected.coinvestors.menu.newmenu.MenuGuiState;
+import me.delected.coinvestors.menu.newmenu.MenuStage;
 import me.delected.coinvestors.menu.newmenu.MenuState;
 import me.delected.coinvestors.util.ItemStackCreator;
 
@@ -66,7 +66,7 @@ public abstract class GuiStage {
 	}
 
 	public static void toMainMenu(Player player) {
-		redirect(player, new MenuGuiState());
+		redirect(player, new MenuStage());
 	}
 
 	public static void toAccountCreation(Player player) {

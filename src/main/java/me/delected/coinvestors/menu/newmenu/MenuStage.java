@@ -17,7 +17,7 @@ import me.delected.coinvestors.controller.MenuLinker;
 import me.delected.coinvestors.menu.GuiStage;
 import me.delected.coinvestors.util.ItemStackCreator;
 
-public class MenuGuiState extends GuiStage {
+public class MenuStage extends GuiStage {
 
 	private static final String MENU_TRANSACTION_LINK = "MENU_TO_TRANSACTION";
 	private static final String MENU_WALLET_CREATION_LINK = "MENU_TO_WALLET_CREATION";
@@ -27,13 +27,13 @@ public class MenuGuiState extends GuiStage {
 	private final Inventory inventory = createInventory();
 
 	static {
-		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuGuiState::onMenuToTransactionClick);
-		MenuLinker.registerLink(MENU_WALLET_CREATION_LINK, MenuGuiState::onMenuToWalletCreationClick);
-		MenuLinker.registerLink(MENU_WALLET_OVERVIEW_LINK, MenuGuiState::onMenuToWalletOverviewClick);
-		MenuLinker.registerLink(MENU_DEPOSIT_LINK, MenuGuiState::onMenuToDepositClick);
+		MenuLinker.registerLink(MENU_TRANSACTION_LINK, MenuStage::onMenuToTransactionClick);
+		MenuLinker.registerLink(MENU_WALLET_CREATION_LINK, MenuStage::onMenuToWalletCreationClick);
+		MenuLinker.registerLink(MENU_WALLET_OVERVIEW_LINK, MenuStage::onMenuToWalletOverviewClick);
+		MenuLinker.registerLink(MENU_DEPOSIT_LINK, MenuStage::onMenuToDepositClick);
 	}
 
-	public MenuGuiState() {
+	public MenuStage() {
 		super(MenuState.MENU);
 	}
 
@@ -65,7 +65,7 @@ public class MenuGuiState extends GuiStage {
 	}
 
 	private static void onMenuToWalletCreationClick(Player player) {
-		//redirect(player, new WalletCreationGuiStage());
+		redirect(player, new WalletCreationStage());
 	}
 
 	private static void onMenuToWalletOverviewClick(Player player) {

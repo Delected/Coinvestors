@@ -7,14 +7,14 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 
-import me.delected.coinvestors.menu.newmenu.MenuGuiState;
+import me.delected.coinvestors.menu.newmenu.MenuStage;
 import me.delected.coinvestors.menu.newmenu.MenuState;
 
 public class GuiPlayerState {
 	private final UUID playerId;
 	private final Map<MenuState, GuiStage> stateMap = new HashMap<>();
 	private Inventory menuInventory;
-	private GuiStage actualState = new MenuGuiState();
+	private GuiStage actualState = new MenuStage();
 	private boolean doingInput = false;
 
 	public GuiPlayerState(final UUID playerId) {

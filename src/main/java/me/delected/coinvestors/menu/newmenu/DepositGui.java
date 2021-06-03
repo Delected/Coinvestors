@@ -47,7 +47,7 @@ public class DepositGui extends GuiStage implements Confirmable {
 		result.setItem(12, cryptoInputGui.getInfoStack(CRYPTO_SELECT_LINK));
 		result.setItem(13, walletRestrictedInputGui.getInfoStack(WALLET_SELECT_LINK));
 		result.setItem(14, amountInputGui.getInfoStack(AMOUNT_SELECT_LINK));
-		result.setItem(25, confirmStack(MAIN_MENU_LINK));
+		result.setItem(25, confirmStack(CONFIRM_LINK));
 		result.setItem(26, backLinkStack(ChatColor.WHITE + "Aborts the transaction"));
 		return result;
 	}
