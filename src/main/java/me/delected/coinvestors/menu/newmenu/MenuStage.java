@@ -48,7 +48,7 @@ public class MenuStage extends GuiStage {
 		menu[0] = new ItemStackCreator(RED_WOOL).setName(ChatColor.GREEN + "My Wallets")
 				.setLink(MENU_WALLET_OVERVIEW_LINK).build();
 		menu[1] = new ItemStackCreator(BLUE_WOOL).setLink(MENU_TRANSACTION_LINK)
-				.setName(ChatColor.GREEN + "Make transaction").build();
+				.setName(ChatColor.GREEN + "Make a transaction").build();
 		menu[2] = new ItemStackCreator(GREEN_WOOL).setName(ChatColor.GREEN + "Deposit money")
 				.setLink(MENU_DEPOSIT_LINK).build();
 		menu[3] = new ItemStackCreator(BROWN_WOOL).setName(ChatColor.YELLOW + "Withdraw money")
@@ -68,7 +68,7 @@ public class MenuStage extends GuiStage {
 	}
 
 	private static void onMenuToTransactionClick(Player player) {
-		//redirect(player, new WalletTransactionGuiState());
+		redirect(player, new SendCryptoStage(actualStage(player)));
 	}
 
 	private static void onMenuToWalletCreationClick(Player player) {

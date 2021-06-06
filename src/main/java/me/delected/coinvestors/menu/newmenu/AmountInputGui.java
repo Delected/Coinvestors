@@ -19,7 +19,7 @@ public class AmountInputGui extends InputGui<BigDecimal> {
 	@Override
 	public void open(final Player player) {
 		InputStageProvider.openNumberInput(player, this::setData, nextGui::build);
-	}
+	}	
 
 	@Override
 	protected ItemStack presentStack(String link) {

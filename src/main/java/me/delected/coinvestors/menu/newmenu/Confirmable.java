@@ -1,6 +1,8 @@
 package me.delected.coinvestors.menu.newmenu;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -43,6 +45,10 @@ public interface Confirmable {
 
 	static void confirm(Player player) {
 		((Confirmable) Coinvestors.guiManager().getStateOf(player).getActualStage()).confirmAction().accept(player);
+	}
+
+	static boolean checkValid(InputGui<?>... inputGuis) {
+		return Arrays.stream(inputGuis).allMatch(inputGui -> Objects.nonNull(inputGui.getData()));
 	}
 
 }
