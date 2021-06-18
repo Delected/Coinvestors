@@ -3,6 +3,7 @@ package me.delected.coinvestors;
 import java.util.Objects;
 import java.util.Optional;
 
+import me.delected.coinvestors.controller.CryptoRegulatorTask;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
@@ -12,7 +13,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import me.delected.coinvestors.commands.CommandDistributor;
 import me.delected.coinvestors.commands.menu.OpenCommand;
-import me.delected.coinvestors.controller.CryptoRegulator;
 import me.delected.coinvestors.controller.GuiPlayerStateManager;
 import me.delected.coinvestors.exceptions.ContactTheDevsException;
 import me.delected.coinvestors.listeners.AbstractListener;
@@ -26,8 +26,6 @@ public final class Coinvestors extends JavaPlugin {
 	private static Economy ECONOMY = null;
 	private final GuiPlayerStateManager guiPlayerStateManager = new GuiPlayerStateManager();
 	private final AccountService accountService = new AccountService();
-	//fixme
-	private final CryptoRegulator cryptoRegulator = new CryptoRegulator();
 
 	@Override
 	public void onLoad() {
@@ -39,7 +37,8 @@ public final class Coinvestors extends JavaPlugin {
 	public void onEnable() {
 		// have a log of all transactions maybe
 		if (!setupEconomy()) {
-			Bukkit.getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
+			Bukkit.getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!",
+					getDescription().getName()));
 			//disable();
 			//return;
 		} else {
@@ -50,23 +49,25 @@ public final class Coinvestors extends JavaPlugin {
 		//register commands
 		Optional<PluginCommand> cvCommand = Optional.ofNullable(getCommand("coinvestors"));
 		CommandDistributor distributor;
-		cvCommand.orElseThrow(ContactTheDevsException::new).setExecutor((distributor = new CommandDistributor()));
+		cvCommand.orElseThrow(ContactTheDevsException::new)
+				.setExecutor((distributor = new CommandDistributor()));
 		cvCommand.get().setTabCompleter(distributor);
 		//register all Listeners
 		PluginManager pluginManager = getServer().getPluginManager();
 		AbstractListener.createListeners().forEach(l -> pluginManager.registerEvents(l, this));
 		//DEBUG
 		Objects.requireNonNull(getCommand("open")).setExecutor(new OpenCommand());
-		/*
-		Bukkit.getScheduler().runTaskTimer(this, CryptoRegulator::recalculatePrices,
-				0L, getConfig().getInt("reload_seconds") * 1000L);*/
+
+		new CryptoRegulatorTask().runTaskTimerAsynchronously(
+				this, 0L, getConfig().getLong("update_interval", 150));
 	}
 
 	private boolean setupEconomy() {
 		if (getServer().getPluginManager().getPlugin("Vault") == null) {
 			return false;
 		}
-		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
+		RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager()
+				.getRegistration(Economy.class);
 		if (rsp == null) {
 			ECONOMY = registerEconomy();
 			return true;

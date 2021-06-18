@@ -1,1 +1,8 @@
-display_prices_in: USD
+# PLEASE READ THE WIKI TO LEARN HOW TO SET THIS STUFF UP! note: all prices displayed in USD!
+
+# your nomics api key
+nomics_api_key: ""
+
+# your preferred crypto price update interval (in seconds)
+update_interval: 150
+

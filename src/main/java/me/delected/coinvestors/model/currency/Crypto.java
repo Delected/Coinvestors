@@ -37,30 +37,15 @@ public enum Crypto {
 	DASH("Dash"),
 	ZEC("Zcash");
 
-	String fullName;
-	Wallet walletClass;
-	BigDecimal price = BigDecimal.ONE;
+	private String fullName;
+	private BigDecimal price = BigDecimal.ZERO;
 
 	Crypto(String fullName) {
 		this.fullName = fullName;
 	}
 
-	/**
-	 * @deprecated old way is fine again
-	 */
-	@Deprecated
-	Crypto(String fullName, Wallet walletClass) {
-		this.fullName = fullName;
-		this.walletClass = walletClass;
-	}
-
 	public String getFullName() {
 		return fullName;
-	}
-
-	@Deprecated
-	public Wallet getWalletClass() {
-		return walletClass;
 	}
 
 	public static List<Crypto> valueList() {
